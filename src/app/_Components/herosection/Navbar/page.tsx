@@ -5,6 +5,9 @@ import { usePathname } from 'next/navigation'
 import { gsap } from "gsap";
 import {Shadows_Into_Light} from "next/font/google"
 import { useGSAP } from "@gsap/react";
+import { Menu } from "lucide-react";
+import Mobilemenu from "./mobilemenu/page";
+import { useState } from "react";
 const shadowFont = Shadows_Into_Light({
   weight : "400",
   subsets : ['latin'],
@@ -14,6 +17,7 @@ const Navbar = () => {
 
     const pathname = usePathname()
     console.log('>>>>>>>>>>>current path', pathname)
+    const [showMenu, setShowmenu] = useState(false)
   const navbarElems = [
     {
       tag: "Home",
@@ -53,10 +57,10 @@ const Navbar = () => {
   },[])
   return (
     <>
-      <div className=" navbar h-[4rem] w-full fixed bg-transparent flex justify-between px-[4rem] items-center top-[2rem]">
+      <div className=" navbar h-[4rem] w-full fixed bg-transparent flex justify-between px-[1rem] items-center top-[2rem] ">
       <div className={`${shadowFont.className} text-3xl`}>HSP</div>
 
-        <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 gap-5 px-3 rounded-full  cursor-pointer ">
+        <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 lg:gap-5 gap-1 px-3 rounded-full  cursor-pointer hidden md:flex ">
           {navbarElems.map((elem, index) => (
             <>
               <Link href={elem.linkTo} className={`hover:bg-[#efff01] p-3 px-5 hover:text-black rounded-full transition ease-linear duration-700
@@ -68,10 +72,25 @@ const Navbar = () => {
           ))}
         </ul>
         {/* cart */}
+        <div className="hidden md:block">
         <Cart/>
+        </div>
+        {/* menu button for mobile devices */}
+
+        <div className="flex gap-3 md:hidden">
+       <div className="md:hidden">
+        <Cart/>
+        </div>
+        <div 
+        onClick={()=>setShowmenu(!showMenu)}
+        className= " md:hidden bg-gray-50/50 hover:bg-gray-50/75  transition ease-linear duration-700  p-3 flex justify-center items-center rounded-full">
+        <Menu color="black" />
+        </div>
+        </div>
       </div>
+      <Mobilemenu show={showMenu}/>
     </>
-  );
+  );  
 };
 
 export default Navbar;
