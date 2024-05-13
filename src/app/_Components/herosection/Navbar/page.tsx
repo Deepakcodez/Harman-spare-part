@@ -2,7 +2,14 @@
 import Link from "next/link";
 import Cart from "./cart/page";
 import { usePathname } from 'next/navigation'
-
+import { gsap } from "gsap";
+import {Shadows_Into_Light} from "next/font/google"
+import { useGSAP } from "@gsap/react";
+const shadowFont = Shadows_Into_Light({
+  weight : "400",
+  subsets : ['latin'],
+  display : 'swap'
+})
 const Navbar = () => {
 
     const pathname = usePathname()
@@ -29,10 +36,25 @@ const Navbar = () => {
       linkTo: "/about-us",
     },
   ];
+
+  //animation
+  useGSAP(()=>{
+    gsap.from(".navbar",{
+      y:-100,
+      duration :1.5,
+      delay : 1,
+      opacity: 0.4,
+      stagger: {
+        amount : 1.5,
+      },
+      ease : "back",
+      
+    })
+  },[])
   return (
     <>
-      <div className="h-[4rem] w-full fixed bg-transparent flex justify-between px-[4rem] items-center top-[2rem]">
-      <div></div>
+      <div className=" navbar h-[4rem] w-full fixed bg-transparent flex justify-between px-[4rem] items-center top-[2rem]">
+      <div className={`${shadowFont.className} text-3xl`}>HSP</div>
 
         <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 gap-5 px-3 rounded-full  cursor-pointer ">
           {navbarElems.map((elem, index) => (
