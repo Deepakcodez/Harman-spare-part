@@ -51,7 +51,7 @@ const Mobilemenu = ({show}:showProps) => {
 
     return ( 
         <>
-        <div className={`${show?"fixed":"hidden"} md:hidden outerBox flex flex-col gap-4 py-4 px-5 rounded-s-xl top-[6rem] right-0 w-[15rem] z-10 bg-black/50 backdrop-blur-md  border-[0.2px] border-gray-700 border-l-[#eeff0181]`}>
+        <div className={`${show?"fixed":"hidden"} md:hidden z-50 outerBox flex flex-col gap-4 py-4 px-5 rounded-s-xl top-[6rem] right-0 w-[15rem] z-10 bg-black/50 backdrop-blur-md  border-[0.2px] border-gray-700 border-l-[#eeff0181]`}>
          {
             navbarElems.map((elem,index)=>
             <Fragment key={index}>

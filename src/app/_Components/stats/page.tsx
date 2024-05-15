@@ -1,6 +1,9 @@
+import Rocket from "./rocket/Rocket";
+
 const Stats = () => {
     return ( 
         <>
+        <Rocket/>
         <div className="py-[5rem] mt-9 sm:px-[3rem] w-full bg-black grid md:grid-cols-3 grid-cols-1  sm:gap-4 gap-2 items-center place-items-center 	" >
 
             <div className=" w-full h-[5rem] md:border-r text-center  md:border-r-yellow-200 flex flex-col items-center">
