@@ -9,6 +9,7 @@ import { Menu } from "lucide-react";
 import Mobilemenu from "./mobilemenu/page";
 import { Fragment, useState } from "react";
 import Searchbutton from "../../search/page";
+import { navbarElemsProps } from "@/types/mobilenavbar.types";
 const shadowFont = Shadows_Into_Light({
   weight: "400",
   subsets: ["latin"],
@@ -18,7 +19,7 @@ const Navbar = () => {
   const pathname = usePathname();
   console.log(">>>>>>>>>>>current path", pathname);
   const [showMenu, setShowmenu] = useState(false);
-  const navbarElems = [
+  const navbarElems:navbarElemsProps[] = [
     {
       tag: "Home",
       linkTo: "/",
