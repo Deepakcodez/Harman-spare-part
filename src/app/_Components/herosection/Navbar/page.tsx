@@ -7,7 +7,7 @@ import { Shadows_Into_Light } from "next/font/google";
 import { useGSAP } from "@gsap/react";
 import { Menu } from "lucide-react";
 import Mobilemenu from "./mobilemenu/page";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Searchbutton from "../../search/page";
 const shadowFont = Shadows_Into_Light({
   weight: "400",
@@ -61,7 +61,7 @@ const Navbar = () => {
 
         <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 lg:gap-5 gap-1 px-3 rounded-full  cursor-pointer hidden md:flex ">
           {navbarElems.map((elem, index) => (
-            <>
+            <Fragment key={index}>
               <Link
                 href={elem.linkTo}
                 className={`hover:bg-[#efff01] p-3 px-5 hover:text-black rounded-full transition ease-linear duration-700
@@ -70,7 +70,7 @@ const Navbar = () => {
               >
                 {elem.tag}
               </Link>
-            </>
+            </Fragment>
           ))}
         </ul>
         {/* cart */}

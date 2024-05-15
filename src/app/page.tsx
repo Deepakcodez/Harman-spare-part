@@ -6,7 +6,7 @@ import VioletBloom from "./_Components/smallcomponents/light/Light";
 import YellowBloom from "./_Components/smallcomponents/light/Light2";
 import Best_Selling from "./_Components/bestSelling/BestSelling";
 
-export default function Home() {
+const Home: React.FC= ()=> {
   return (
     <>
       <div className=" relative h-full w-full bg-black overflow-hidden">
@@ -27,3 +27,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
