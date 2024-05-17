@@ -41,7 +41,7 @@ const Best_Selling = () => {
           {
             dummyElement.map((elem,index)=>
             <Fragment key={index}>
-                <div className="h-[18rem] w-full  px-3 bg-slate-900/25 backdrop-blur-md rounded-md  border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
+                <div className="h-[18rem] w-full  px-3 bg-slate-900/25 backdrop-blur-md rounded-md outline-3 outline-pink-300  border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
             <div className="bg-slate-200 h-[12rem] flex items-center justify-center rounded-b-3xl">
               <Image
                 className="hover:scale-110 overflow-hidden transition ease-linear duration-300 "
@@ -56,11 +56,10 @@ const Best_Selling = () => {
             {/* DETAIL */}
             <div className="mt-3">
               <div className="w-full flex justify-between items-center ">
-                <h1 className="text-lg font-semibold">Product Name</h1>
+                <h1 className="text-md truncate  w-[80%]">Product Nameffdfdfdf rer re   re  rer name a=name</h1>
                 {/* BUTTON */}
-                <button className="flex gap-1 bg-violet-40 border border-white  hover:bg-violet-500 hover:border-transparent text-white  rounded-full px-2 py-1 overflow-hidden">
-                  <h1 className="">Add</h1>
-                  <ShoppingCart />
+                <button className="flex gap-1 bg-violet-40  bg-violet-500/25  hover:bg-violet-500 hover:border-transparent transition ease-linear duration-300 text-white   rounded-full p-2   overflow-hidden">
+                  <ShoppingCart size={17} />
                 </button>
               </div>
               {/* Price */}
