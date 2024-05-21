@@ -7,6 +7,7 @@ import YellowBloom from "./_Components/smallcomponents/light/Light2";
 import Best_Selling from "./_Components/bestSelling/BestSelling";
 import Our_products from "./_Components/ourProducts/Ourprod";
 import OurWork from "./_Components/ourWork/Our_work";
+import BikeProd from "./_Components/bikeProd/BikeProd";
 
 const Home: React.FC= ()=> {
 
@@ -20,6 +21,7 @@ const Home: React.FC= ()=> {
         <VioletBloom/>
         <Our_products/>
        <Best_Selling/>
+       <BikeProd/>
        <Image
           className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
           alt="light"
