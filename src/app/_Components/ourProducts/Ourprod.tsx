@@ -4,11 +4,11 @@ import Link from "next/link";
 const Our_products = () => {
   return (
     <>
-      <div className="mt-[3rem]">
-        <h1 className="text-3xl font-semibold px-4">Our Products</h1>
+      <div className="mt-[4rem]">
+        <h1 className="text-3xl font-thin px-4">Our Products</h1>
         <div className="py-[1rem] mt-9 sm:px-[3rem] w-full bg-black grid md:grid-cols-3 grid-cols-1  sm:gap-4 gap-2 items-center place-items-center 	">
-          <Link href={'#'} className=" w-full  h-[10rem] md:border-r text-center  md:border-r-yellow-200 flex flex-col items-center justify-center">
-            <div className="flex justify-center flex-col items-center">
+          <Link data-scroll data-scroll-speed="0.3" href={'#'} className=" w-full  h-[10rem] md:border-r text-center  md:border-r-yellow-200/25 flex flex-col items-center justify-center">
+            <div className="flex justify-center flex-col gap-2 items-center">
               <Image
                 className="opacity-30 hover:opacity-50  transition ease-linear duration-300 "
                 src={"/bike.png"}
@@ -20,8 +20,8 @@ const Our_products = () => {
             </div>
           </Link>
 
-          <Link href={'#'} className=" w-full h-[10rem] md:border-r text-center  md:border-r-yellow-200 flex flex-col items-center justify-center">
-            <div className=" flex justify-center flex-col items-center">
+          <Link href={'#'} className=" w-full h-[10rem] md:border-r text-center  md:border-r-yellow-200/25 flex flex-col items-center justify-center">
+            <div className=" flex justify-center flex-col gap-2 items-center">
               <Image
                 className="opacity-30 hover:opacity-50  transition ease-linear duration-300"
                 src={"/car.png"}
@@ -34,7 +34,7 @@ const Our_products = () => {
           </Link>
 
           <Link href={'#'} className=" w-full  h-[10rem]  text-center  flex flex-col items-center justify-center">
-            <div className=" flex justify-center flex-col items-center">
+            <div className=" flex justify-center flex-col gap-2 items-center">
               <Image
                 className="opacity-30 hover:opacity-50  transition ease-linear duration-300"
                 src={"/lighticon.png"}

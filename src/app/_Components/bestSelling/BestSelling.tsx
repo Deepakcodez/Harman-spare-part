@@ -11,9 +11,9 @@ const Best_Selling = () => {
 
   return (
     <>
-      <div className="relative z-20 w-full px-4 py-5 ">
+      <div className="relative z-20 w-full px-4 py-5 mt-10 ">
         <div className="  flex justify-between flex-wrap gap-2">
-          <h1 className="text-3xl font-semibold ">Best Selling Products</h1>
+          <h1 className="text-3xl font-thin ">Best Selling Products</h1>
 
           {/* button  */}
           <Link
@@ -41,7 +41,7 @@ const Best_Selling = () => {
           {
             dummyElement.map((elem,index)=>
             <Fragment key={index}>
-                <div className="h-[18rem] w-full  px-3 bg-slate-900/25 backdrop-blur-md rounded-md outline-3 outline-pink-300  border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
+                <div  className="h-[18rem] w-full  px-3 bg-slate-900/25 backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
             <div className="bg-slate-200 h-[12rem] flex items-center justify-center rounded-b-3xl">
               <Image
                 className="hover:scale-110 overflow-hidden transition ease-linear duration-300 "
@@ -58,7 +58,7 @@ const Best_Selling = () => {
               <div className="w-full flex justify-between items-center ">
                 <h1 className="text-md truncate  w-[80%]">Product Nameffdfdfdf rer re   re  rer name a=name</h1>
                 {/* BUTTON */}
-                <button className="flex gap-1 bg-violet-40  bg-violet-500/25  hover:bg-violet-500 hover:border-transparent transition ease-linear duration-300 text-white   rounded-full p-2   overflow-hidden">
+                <button className=" w-[10%] flex items-center justify-center gap-1 bg-violet-40  bg-violet-500/25  hover:bg-violet-500 hover:border-transparent transition ease-linear duration-300 text-white   rounded-full p-2   overflow-hidden">
                   <ShoppingCart size={17} />
                 </button>
               </div>

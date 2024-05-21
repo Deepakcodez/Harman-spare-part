@@ -6,8 +6,12 @@ import VioletBloom from "./_Components/smallcomponents/light/Light";
 import YellowBloom from "./_Components/smallcomponents/light/Light2";
 import Best_Selling from "./_Components/bestSelling/BestSelling";
 import Our_products from "./_Components/ourProducts/Ourprod";
+import OurWork from "./_Components/ourWork/Our_work";
 
 const Home: React.FC= ()=> {
+
+
+
   return (
     <>
       <div className=" relative h-full w-full bg-black overflow-hidden">
@@ -23,8 +27,9 @@ const Home: React.FC= ()=> {
           width={1000}
           height={1000}
           />
-        
+          <OurWork/>
           <Stats/>
+          
       </div>
     </>
   );

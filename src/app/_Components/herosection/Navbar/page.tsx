@@ -57,8 +57,8 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className=" navbar h-[4rem] w-full fixed bg-transparent flex justify-between px-[1rem] items-center top-[2rem] z-[1000] ">
-        <Link href={'/'} className={`${shadowFont.className} text-3xl`}>HSP</Link>
+      <div className=" navbar h-[4rem] w-full  fixed bg-transparent flex justify-between px-[2rem] items-center top-[2rem] z-[1000] ">
+        <Link href={'/'} className={`${shadowFont.className} text-3xl text-black`}>HSP</Link>
 
         <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 lg:gap-5 gap-1 px-3 rounded-full  cursor-pointer hidden md:flex ">
           {navbarElems.map((elem, index) => (
