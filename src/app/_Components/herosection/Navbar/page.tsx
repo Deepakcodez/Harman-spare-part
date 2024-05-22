@@ -61,7 +61,8 @@ const Navbar = () => {
         <Link href={'/'} className={`${shadowFont.className} text-3xl text-black`}>HSP</Link>
 
         <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 lg:gap-5 gap-1 px-3 rounded-full  cursor-pointer hidden md:flex ">
-          {navbarElems.map((elem, index) => (
+          {
+          navbarElems.map((elem, index) => (
             <Fragment key={index}>
               <Link
                 href={elem.linkTo}
@@ -72,7 +73,8 @@ const Navbar = () => {
                 {elem.tag}
               </Link>
             </Fragment>
-          ))}
+          ))
+          }
         </ul>
         {/* cart */}
         <div className="hidden md:flex">
