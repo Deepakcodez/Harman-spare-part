@@ -8,6 +8,7 @@ import Best_Selling from "./_Components/bestSelling/BestSelling";
 import Our_products from "./_Components/ourProducts/Ourprod";
 import OurWork from "./_Components/ourWork/Our_work";
 import BikeProd from "./_Components/bikeProd/BikeProd";
+import {  FooterSection } from "./_Components/footer/Footer";
 
 const Home: React.FC= ()=> {
 
@@ -21,6 +22,13 @@ const Home: React.FC= ()=> {
         <VioletBloom/>
         <Our_products/>
        <Best_Selling/>
+       <Image
+          className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
+          alt="light"
+          src={"/pinklight.svg"}
+          width={1000}
+          height={1000}
+          />
        <BikeProd/>
        <Image
           className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
@@ -31,6 +39,7 @@ const Home: React.FC= ()=> {
           />
           <OurWork/>
           <Stats/>
+          <FooterSection/>
           
       </div>
     </>
