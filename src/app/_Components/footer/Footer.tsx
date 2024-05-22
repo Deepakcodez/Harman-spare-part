@@ -28,7 +28,7 @@ export const FooterSection = () => {
   );
 };
 
-const Block = ({ className, ...rest }) => {
+const Block = ({ className, ...rest }:any) => {
   return (
     <motion.div
       variants={{
