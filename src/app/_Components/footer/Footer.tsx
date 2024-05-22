@@ -60,13 +60,9 @@ const Block = ({ className, ...rest }:any) => {
 
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-6">
-    <img
-      src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John"
-      alt="avatar"
-      className="mb-4 size-14 rounded-full"
-    />
+   
     <h1 className="mb-12 text-4xl font-medium leading-tight">
-      Hi, I'am Harman.{" "}
+      Hi, I am Harman.{" "}
       <span className="text-zinc-400">
         I here to convert your bike into superbike
       </span>
@@ -147,7 +143,7 @@ const AboutBlock = () => (
       My passion is building cool stuff.{" "}
       <span className="text-zinc-400">
         I build primarily with React, Tailwind CSS, and Framer Motion. I love
-        this stack so much that I even built a website about it. I've made over
+        this stack so much that I even built a website about it. I ve made over
         a hundred videos on the subject across YouTube and TikTok.
       </span>
     </p>
