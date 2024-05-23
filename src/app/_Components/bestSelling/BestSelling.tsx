@@ -4,10 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { ShoppingCart } from "lucide-react";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { add } from "@/lib/features/cart/cartslice";
 
 const Best_Selling = () => {
+  const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const dummyElement = [1,2,3,4]
+  const dummyElement = [1,2,3,4];
+
+
+  const handleAddToCart=(productId : string)=>{
+        dispatch(add(productId))
+  }
 
   return (
     <>
@@ -61,7 +69,9 @@ const Best_Selling = () => {
               <div className="w-full flex justify-between items-center ">
                 <h1 className="text-md truncate  w-[80%]">Product Nameffdfdfdf rer re   re  rer name a=name</h1>
                 {/* BUTTON */}
-                <button className=" w-[10%] flex items-center justify-center gap-1 bg-violet-40  bg-violet-500/25  hover:bg-violet-500 hover:border-transparent transition ease-linear duration-300 text-white   rounded-full p-2   overflow-hidden">
+                <button 
+                onClick={()=>handleAddToCart("54cllskl59945ja0%*fhj")}
+                className=" w-[10%] flex items-center justify-center gap-1 bg-violet-40  bg-violet-500/25  hover:bg-violet-500 hover:border-transparent transition ease-linear duration-300 text-white   rounded-full p-2   overflow-hidden">
                   <ShoppingCart size={17} />
                 </button>
               </div>

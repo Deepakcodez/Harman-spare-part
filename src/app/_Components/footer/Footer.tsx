@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
@@ -8,7 +8,6 @@ import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
 export const FooterSection = () => {
   return (
     <div className="min-h-screen bg-black px-4 py-12 text-zinc-50  border-t-[1px] border-t-white/25">
-      
       <motion.div
         initial="initial"
         animate="animate"
@@ -28,7 +27,7 @@ export const FooterSection = () => {
   );
 };
 
-const Block = ({ className, ...rest }:any) => {
+const Block = ({ className, ...rest }: any) => {
   return (
     <motion.div
       variants={{
@@ -60,7 +59,6 @@ const Block = ({ className, ...rest }:any) => {
 
 const HeaderBlock = () => (
   <Block className="col-span-12 row-span-2 md:col-span-6">
-   
     <h1 className="mb-12 text-4xl font-medium leading-tight">
       Hi, I am Harman.{" "}
       <span className="text-zinc-400">

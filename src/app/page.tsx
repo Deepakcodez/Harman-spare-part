@@ -10,7 +10,7 @@ import OurWork from "./_Components/ourWork/Our_work";
 import BikeProd from "./_Components/bikeProd/BikeProd";
 import {  FooterSection } from "./_Components/footer/Footer";
 
-const Home: React.FC= ()=> {
+const Home= ({children,}: Readonly<{ children: React.ReactNode;}>) => {
 
 
 
