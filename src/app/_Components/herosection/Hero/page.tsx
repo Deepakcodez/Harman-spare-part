@@ -1,6 +1,4 @@
 "use client"
-import Spline from '@splinetool/react-spline';
-import Helemt3d from '../../3d/helmet';
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
 import { useState } from 'react';
@@ -25,7 +23,6 @@ const Hero = () => {
                 </div>
 
                 
-          {/* <Helemt3d/> */}
             </div>
         </div>
         </>
