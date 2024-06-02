@@ -9,6 +9,7 @@ import Our_products from "./_Components/ourProducts/Ourprod";
 import OurWork from "./_Components/ourWork/Our_work";
 import BikeProd from "./_Components/bikeProd/BikeProd";
 import {  FooterSection } from "./_Components/footer/Footer";
+import CarProd from "./_Components/CarProduct/page";
 
 const Home: React.FC= ()=> {
 
@@ -37,6 +38,7 @@ const Home: React.FC= ()=> {
           width={1000}
           height={1000}
           />
+          <CarProd/>
           <OurWork/>
           <Stats/>
           <FooterSection/>

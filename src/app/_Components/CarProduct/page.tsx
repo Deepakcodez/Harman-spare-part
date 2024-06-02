@@ -4,17 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { ShoppingCart } from "lucide-react";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { add } from "@/lib/features/cart/cartslice";
 import Card from "../Card/Card";
 
-const BikeProd = () => {
+const CarProd = () => {
+  const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const dummyElement = [1, 2, 3, 4];
+
+  const handleAddToCart = (productId: string) => {
+    dispatch(add(productId));
+  };
+
   return (
     <>
-      <div className="relative z-20 w-full px-4 py-5 mt-5 ">
+      <div className="relative z-20 w-full px-4 py-5 mt-10 ">
         <div className="  flex justify-between flex-wrap gap-2">
           <div className="w-full flex flex-col md:flex-row  justify-between">
-            <h1 className="text-3xl font-thin ">Bike Products </h1>
+            <h1 className="text-3xl font-thin ">Car Products</h1>
 
             {/* button  */}
             <Link
@@ -39,16 +47,11 @@ const BikeProd = () => {
 
         <div className="my-7 w-full md:px-[1rem] px-1  grid grid-cols-1  md:grid-cols-2 sm:grid-cols-2  lg:grid-cols-4 md:gap-8 gap-5 place-items-center">
           {/* CARDS */}
-
-        <Card/>
-          
-
-
-
+          <Card />
         </div>
       </div>
     </>
   );
 };
 
-export default BikeProd;
+export default CarProd;
