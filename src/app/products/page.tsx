@@ -2,7 +2,8 @@
 import React, { FC } from 'react';
 import useSWR from 'swr';
 import { ProdDocument } from '../../types/product.types';
-import Card from '../_Components/Card/Card';
+import Card from '../_Components/Shared/Card/Card';
+import Loader from '../_Components/Shared/Loader/Loader';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -10,7 +11,7 @@ const Products: FC = () => {
   const { data, error } = useSWR('https://harman-spare-parts-backend.vercel.app/api/v1/product/allProducts', fetcher);
 
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div><Loader /></div>;
 
   const products: ProdDocument[] = data.products;
 

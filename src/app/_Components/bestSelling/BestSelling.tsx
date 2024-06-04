@@ -6,7 +6,7 @@ import { Fragment, useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { add } from "@/lib/features/cart/cartslice";
-import Card from "../Card/Card";
+import Card from "../Shared/Card/Card";
 
 const Best_Selling = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +51,7 @@ const Best_Selling = () => {
 
 
 
-          <div  className="h-[24rem] max-w-full w-[18rem]  bg-slate-900/25 backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
+          <div className="h-[24rem] max-w-full w-[18rem]  bg-slate-900/25 backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
             <div className="bg-slate-200 h-[15rem] flex items-center justify-center rounded-b-3xl">
               <Image
                 className="hover:scale-110 overflow-hidden transition ease-linear duration-300 "
@@ -65,16 +65,16 @@ const Best_Selling = () => {
             </div>
             {/* DETAIL */}
             <div className="mt-3 px-5 flex flex-col gap-2">
-                <h1 className="text-md truncate  w-[90%]">prod name</h1>
-                
+              <h1 className="text-md truncate  w-[90%]">prod name</h1>
+
               {/* Price */}
               <h1 className="text-lg  font-serif text-blue-100">₹price</h1>
               <div className="flex gap-1 items-center justify-start">
-              <div className="bg-violet-400 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
-                <h1 className="text-md">4.4</h1>
-                <Star size={20}/>
-              </div>
-              <h1 className="text-sm text-white/75">(321 Reviews)</h1>
+                <div className="bg-violet-400 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
+                  <h1 className="text-md">4.4</h1>
+                  <Star size={20} />
+                </div>
+                <h1 className="text-sm text-white/75">(321 Reviews)</h1>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ const Best_Selling = () => {
 
 
 
-         
+
         </div>
       </div>
     </>
