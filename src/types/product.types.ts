@@ -21,6 +21,7 @@ export interface UserReference {
 
 // Define the ProdDocument interface
 export interface ProdDocument extends UserReference {
+  _id:mongoose.Types.ObjectId, 
   name: string;
   description: string;
   price: number;

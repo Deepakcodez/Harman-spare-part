@@ -1,6 +1,7 @@
 import { ProdDocument } from "@/types/product.types";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FC, Fragment } from "react";
 
 interface CardProps {
@@ -15,8 +16,8 @@ const Card:FC<CardProps> = ({ products }) => {
         {
             products?.map((elem,index)=>
             <Fragment key={index}>
-                <div  className="h-[24rem] max-w-full w-[18rem]  bg-slate-900/25 backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
-            <div className="bg-slate-200 h-[15rem] flex items-center justify-center rounded-b-3xl">
+                <Link href={`/products/${elem?._id}`}  className="h-[24rem] max-w-full w-[18rem]   backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
+            <div className="bg-slate-200 shadow-lg  h-[15rem] flex items-center justify-center rounded-b-lg">
               <Image
                 className="hover:scale-110 overflow-hidden transition ease-linear duration-300 "
                 alt="product image"
@@ -41,7 +42,7 @@ const Card:FC<CardProps> = ({ products }) => {
               <h1 className="text-sm text-white/75">({elem.reviews.length} Reviews)</h1>
               </div>
             </div>
-          </div>
+          </Link>
 
             </Fragment>)
           }

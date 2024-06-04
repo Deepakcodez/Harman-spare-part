@@ -8,7 +8,7 @@ const Hero = () => {
 
     return ( 
         <>
-        <div className=" relative z-0 h-screen w-full bg-black md:p-5  ">
+        <div className=" relative z-0 h-screen w-full  md:p-5  ">
             <div className="bg-yellow-50 w-full h-screen rounded-3xl  ">
 
               {/* product button */}
