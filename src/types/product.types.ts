@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 export interface Image {
   public_id: string;
   url: string;
+  _id:  mongoose.Types.ObjectId;
 }
 
 // Define the Review interface

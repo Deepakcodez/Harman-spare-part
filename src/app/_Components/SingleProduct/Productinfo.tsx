@@ -8,18 +8,17 @@ interface ProdProps {
 }
 
 const ProductInfo: FC<ProdProps> = ({ product }) => {
-    console.log('>>>>>>>>>>>', product.name);
 
     return (
         <>
-            <div className="grid md:grid-cols-2 w-full min-h-screen h-auto bg-white">
+            <div className="grid md:grid-cols-2 w-full min-h-screen md:h-screen bg-white">
                 {/* Product image */}
-                <div className=" h-fit">
-                    <ProdImage />
+                <div className=" h-fit  ">
+                    <ProdImage images={product.images} />
                 </div>
 
                 {/* Product details */}
-                <div className=" px-4 h-auto overflow-y-auto">
+                <div className=" px-4 h-auto md:overflow-y-auto">
                     <ProdDetails product={product} />
                 </div>
             </div>
