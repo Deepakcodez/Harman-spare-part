@@ -1,5 +1,7 @@
 "use client"
 import Loader from "@/app/_Components/Shared/Loader/Loader";
+import ProductInfo from "@/app/_Components/SingleProduct/Productinfo";
+import { ProdDocument } from "@/types/product.types";
 import Router from "next/router";
 import { FC } from "react";
 import useSWR from "swr";
@@ -17,12 +19,13 @@ const  Product:FC<ProductProps>= ({params}) => {
 
     if (error) return <div>Failed to load</div>;
     if (!data) return <div><Loader /></div>;
-    console.log('>>>>>>>>>>>', data.product)
+
+    const product: ProdDocument = data.product;
 
     return ( 
         <>
-        <div>
-            single prod {data.product.name}
+        <div className="w-full h-auto">
+          <ProductInfo product={product}/>            
         </div>
         </>
      );
