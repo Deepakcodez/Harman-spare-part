@@ -1,17 +1,36 @@
+"use state"
 import { ProdDocument } from "@/types/product.types";
-import { Star } from "lucide-react";
-import { FC, Fragment } from "react";
+import { Pencil, Star } from "lucide-react";
+import { FC, Fragment, useState } from "react";
+import MakeReview from "../MakeReview/MakeReview";
+import { useAppDispatch, } from "@/lib/store/hooks";
+import {  toggleIsShown } from "@/lib/features/review/reviewSlice";
 
 
 interface ProdProps {
     product: ProdDocument;
 }
 const ProdDetails: FC<ProdProps> = ({ product }) => {
-    console.log('>>>>>>>>>>>', product)
+
+    const dispatch = useAppDispatch();
+
+
+    const ReviewHandler = () => {
+        dispatch(toggleIsShown())
+
+    }
+
+
+
+
 
     return (
         <>
-            <div className="md:my-[7rem] my-[2rem]     h-fit w-full bg-white   flex flex-col gap-3  ">
+
+            <div className="md:my-[7rem] my-[2rem] h-fit w-full bg-white  flex flex-col gap-3  ">
+
+
+                {/* Product Name */}
 
                 <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
                     <h1 className="text-2xl text-black/75 ">{product.name}</h1>
@@ -19,6 +38,8 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     <div className="bg-violet-600/25 text-violet-800 font-bold border-2 border-violet-600 hover:bg-violet-800/50 w-fit  p-2 rounded-full px-4 transition ease-linear duration-300 cursor-pointer">Free Delivery</div>
                 </div>
 
+
+                {/* Product Details */}
 
                 <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
                     <h1 className="text-2xl text-black">Product Detail</h1>
@@ -36,8 +57,17 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                 </div>
 
 
+                {/* Reviews section */}
+
                 <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
-                    <h1 className="text-2xl text-black">Product Reviews</h1>
+                    <div className="flex justify-between">
+                        <h1 className="text-2xl text-black">Product Reviews</h1>
+                        <div
+                            onClick={ReviewHandler}
+                            className="bg-violet-900 hover:bg-violet-800 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300">
+                            <Pencil color="white" size={20} />
+                        </div>
+                    </div>
                     {
                         product.reviews.map((rev, index) =>
                             <Fragment key={index}>
