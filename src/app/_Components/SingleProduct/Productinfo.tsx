@@ -18,7 +18,7 @@ const ProductInfo: FC<ProdProps> = ({ product }) => {
     return (
         <>
         {
-            isShown && <MakeReview/>
+            isShown && <MakeReview productId={product._id.toString()} />
         }
        
             <div className="grid md:grid-cols-2 w-full min-h-screen md:h-screen bg-white">
