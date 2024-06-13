@@ -16,8 +16,8 @@ const Card:FC<CardProps> = ({ products }) => {
         {
             products?.map((elem,index)=>
             <Fragment key={index}>
-                <Link href={`/products/${elem?._id}`}  className="h-[24rem] max-w-full w-[18rem]   backdrop-blur-md rounded-md   border-[1px] border-gray-800 hover:border-gray-700 border-b-gray-600 hover:border-b-gray-500  hover:-translate-y-2 transition ease-linear duration-300 ">
-            <div className="bg-slate-200 shadow-lg  h-[15rem] flex items-center justify-center rounded-b-lg">
+                <Link href={`/products/${elem?._id}`}  className="h-[24rem] max-w-full w-[18rem]   backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 ">
+            <div className="bg-slate-200 shadow-lg  h-[15rem] flex items-center justify-center rounded-sm">
               <Image
                 className="hover:scale-110 overflow-hidden transition ease-linear duration-300 "
                 alt="product image"
@@ -29,7 +29,7 @@ const Card:FC<CardProps> = ({ products }) => {
               />
             </div>
             {/* DETAIL */}
-            <div className="mt-3 px-5 flex flex-col gap-2">
+            <div className="mt-3  flex flex-col ">
                 <h1 className="text-md truncate  w-[90%]">{elem.name}</h1>
                 
               {/* Price */}
