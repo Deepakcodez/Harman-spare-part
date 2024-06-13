@@ -32,4 +32,5 @@ export interface ProdDocument extends UserReference {
   stock: number;
   numberOfReviews: number;
   reviews: Review[];
+  isFreeDelivery : Boolean
 }

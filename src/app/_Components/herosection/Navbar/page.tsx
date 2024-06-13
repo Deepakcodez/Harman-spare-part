@@ -58,7 +58,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className=" navbar h-[4rem] w-full  fixed bg-transparent flex justify-between px-[2rem] items-center top-[2rem] z-[1000] ">
+      <div className=" navbar h-[4rem] w-full backdrop-blur  fixed bg-transparent flex justify-between px-[2rem] items-center top-0 z-[1000] ">
         <Link
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
@@ -66,13 +66,13 @@ const Navbar = () => {
           HSP
         </Link>
 
-        <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-full w-auto flex justify-between items-center text-gray-700 lg:gap-5 gap-1 px-3 rounded-full  cursor-pointer hidden md:flex ">
+        <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-[3rem] w-[32rem]  px-3 flex justify-between items-center text-gray-700 lg:gap-3 gap-1  rounded-full  cursor-pointer hidden md:flex ">
           {navbarElems.map((elem, index) => (
             <Fragment key={index}>
               <Link
                 href={elem.linkTo}
-                className={`hover:bg-[#efff01] p-3 px-5 hover:text-black rounded-full transition ease-linear duration-700
-              ${elem.linkTo === pathname ? "bg-[#efff01] text-black " : ""}
+                className={`hover:bg-[#eeff0131]  p-2  px-3 hover:text-black rounded-full transition ease-linear duration-700
+              ${elem.linkTo === pathname ? "bg-[#eeff0163] text-black " : ""}
               `}
               >
                 {elem.tag}
