@@ -3,8 +3,8 @@ import { ProdDocument } from "@/types/product.types";
 import { Pencil, Star } from "lucide-react";
 import { FC, Fragment, useState } from "react";
 import MakeReview from "../MakeReview/MakeReview";
-// import { useAppDispatch, } from "@/lib/store/hooks";
-// import {  toggleIsShown } from "@/lib/features/review/reviewSlice";
+import { useAppDispatch, } from "@/lib/store/hooks";
+import { toggleIsShown } from "@/lib/features/review/reviewSlice";
 
 
 interface ProdProps {
@@ -12,13 +12,13 @@ interface ProdProps {
 }
 const ProdDetails: FC<ProdProps> = ({ product }) => {
 
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
 
-    // const ReviewHandler = () => {
-    //     dispatch(toggleIsShown())
+    const ReviewHandler = () => {
+        dispatch(toggleIsShown())
 
-    // }
+    }
 
 
 
@@ -49,7 +49,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                 {/* Product Details */}
 
                 <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
-                    <h1 className="text-xl text-black">Product Detail</h1>
+                    <h1 className="text-md text-black">Product Detail</h1>
                     <h1 className="text-sm text-black/75 ">{product.description}</h1>
                     <div className="text-black flex items-center gap-1" >
                         <div
@@ -77,34 +77,38 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
 
                 {/* Reviews section */}
 
-                {
-                    product.reviews[0]
-                    &&
+                
                     <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
-                        <div className="flex justify-between">
-                            <h1 className="text-xl text-black">Product Reviews</h1>
+                        
+
+                            <div className="flex justify-between">
+                                <h1 className="text-md text-black">Product Reviews</h1>
+                                <div
+                                    onClick={ReviewHandler}
+                                    className="bg-violet-900 hover:bg-violet-800 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300">
+                                    <Pencil color="white" size={20} />
+                                </div>
+                            </div>
+                            {
+                                product.reviews.map((rev, index) =>
+                                    <Fragment key={index}>
+                                        <div className="border-t py-3">
+                                            <h1 className="text-black/75 text-md ">{rev.name}</h1>
+                                            <h1 className="text-black/75 text-sm">{rev.comment}</h1>
+                                        </div>
+                                    </Fragment>
+                                )
+                            }
 
                         </div>
-                        {
-                            product.reviews.map((rev, index) =>
-                                <Fragment key={index}>
-                                    <div className="border-t py-3">
-                                        <h1 className="text-black/75 text-md ">{rev.name}</h1>
-                                        <h1 className="text-black/75 text-sm">{rev.comment}</h1>
-                                    </div>
-                                </Fragment>
-                            )
-                        }
+                
+
+
+
 
                     </div>
-                }
-
-
-
-
-            </div>
         </>
-    );
+            );
 }
 
-export default ProdDetails;
+            export default ProdDetails;

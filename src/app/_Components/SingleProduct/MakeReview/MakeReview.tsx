@@ -36,10 +36,10 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
 
     return (
         <>
-            <div className="absolute z-10 h-screen w-full bg-black/50 flex justify-center items-center">
-                <div className="w-[70%] p-9  bg-white rounded-md border-2 border-violet-200 shadow-md  ">
+            <div className="absolute z-10 h-screen w-full bg-black/75 flex justify-center items-center">
+                <div className="md:w-[50%] sm:w-[70%] w-[90%] p-9  bg-white rounded-md border-2 border-violet-200 shadow-md  ">
                     <div className="flex text-black justify-between items-center">
-                        <h1 className="text-black text-2xl mb-2 flex items-center gap-3">Post Review <PenBoxIcon /></h1>
+                        <h1 className="text-black text-md mb-2 flex items-center gap-3">Post Review <PenBoxIcon /></h1>
                         <div
                             onClick={ReviewHandler}
                         >
@@ -47,13 +47,13 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
                         </div>
                     </div>
                     <textarea
-                        className="border border-black/25 w-full p-4 rounded-md text-black max-h-[10rem] min-h-[5rem]"
+                        className="border border-black/25 w-full p-4 rounded-md text-black max-h-[10rem] min-h-[5rem] text-sm"
                         placeholder="Enter your Review"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                     />
-                    <div className="flex gap-1 text-black mt-2 ">
-                        <h1 className="text-lg ">Give Stars </h1>
+                    <div className="flex gap-1 text-black mt-2  ">
+                        <h1 className="text-md me-3  ">Rate The Product </h1>
                         <select
                             name="rating"
                             className="text-white bg-violet-500 rounded-md px-2 "
@@ -69,11 +69,11 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
                     </div>
 
                     <button
-                        className="bg-violet-900 rounded-md p-2 px-4 mt-3 flex gap-1 cursor-pointer "
+                        className="bg-violet-900 rounded-md p-2 px-4 mt-3 flex justify-center items-center gap-1 cursor-pointer "
                         onClick={handleSubmit}
                     >
-                        <h1>Post</h1>
-                        <Send />
+                        <h1 className="text-sm">Post</h1>
+                        <Send size={15} />
                     </button>
                 </div>
             </div>

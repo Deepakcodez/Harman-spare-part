@@ -66,7 +66,7 @@ console.log('>>>>>>>>>>>data', data)
     <div className="h-auto w-full p-4 mt-9">
       <div className='md:flex w-full'>
         {/* filter parent div */}
-        <div className='md:w-[25rem] w-full h-[7rem] md:h-[100vh] py-7'>
+        <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7'>
           {/* filter child div */}
           <div className='h-full w-full bg-[#ffffff16] rounded-md flex flex-col py-5'>
             <div className='flex justify-center items-center'>
@@ -82,10 +82,10 @@ console.log('>>>>>>>>>>>data', data)
               </div>
             </div>
             {/* category */}
-            <div className='w-full flex justify-center mt-3'>
+            <div className='w-full  flex justify-center mt-3'>
               <select
                 name="category"
-                className="text-white bg-[#ffffff48] text-[#ffffff56] rounded-md px-2 outline-none py-1 w-full text-center mx-6 text-sm"
+                className="text-white bg-[#ffffff48] text-[#ffffff56] rounded-md px-2 outline-none py-1 w-full text-center mx-6 text-sm "
                 value={category}
                 onChange={categoryHandler}
               >
@@ -102,7 +102,7 @@ console.log('>>>>>>>>>>>data', data)
         <ProductCards products={products} data={data} error={error} />
       </div>
 
-      
+
       {/* pagination div */}
       <div className='h-[3rem] w-full rounded-md flex justify-center items-center gap-2 mt-14'>
         {/* prev button */}
