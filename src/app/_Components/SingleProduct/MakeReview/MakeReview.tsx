@@ -22,7 +22,9 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
             comment: comment,
             rating: rating
         };
-
+          if(!reviewData){
+            return 
+          }
         try {
             const response = await axios.put("https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review", reviewData);
 
@@ -38,13 +40,15 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
         <>
             <div className="absolute z-10 h-screen w-full bg-black/75 flex justify-center items-center">
                 <div className="md:w-[50%] sm:w-[70%] w-[90%] p-9  bg-white rounded-md border-2 border-violet-200 shadow-md  ">
-                    <div className="flex text-black justify-between items-center">
-                        <h1 className="text-black text-md mb-2 flex items-center gap-3">Post Review <PenBoxIcon /></h1>
-                        <div
-                            onClick={ReviewHandler}
-                        >
+                <div className="text-black w-full "
+                    onClick={ReviewHandler}>
                             <X />
-                        </div>
+                </div>
+                    <div className="flex text-black justify-between items-center">
+                        <h1 className="text-black/75 text-sm mb-2 flex items-center gap-3 ">
+                        Post Review <PenBoxIcon size={15} />
+                        </h1>
+                       
                     </div>
                     <textarea
                         className="border border-black/25 w-full p-4 rounded-md text-black max-h-[10rem] min-h-[5rem] text-sm"
@@ -52,7 +56,7 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                     />
-                    <div className="flex gap-1 text-black mt-2  ">
+                    <div className="flex gap-1 text-black/75 mt-2  ">
                         <h1 className="text-md me-3  ">Rate The Product </h1>
                         <select
                             name="rating"

@@ -1,4 +1,19 @@
 import type { Config } from "tailwindcss";
+import { PluginAPI } from 'tailwindcss/types/config';
+
+const noScrollbarPlugin = (api: PluginAPI) => {
+  const { addUtilities } = api;
+  const newUtilities = {
+    ".no-scrollbar::-webkit-scrollbar": {
+      display: "none",
+    },
+    ".no-scrollbar": {
+      "-ms-overflow-style": "none",
+      "scrollbar-width": "none",
+    },
+  };
+  addUtilities(newUtilities);
+};
 
 const config: Config = {
   content: [
@@ -33,20 +48,9 @@ const config: Config = {
       // => @media (min-width: 1536px) { ... }
     },
   },
-
   plugins: [
-    function ({addUtilities}){
-      const newUtilities ={
-        ".no-scrollbar::-webkit-scrollbar":{
-          display:"none",
-        },
-        ".no-scrollbar":{
-          "-ms-overflow-style":"none",
-          "scrollbar-width":"none"
-        },
-      }
-      addUtilities(newUtilities)
-    }
+    noScrollbarPlugin
   ],
 };
+
 export default config;
