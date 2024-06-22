@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className=" relative h-full w-full bg-[#000000] overflow-hidden">
+      <div className=" relative h-full w-full bg-black overflow-hidden">
         <YellowBloom />
         <Hero />
         <VioletBloom />

@@ -24,7 +24,7 @@ const  Product:FC<ProductProps>= ({params}) => {
 
     return ( 
         <>
-        <div className="w-full h-auto">
+        <div className="w-full h-screen bg-red-500 ">
           <ProductInfo product={product}/>            
         </div>
         </>
