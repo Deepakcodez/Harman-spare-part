@@ -22,7 +22,7 @@ const Best_Selling = () => {
       <div className="relative z-20 w-full px-4 py-5 mt-10 ">
         <div className="  flex justify-between flex-wrap gap-2">
           <div className="w-full flex flex-col md:flex-row  justify-between">
-            <h1 className="text-3xl font-thin ">Best Selling Products</h1>
+            <h1 className="text-3xl text-black/75 ">Best Selling Products</h1>
 
             {/* button  */}
             <Link

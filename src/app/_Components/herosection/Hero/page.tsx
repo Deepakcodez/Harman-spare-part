@@ -9,7 +9,7 @@ const Hero = () => {
     return ( 
         <>
         <div className=" relative z-0 h-screen w-full  md:p-5  ">
-            <div className="bg-yellow-50 w-full h-screen rounded-3xl  ">
+            <div className="bg-slate-800 w-full h-screen rounded-3xl  ">
 
               {/* product button */}
               <div className='absolute top-[70%]   w-full flex justify-center group'>

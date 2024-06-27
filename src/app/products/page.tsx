@@ -5,7 +5,16 @@ import { ProdDocument } from '../../types/product.types';
 import { Search } from 'lucide-react';
 import ProductCards from '../_Components/productCards/ProductCards';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-import { selectCategory, selectSearchKeyword, selectCurrentPage, selectMaxPage, setCategory, setSearchKeyword, setCurrentPage, setMaxPage } from '@/lib/features/filter/filterSlice';
+import {
+  selectCategory,
+  selectSearchKeyword,
+  selectCurrentPage,
+  selectMaxPage,
+  setCategory,
+  setSearchKeyword,
+  setCurrentPage,
+  setMaxPage
+} from '@/lib/features/filter/filterSlice';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -54,46 +63,47 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (data) {
-      const averageOfProducts = Math.ceil(data.productCount / 9); // 9 is products shown on one page
+      const productCount = data.productCount ?? 0;
+      const averageOfProducts = Math.ceil(productCount / 9); // 9 is products shown on one page
       dispatch(setMaxPage(averageOfProducts));
     }
   }, [data, dispatch]);
 
-console.log('>>>>>>>>>>>data', data)
-  const products: ProdDocument[] = data?.products;
+  const products: ProdDocument[] = data?.products ?? [];
 
   return (
-    <div className="h-auto w-full p-4 mt-9 bg-white ">
-      <div className='md:flex w-full'>
+    <div className="h-auto w-full pt-16 md:px-16 bg-white">
+      <div className='md:flex w-full '>
         {/* filter parent div */}
-        <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7'>
+        <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7 '>
           {/* filter child div */}
-          <div className='h-full w-full bg-white rounded-md flex flex-col py-5 bg-gray-50 border-2'>
+          <div className='h-full w-full bg-white rounded-md flex flex-col py-5 '>
             {/* search option */}
             <div className='flex justify-center items-center  '>
-              <div className='flex w-fit border-2 rounded-md'>
+              <div className='flex w-full border-2 rounded-md mx-6'>
 
-              <input
-                className='bg-[#f7f7f7]  px-2 py-1 rounded-s-md outline-none text-black/75'
-                name='search_keyword'
-                value={searchInput}
-                placeholder='Search Item'
-                onChange={searchHandler}
+                <input
+                  className='bg-[#f7f7f7] w-full  px-2 py-1 rounded-s-md outline-none text-black/75 '
+                  name='search_keyword'
+                  value={searchInput}
+                  placeholder='Search Item'
+                  onChange={searchHandler}
                 />
-              <div className='bg-[#f7f7f7] py-1 rounded-e-md '>
-                <Search className='hover:text-white text-black pe-2' />
-              </div>
+                <div className='bg-[#f7f7f7] py-1 rounded-e-md '>
+                  <Search className='hover:text-white text-black pe-2' />
                 </div>
+              </div>
             </div>
             {/* category */}
-            <div className='w-full  flex justify-center mt-3'>
+            <div className='w-full  flex justify-center mt-3 '>
               <select
                 name="category"
                 className=" bg-[#ffff] border-2 text-black rounded-md px-2 outline-none py-1 w-full text-center mx-6 text-sm "
                 value={category}
                 onChange={categoryHandler}
               >
-                <option className='text-black/75 bg-violet-500 ' value="">Select Product Category</option>
+                <option className='text-black/75 bg-violet-500 text-sm' value="">Select Product Category</option>
+                <option className='text-black' value="">All</option>
                 <option className='text-black' value="bike">Bike</option>
                 <option className='text-black' value="car">Car</option>
                 <option className='text-black' value="light">Light</option>
@@ -108,7 +118,7 @@ console.log('>>>>>>>>>>>data', data)
 
 
       {/* pagination div */}
-      <div className='h-[3rem] w-full rounded-md flex justify-center items-center gap-2 mt-14'>
+      <div className='h-[3rem] w-full rounded-md flex justify-center items-center gap-2 py-14'>
         {/* prev button */}
         <div
           onClick={prevPageHandler}

@@ -15,10 +15,6 @@ const Mobilemenu = ({ show }: showProps) => {
       linkTo: "/",
     },
     {
-      tag: "Lights",
-      linkTo: "/lights",
-    },
-    {
       tag: "Products",
       linkTo: "/products",
     },

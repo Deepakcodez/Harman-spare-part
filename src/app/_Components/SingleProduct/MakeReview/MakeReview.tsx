@@ -23,6 +23,7 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
             rating: rating
         };
           if(!reviewData){
+            console.log('>>>>>>>>>>> review required')
             return 
           }
         try {
@@ -40,7 +41,7 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
         <>
             <div className="absolute z-10 h-screen w-full bg-black/75 flex justify-center items-center">
                 <div className="md:w-[50%] sm:w-[70%] w-[90%] p-9  bg-white rounded-md border-2 border-violet-200 shadow-md  ">
-                <div className="text-black w-full "
+                <div className="text-black w-full flex flex-row-reverse  "
                     onClick={ReviewHandler}>
                             <X />
                 </div>
@@ -57,7 +58,7 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
                         onChange={(e) => setComment(e.target.value)}
                     />
                     <div className="flex gap-1 text-black/75 mt-2  ">
-                        <h1 className="text-md me-3  ">Rate The Product </h1>
+                        <h1 className="text-sm me-3  ">Rate The Product </h1>
                         <select
                             name="rating"
                             className="text-white bg-violet-500 rounded-md px-2 "

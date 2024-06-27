@@ -14,8 +14,8 @@ interface ProductCardsProb {
 const ProductCards:FC<ProductCardsProb> = ({products, data, error}) => {
 
     
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div className="w-full h-full"><Loader /></div>;
+  if (error) return <div className=" w-full h-full text-black flex justify-center items-center">Failed to load</div>;
+  if (!data) return <div className="w-full h-screen text-black flex justify-center items-center"><h1>Loading...</h1></div>;
   if (!data.products || data.products.length === 0) return <div className='h-screen w-full flex justify-center items-center'>Nothing to show</div>;
     return ( 
         <>

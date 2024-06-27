@@ -77,38 +77,40 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
 
                 {/* Reviews section */}
 
-                
-                    <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
-                        
 
-                            <div className="flex justify-between">
-                                <h1 className="text-md text-black">Product Reviews</h1>
-                                <div
-                                    onClick={ReviewHandler}
-                                    className="bg-violet-900 hover:bg-violet-800 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300">
-                                    <Pencil color="white" size={20} />
-                                </div>
-                            </div>
-                            {
-                                product.reviews.map((rev, index) =>
-                                    <Fragment key={index}>
-                                        <div className="border-t py-3">
-                                            <h1 className="text-black/75 text-md ">{rev.name}</h1>
-                                            <h1 className="text-black/75 text-sm">{rev.comment}</h1>
-                                        </div>
-                                    </Fragment>
-                                )
-                            }
+                <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
 
+
+                    <div className="flex justify-between">
+                        <h1 className="text-md text-black">Product Reviews</h1>
+                        <div
+                            onClick={ReviewHandler}
+                            className="bg-violet-50 hover:bg-violet-200 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300 border">
+                            <Pencil color="#4d4d4d" size={20} />
                         </div>
-                
-
-
-
-
                     </div>
+                    {product?.reviews && product.reviews.length > 0 ? (
+                        product.reviews.map((rev, index) => (
+                            <Fragment key={index}>
+                                <div className="border-t py-3">
+                                    <h1 className="text-black/75 text-md">{rev.name}</h1>
+                                    <h1 className="text-black/75 text-sm">{rev.comment}</h1>
+                                </div>
+                            </Fragment>
+                        ))
+                    ) : (
+                        <p className="text-black/50 text-sm">No Reviews to Show...</p>
+                    )}
+
+                </div>
+
+
+
+
+
+            </div>
         </>
-            );
+    );
 }
 
-            export default ProdDetails;
+export default ProdDetails;

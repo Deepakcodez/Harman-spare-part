@@ -10,6 +10,7 @@ import Mobilemenu from "./mobilemenu/page";
 import { Fragment, useState } from "react";
 import Searchbutton from "../../search/page";
 import { navbarElemsProps } from "@/types/mobilenavbar.types";
+import Image from "next/image";
 const shadowFont = Shadows_Into_Light({
   weight: "400",
   subsets: ["latin"],
@@ -24,10 +25,7 @@ const Navbar = () => {
       tag: "Home",
       linkTo: "/",
     },
-    {
-      tag: "Lights",
-      linkTo: "/lights",
-    },
+
     {
       tag: "Products",
       linkTo: "/products",
@@ -56,6 +54,8 @@ const Navbar = () => {
       ease: "back",
     });
   }, []);
+
+
   return (
     <>
       <div className=" navbar h-[4rem] w-full backdrop-blur  fixed bg-transparent flex justify-between px-[2rem] items-center top-0 z-[1000] ">
@@ -63,15 +63,15 @@ const Navbar = () => {
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
         >
-          HSP
+         <Image src={'/logo.png'} width={60} height={60} alt="HSP"/>
         </Link>
 
-        <ul className="bg-gray-50/75 backdrop-blur-sm	 shadow-lg h-[3rem] w-[32rem]  px-3 flex justify-between items-center text-gray-700 lg:gap-3 gap-1  rounded-full  cursor-pointer hidden md:flex ">
+        <ul className="bg-gray-50/75 backdrop-blur-sm border-2	 shadow-lg h-[3rem]  text-gray-700  rounded-full  cursor-pointer hidden md:grid grid-cols-4 gap-2 ">
           {navbarElems.map((elem, index) => (
             <Fragment key={index}>
               <Link
                 href={elem.linkTo}
-                className={`hover:bg-[#eeff0131]  p-2  px-3 hover:text-black rounded-full transition ease-linear duration-700
+                className={`hover:bg-[#eeff0131]  p-2  text-center px-3 hover:text-black rounded-full transition ease-linear duration-700
               ${elem.linkTo === pathname ? "bg-[#eeff0163] text-black " : ""}
               `}
               >

@@ -17,10 +17,9 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className=" relative h-full w-full bg-black overflow-hidden">
-        <YellowBloom />
+      <div className=" relative h-full w-full bg-white overflow-hidden">
         <Hero />
-        <VioletBloom />
+        {/* <VioletBloom /> */}
         <Our_products />
         <Best_Selling />
         <Image
@@ -31,13 +30,13 @@ const Home: React.FC = () => {
           height={1000}
         />
         <BikeProd />
-        <Image
+        {/* <Image
           className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
           alt="light"
           src={"/pinklight.svg"}
           width={1000}
           height={1000}
-        />
+        /> */}
         <CarProd />
         <OurWork />
         <Stats />
