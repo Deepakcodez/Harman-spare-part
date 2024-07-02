@@ -8,8 +8,7 @@ interface CardProps {
   products: ProdDocument[];
 }
 const Card:FC<CardProps> = ({ products }) => {
-    const dummyElement = [1, 2, 3, 4,5,1, 2, 3, 4,5];
-    // console.log('>>>>>>>>>>> from card', products)
+
 
     return (
         <>
