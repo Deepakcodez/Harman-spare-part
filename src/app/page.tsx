@@ -21,7 +21,7 @@ const Home: React.FC = () => {
         <Hero />
         {/* <VioletBloom /> */}
         <Our_products />
-        <Best_Selling />
+        {/* <Best_Selling /> */}
         <Image
           className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
           alt="light"

@@ -7,21 +7,23 @@ import { ShoppingCart } from "lucide-react";
 import Card from "../Shared/Card/Card";
 import { useAllProducts } from '@/hooks/products/Product';
 import { ProdDocument } from "@/types/product.types";
+import { CardSkelton } from "../Shared/Card/Skelton";
 
 const BikeProd = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const { data, error } = useAllProducts(1, "", "bike");
+  const { data, error , isLoading} = useAllProducts(1, "", "bike");
   const products: ProdDocument[] = data?.products ?? [];
 
   const FourProd : ProdDocument[] = products.slice(0,4)
   
+  if(!products) return <CardSkelton/>
 
   return (
     <>
       <div className="relative z-20 w-full px-4 py-5 mt-5 ">
         <div className="  flex justify-between flex-wrap gap-2">
-          <div className="w-full flex flex-col md:flex-row  justify-between">
-            <h1 className="text-3xl  text-black/75 ">Bike Products </h1>
+          <div className="w-full flex flex-wrap flex-row  justify-between">
+            <h1 className=" md:text-3xl text-2xl  text-black/75 ">Bike Products </h1>
 
             {/* button  */}
             <Link
@@ -47,7 +49,10 @@ const BikeProd = () => {
         <div className="my-7 w-full md:px-[1rem] px-1  grid grid-cols-1  md:grid-cols-2 sm:grid-cols-2  lg:grid-cols-4 md:gap-8 gap-5 place-items-center">
           {/* CARDS */}
 
-          <Card products={FourProd}/>
+          {
+        isLoading?<CardSkelton/> : <Card products={FourProd}/>
+       }
+        
 
 
 
