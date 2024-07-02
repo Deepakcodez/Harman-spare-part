@@ -16,7 +16,7 @@ const Card:FC<CardProps> = ({ products }) => {
         {
             products?.map((elem,index)=>
             <Fragment key={index}>
-                <Link href={`/products/${elem?._id}`}  className="h-auto pb-6 max-w-full w-[15rem]   backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300  ">
+                <Link href={`/products/${elem?._id}`}  className="h-auto pb-6 max-w-full w-[15rem]   backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300  N">
             <div className="bg-slate-200   h-[15rem] flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 ">
               <Image
                 className=" overflow-hidden transition ease-linear duration-300  h-full w-auto "

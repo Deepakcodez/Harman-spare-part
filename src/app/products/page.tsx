@@ -1,6 +1,5 @@
 "use client";
 import React, { FC, useEffect, useState } from 'react';
-import useSWR from 'swr';
 import { ProdDocument } from '../../types/product.types';
 import { Search } from 'lucide-react';
 import ProductCards from '../_Components/productCards/ProductCards';
@@ -15,8 +14,8 @@ import {
   setCurrentPage,
   setMaxPage
 } from '@/lib/features/filter/filterSlice';
+import { useAllProducts } from '@/hooks/products/Product';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Products: FC = () => {
   const dispatch = useAppDispatch();
@@ -57,9 +56,10 @@ const Products: FC = () => {
     dispatch(setCategory(selectedCategory));
   };
 
-  const query = `https://harman-spare-parts-backend.vercel.app/api/v1/product/allProducts?page=${currentPage}&keyword=${searchKeyword}${category ? `&category=${category}` : ''}`;
+ 
 
-  const { data, error } = useSWR(query, fetcher, { revalidateOnFocus: false });
+  const { data, error } = useAllProducts(currentPage, searchKeyword, category);
+
 
   useEffect(() => {
     if (data) {

@@ -34,3 +34,8 @@ export interface ProdDocument extends UserReference {
   reviews: Review[];
   isFreeDelivery : Boolean
 }
+
+export interface ProductResponse {
+  products: ProdDocument[];
+  productCount: number;
+}
