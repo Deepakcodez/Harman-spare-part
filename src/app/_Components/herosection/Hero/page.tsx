@@ -16,13 +16,13 @@ const Hero = () => {
             <div className="bg-black w-full h-screen rounded-3xl  ">
               
 
-              <Canvas className=''>
+              <Canvas  className=' h-[50vh] bg-white' camera={{ position: [0, 0, 2] }} >
                 <ambientLight/>
-                <OrbitControls/>  
+                <OrbitControls enableZoom={false} />  
                 <Suspense fallback = {null}>
                    <Bikemodel/>
                 </Suspense>
-               <Environment  preset='studio'/>
+               <Environment  preset='studio'/>  
               </Canvas>
 
               {/* product button */}
