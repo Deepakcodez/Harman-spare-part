@@ -45,6 +45,7 @@ const Login: FC = () => {
                 if (response.status === 200) {
 
                     localStorage.setItem("HSPToken",response.data.token)
+                    localStorage.setItem("HSPuser",response.data.user.name)
                     toast.success("Login successfully successfully")
                     router.push('/')
                     setInputValue({

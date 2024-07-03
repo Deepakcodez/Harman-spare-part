@@ -95,8 +95,8 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                         product.reviews.map((rev, index) => (
                             <Fragment key={index}>
                                 <div className="border-t py-3">
-                                    <h1 className="text-black/75 text-md">{rev.name}</h1>
-                                    <h1 className="text-black/75 text-sm">{rev.comment}</h1>
+                                    <h1 className="text-black text-md">{rev.name}</h1>
+                                    <h1 className="text-black/75 text-sm ps-2">{rev.comment}</h1>
                                 </div>
                             </Fragment>
                         ))

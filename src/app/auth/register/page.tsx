@@ -6,9 +6,12 @@ import Lottie from "lottie-react";
 
 import loadingAnim from '../../../../public/lading.json'
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const Register: FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter()
+
     const [inputValue, setInputValue] = useState({
         name: "",
         email: "",
@@ -44,9 +47,11 @@ const Register: FC = () => {
                     { headers: { 'Content-Type': 'application/json' } })
 
                 if (response.status === 200) {
-                    console.log(response.data);
 
+                    localStorage.setItem("HSPToken",response.data.token)
+                    localStorage.setItem("HSPuser",response.data.user.name)
                     toast.success("Register successfully")
+                    router.push('/')
                     setInputValue({
                         name: "",
                         email: "",
