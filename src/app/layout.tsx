@@ -9,8 +9,8 @@ import StoreProvider from "./Providers"; // Import StoreProvider
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "HSP",
-  description: "Make you vehicle super vehicle",
+  title: "Harman Spare parts",
+  description: "Make your vehicle super vehicle",
 };
 
 export default function RootLayout({

@@ -58,7 +58,7 @@ const Products: FC = () => {
 
  
 
-  const { data, error } = useAllProducts(currentPage, searchKeyword, category);
+  const { data, error, isLoading } = useAllProducts(currentPage, searchKeyword, category);
 
 
   useEffect(() => {
@@ -113,7 +113,7 @@ const Products: FC = () => {
           </div>
         </div>
         {/* cards */}
-        <ProductCards products={products} data={data} error={error} />
+        <ProductCards products={products} data={data} error={error} isLoading={isLoading} />
       </div>
 
 

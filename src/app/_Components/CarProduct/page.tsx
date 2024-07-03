@@ -33,7 +33,7 @@ const CarProd = () => {
 
             {/* button  */}
             <Link
-              href={"/#"}
+              href={"/products"}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className={` hover:-translate-y-2 bg-[#efff01] hover:bg-[#f9ffa7] transition ease-linear duration-300 flex gap-2 w-fit justify-center items-center shadow-md  text-black rounded-full p-2 px-3`}

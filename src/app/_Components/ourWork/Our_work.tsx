@@ -5,7 +5,7 @@ const OurWork = () => {
         <>
         <div className="w-full mt-10">
             <div className="mb-7">
-                <h1 className="font-thin w-full text-center text-3xl ">Our Works</h1>
+                <h1 className="text-black/75 w-full text-center text-3xl ">Our Works</h1>
             </div>
             <Scroll_Img/>
         </div>

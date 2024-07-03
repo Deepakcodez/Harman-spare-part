@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Fragment } from "react";
 import { useGSAP } from "@gsap/react";
+import Lenis from "@studio-freight/lenis";
 
 // Register the ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -25,19 +26,44 @@ const Scroll_Img: React.FC = () => {
   const contRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
+
+   // Initialize Lenis for smooth scrolling
+   const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+
+
+
+
+
+
     if (contRef.current) {
       gsap.to(contRef.current, {
-        transform : "translateX(-60%)",
+        transform : "translateX(-150%)",
         scrollTrigger: {
           trigger: contRef.current,
-          start: "top 80%",
+          start: "top 20%",
           end: "top -50%",
           scrub: true,
-        //   pin: true,
+          pin: true,
         //   markers: true, // This adds the markers for start and end points
         },
       });
     }
+
+
+    return () => {
+      lenis.destroy();
+    };
+
   }, []);
 
   return (
@@ -47,7 +73,7 @@ const Scroll_Img: React.FC = () => {
           <Fragment key={index}>
             <Image 
             className="rounded-md"
-             src={img.src} width={500} height={500} alt="bike" />
+             src={img.src} width={300} height={300} alt="bike" />
           </Fragment>
         ))}
       </div>
