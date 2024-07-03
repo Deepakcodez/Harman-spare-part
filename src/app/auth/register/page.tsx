@@ -5,6 +5,7 @@ import { ChangeEvent, FC, FormEvent, useState } from "react";
 import Lottie from "lottie-react";
 
 import loadingAnim from '../../../../public/lading.json'
+import toast from "react-hot-toast";
 const Register: FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,10 +39,14 @@ const Register: FC = () => {
         } else {
             try {
                 setIsLoading(true)
-                const response = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/user/register', inputValue, { headers: { 'Content-Type': 'application/json' } })
+                const response = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/user/register', 
+                    inputValue, 
+                    { headers: { 'Content-Type': 'application/json' } })
+
                 if (response.status === 200) {
                     console.log(response.data);
 
+                    toast.success("Register successfully")
                     setInputValue({
                         name: "",
                         email: "",
@@ -50,12 +55,14 @@ const Register: FC = () => {
                     setIsLoading(false)
 
                 } else {
+                    toast.error("Something Went Wrong")
                     console.error('Signup failed:', response.data.message);
                     // Display an error message to the user
                     setIsLoading(false)
                 }
 
             } catch (error) {
+                toast.error("Something Went Wrong")
                 console.log('>>>>>>>>>>>', error)
 
             } finally {
@@ -68,19 +75,20 @@ const Register: FC = () => {
 
     return (
         <>
-            <div className=" w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
-                <h1 className="text-xl font-bold mb-6 text-white">Harman Spare Parts
-                    <h1 className="text-xs font-thin">make Your Bike Super-Bike</h1>
-                </h1>
-                <h3 className="text-2xl font-bold mb-1 text-white"> Create your account</h3>
-                <h5 className="text-xs text-gray-400">
+            <div className="  w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
+                <div className="mb-4">
+                <h1 className="text-xl font-bold  text-black/75">Harman Spare Parts </h1>
+                    <h5  className="text-xs text-gray-700 ">Convert Your Vehicle Super-Vehicle</h5>
+                </div>
+                <h3 className="text-2xl font-bold mb-1 text-black/75"> Create your account</h3>
+                <h5 className="text-xs text-gray-700">
                     Welcome back, Please enter your details.
                 </h5>
                 <form>
                     {/* email input */}
                     <label
                         htmlFor="username"
-                        className="block text-left text-sm font-medium leading-6 text-white"
+                        className="block text-left text-sm font-medium leading-6 text-black/75"
                     >
                         Email
                     </label>
@@ -91,7 +99,7 @@ const Register: FC = () => {
                                 name="email"
                                 value={inputValue.email}
                                 onChange={onchangeHandler}
-                                className="block flex-1 border-0 text-white bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md text-white-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                className="block flex-1 border-0 text-black bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                 placeholder="please enter email"
                             />
                         </div>
@@ -100,7 +108,7 @@ const Register: FC = () => {
                     {/* name  */}
                     <label
                         htmlFor="name"
-                        className="block text-left text-sm font-medium leading-6 text-white"
+                        className="block text-left text-sm font-medium leading-6 text-black/75"
                     >
                         Name
                     </label>
@@ -111,7 +119,7 @@ const Register: FC = () => {
                                 name="name"
                                 value={inputValue.name}
                                 onChange={onchangeHandler}
-                                className="block flex-1 border-0 text-white bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md text-white-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                className="block flex-1 border-0 text-black bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md text-white-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                 placeholder="Please Enter Name"
                             />
                         </div>
@@ -120,7 +128,7 @@ const Register: FC = () => {
                     {/* password input  */}
                     <label
                         htmlFor="username"
-                        className="block text-left text-sm font-medium leading-6 text-white"
+                        className="block text-left text-sm font-medium leading-6 text-black/75"
                     >
                         Password
                     </label>
@@ -131,14 +139,14 @@ const Register: FC = () => {
                                 name="password"
                                 value={inputValue.password}
                                 onChange={onchangeHandler}
-                                className="block flex-1 border-0 text-white bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md text-white-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                className="block flex-1 border-0 text-black bg-transparent py-1.5 pl-1 bg-gray-700   rounded-md  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                 placeholder="enter  password"
                             />
                         </div>
                     </div>
 
                     <button
-                        className="bg-blue-400 rounded h-[2rem] flex justify-normal items-center  py-1.5 w-full mt-3 hover:bg-blue-500 "
+                        className="bg-violet-500 rounded h-[2rem] flex justify-normal items-center  py-1.5 w-full mt-3 hover:bg-violet-400 "
                         onClick={SignUpHandler}
                     >
                         {isLoading ? (
@@ -148,9 +156,9 @@ const Register: FC = () => {
                         )}
 
                     </button>
-                    <h5 className="mt-3 font-thin text-gray-400">
+                    <h5 className="mt-3 text-sm text-black">
                         have an account ?{" "}
-                        <Link href="/auth/login" className="text-blue-300">
+                        <Link href="/auth/login" className="text-blue-500">
                             Login
                         </Link>{" "}
                     </h5>

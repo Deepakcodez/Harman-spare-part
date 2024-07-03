@@ -12,11 +12,10 @@ const Hero = () => {
 
     return ( 
         <>
-        <div className=" relative z-0 h-screen w-full  md:p-5  mt-[3rem] ">
-            <div className="bg-black w-full h-screen rounded-3xl  ">
-              
-
-              <Canvas  className=' h-[50vh] bg-white' camera={{ position: [0, 0, 2] }} >
+        <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
+            <div className="bg-black w-full h-screen rounded-3xl flex md:items-end ">
+              <div className='  md:h-[35rem] h-[30rem] w-full'>
+              <Canvas  className='' camera={{ position: [0, 0, 2] }} >
                 <ambientLight/>
                 <OrbitControls enableZoom={false} />  
                 <Suspense fallback = {null}>
@@ -24,6 +23,7 @@ const Hero = () => {
                 </Suspense>
                <Environment  preset='studio'/>  
               </Canvas>
+              </div>
 
               {/* product button */}
               <div className='absolute top-[70%]   w-full flex justify-center group'>

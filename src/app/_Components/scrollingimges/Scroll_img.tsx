@@ -73,7 +73,7 @@ const Scroll_Img: React.FC = () => {
           <Fragment key={index}>
             <Image 
             className="rounded-md"
-             src={img.src} width={300} height={300} alt="bike" />
+             src={img.src} width={500} height={500} alt="bike" />
           </Fragment>
         ))}
       </div>

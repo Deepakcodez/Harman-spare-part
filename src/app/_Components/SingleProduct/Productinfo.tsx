@@ -21,7 +21,7 @@ const ProductInfo: FC<ProdProps> = ({ product }) => {
             isShown && <MakeReview productId={product._id.toString()} />
         }
        
-            <div className="grid md:grid-cols-2 w-full h-screen bg-white no-scrollbar   ">
+            <div id="prodDetails" className="grid md:grid-cols-2 w-full h-screen bg-white no-scrollbar   ">
                 {/* Product image */}
                 <div className=" h-fit  ">
                     <ProdImage images={product.images} />

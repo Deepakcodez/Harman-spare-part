@@ -58,7 +58,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" navbar h-[4rem] w-full backdrop-blur  fixed bg-transparent flex justify-between px-[2rem] items-center top-0 z-[1000] ">
+      <div className=" navbar h-[4rem] w-full backdrop-blur  fixed bg-transparent flex justify-between px-[1rem] items-center top-0 z-[1000] ">
         <Link
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
