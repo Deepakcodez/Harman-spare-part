@@ -3,6 +3,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { PenBoxIcon, Send, X } from "lucide-react";
 import { FC, useState } from "react";
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 
 interface MakeReviewProps {
@@ -12,6 +13,8 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
     const dispatch = useAppDispatch();
     const [comment, setComment] = useState<string>("");
     const [rating, setRating] = useState<number>(1);
+    const token = localStorage.getItem("HSPToken");
+
     const ReviewHandler = () => {
         dispatch(toggleIsShown())
     }
@@ -23,16 +26,22 @@ const MakeReview: FC<MakeReviewProps> = ({productId}) => {
             rating: rating
         };
           if(!reviewData){
-            console.log('>>>>>>>>>>> review required')
+            toast.error("Enter Review")
             return 
           }
+        //   https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review
         try {
-            const response = await axios.put("https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review", reviewData);
+            const response = await axios.put("http://localhost:8000/api/v1/product/create/review", reviewData, {
+                headers: {
+                  Authorization: token,
+                         }
+            });
 
-            // Handle success, maybe show a success message to the user
-            console.log("Review submitted successfully!", response.data);
+            toast.success("Review Added")
+            dispatch(toggleIsShown())
         } catch (error:any) {
             // Handle error, maybe show an error message to the user
+            toast.error("Something Went Wrong")
             console.error("Failed to submit review:", error.message);
         }
     };
