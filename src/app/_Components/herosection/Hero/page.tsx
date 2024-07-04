@@ -9,19 +9,20 @@ import Bikemodel from './../../../../../public/Bikemodel'
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
+  
 
     return ( 
         <>
         <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
             <div className="relative bg-black w-full h-screen rounded-3xl flex md:items-end ">
-              <h1 className='absolute top-7 left-7 text-white text-5xl font-thin'> <span className='font-serif'>Hello</span> {localStorage.getItem("HSPuser")}</h1>
+              <h1 className='absolute top-7 left-7 text-white text-5xl font-thin'> <span className='font-serif'>Hello</span> </h1>
               <div className='  md:h-[35rem] h-[30rem] w-full'>
 
               <Canvas  className='' camera={{ position: [0, 0, 2] }} >
                 <ambientLight/>
                 <OrbitControls enableZoom={false} />  
                 <Suspense fallback = {null}>
-                   <Bikemodel/>
+                   <Bikemodel    />
                 </Suspense>
                <Environment  preset='studio'/>  
               </Canvas>

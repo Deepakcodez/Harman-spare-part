@@ -18,7 +18,7 @@ const ProductCards:FC<ProductCardsProb> = ({products, data, error, isLoading}) =
   
     return ( 
         <>
-         <div className="my-7 w-full md:px-[1rem] px-1 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 place-items-center  ">
+         <div className="my-7 px-5 sm:px-1 w-full md:px-[1rem]  grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-2 place-items-center  ">
           {
             isLoading? <CardSkelton/> :   <Card products={products} />
           }

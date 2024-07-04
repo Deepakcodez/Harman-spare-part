@@ -72,7 +72,7 @@ const Products: FC = () => {
   const products: ProdDocument[] = data?.products ?? [];
 
   return (
-    <div className="h-auto w-full pt-16 md:px-16 bg-white">
+    <div className="h-auto w-full pt-16 xl:px-16 bg-white">
       <div className='md:flex w-full '>
         {/* filter parent div */}
         <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7 '>
