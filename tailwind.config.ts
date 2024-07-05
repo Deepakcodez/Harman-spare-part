@@ -49,7 +49,8 @@ const config: Config = {
     },
   },
   plugins: [
-    noScrollbarPlugin
+    noScrollbarPlugin,
+    require('daisyui'),
   ],
 };
 
