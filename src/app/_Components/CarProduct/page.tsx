@@ -52,15 +52,50 @@ const CarProd = () => {
           </div>
         </div>
 
-        <div className="my-7 w-full md:px-[1rem] px-1  grid grid-cols-1  md:grid-cols-2 sm:grid-cols-2  lg:grid-cols-4 md:gap-8 gap-5 place-items-center">
+       
+        <div className="flex gap-5 overflow-x-scroll custom-scrollbar py-4">
           {/* CARDS */}
-       {
-        isLoading?<CardSkelton/> : <Card products={FourProd}/>
-       }
-        
-         
+          {isLoading ? (
+            <CardSkelton />
+          ) : (
+            products.map((product, index) => (
+              <Link
+                key={index}
+                href={`/products/${product._id}`}
+                className="h-auto pb-6 max-w-full w-[12rem] sm:w-[15rem] backdrop-blur-md rounded-md hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm flex-none"
+              >
+                <div className="h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent py-1 border-b-2 shadow-md bg-violet-100/25">
+                  <Image
+                    className="overflow-hidden transition ease-linear duration-300 h-auto w-auto"
+                    alt="product image"
+                    src={"/rocket.png"}
+                    width={500}
+                    height={500}
+                  />
+                </div>
+                {/* DETAIL */}
+                <div className="mt-1 flex flex-col">
+                  <h1 className="text-md truncate text-black w-[90%]">
+                    {product.name}
+                  </h1>
 
-
+                  {/* Price */}
+                  <h1 className="text-lg font-serif text-black leading-4 pb-1">
+                    ₹{product.price}
+                  </h1>
+                  <div className="flex gap-1 items-center justify-start">
+                    <div className="bg-violet-400 border border-violet-500 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
+                      <h1 className="text-md">{product.ratings}</h1>
+                      <Star size={20} />
+                    </div>
+                    <h1 className="text-sm text-black/75">
+                      ({product.reviews.length} Reviews)
+                    </h1>
+                  </div>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </>

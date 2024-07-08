@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 
 export const CardSkelton = () => {
-    const products = [1,1,1,1]
+    const products = [1,1,1,1,1]
   return (
    <>
     {

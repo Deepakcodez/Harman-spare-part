@@ -31,3 +31,24 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #f8c8ff #f5f5f5; /* Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+  
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #f8c8ff;
+  border-radius: 10px;
+  border: 2px solid #f5f5f5;
+} 
