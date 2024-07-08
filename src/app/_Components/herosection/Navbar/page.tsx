@@ -32,7 +32,7 @@ const Navbar = () => {
     },
     {
       tag: "Shop",
-      linkTo: "/shop",
+      linkTo: "/#shop",
     },
     {
       tag: "About-us",

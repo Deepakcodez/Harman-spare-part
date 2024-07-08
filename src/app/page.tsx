@@ -8,8 +8,9 @@ import Best_Selling from "./_Components/bestSelling/BestSelling";
 import Our_products from "./_Components/ourProducts/Ourprod";
 import OurWork from "./_Components/ourWork/Our_work";
 import BikeProd from "./_Components/bikeProd/BikeProd";
-import { FooterSection } from "./_Components/footer/Footer";
 import CarProd from "./_Components/CarProduct/page";
+import Map from "./_Components/map/Map";
+import { Footer } from "./_Components/footer/Footer";
 
 const Home: React.FC = () => {
 
@@ -40,8 +41,8 @@ const Home: React.FC = () => {
         <CarProd />
         <OurWork />
         <Stats />
-        <FooterSection />
-
+        <Map/>
+        <Footer/>
       </div>
     </>
   );
