@@ -14,7 +14,6 @@ const fetchCurrentUser = async () => {
       Authorization: token,
     }
   });
-  console.log('>>>>>>>>>>>fetch', response.data.user)
   return response.data.user;
 };
 

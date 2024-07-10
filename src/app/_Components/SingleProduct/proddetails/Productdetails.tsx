@@ -7,6 +7,7 @@ import { useAppDispatch, } from "@/lib/store/hooks";
 import { toggleIsShown } from "@/lib/features/review/reviewSlice";
 import Link from "next/link";
 import Image from "next/image";
+import  RenderStar  from "./RenderStar";
 
 
 interface ProdProps {
@@ -96,15 +97,21 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                         product.reviews.map((rev, index) => (
                             <Fragment key={index}>
                                 <div className="border-t py-3">
-                                    <div className="flex gap-2 items-center">
+                                    <div className="flex gap-2 items-center justify-between">
+                                        <div className="flex gap-2 items-center">
+
                                         <Image
                                         className="rounded-full"
-                                         src={'/defaultavatar.jpg'}
-                                         width={30}
-                                         height={30}
-                                         alt="AVATAR"
+                                        src={'/defaultavatar.jpg'}
+                                        width={30}
+                                        height={30}
+                                        alt="AVATAR"
                                         />
                                         <h1 className="text-black text-md">{rev.name}</h1>
+                                        </div>
+                                        <div>
+                                        {rev.rating ? <RenderStar rating={rev.rating} /> : "...."}
+                                        </div>
                                     </div>
                                     <h1 className="text-black/75 text-sm ps-12">{rev.comment}</h1>
                                 </div>
