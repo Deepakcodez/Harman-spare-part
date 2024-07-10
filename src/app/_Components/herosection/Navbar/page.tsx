@@ -84,7 +84,7 @@ const Navbar = () => {
         </ul>
         {/* cart */}
         <div className="hidden md:flex gap-3">
-          <FaUser size={20} />
+          <Link href={'/auth/login'}> <FaUser size={20} /> </Link>
           <Cart />
         </div>
 

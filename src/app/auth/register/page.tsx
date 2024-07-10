@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import Lottie from "lottie-react";
-
+import Cookies from 'js-cookie'
 import loadingAnim from '../../../../public/lading.json'
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -48,8 +48,7 @@ const Register: FC = () => {
 
                 if (response.status === 200) {
 
-                    localStorage.setItem("HSPToken",response.data.token)
-                    localStorage.setItem("HSPuser",response.data.user.name)
+                    Cookies.set("HSPToken",response.data.token)
                     toast.success("Register successfully")
                     router.push('/')
                     setInputValue({
