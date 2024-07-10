@@ -21,14 +21,14 @@ const ProductInfo: FC<ProdProps> = ({ product }) => {
             isShown && <MakeReview productId={product._id.toString()} />
         }
        
-            <div id="prodDetails" className="grid md:grid-cols-2 w-full h-screen bg-white no-scrollbar   ">
+            <div id="prodDetails" className="grid md:grid-cols-2 w-full h-screen  no-scrollbar backgroundColor  ">
                 {/* Product image */}
                 <div className=" h-fit  ">
-                    <ProdImage images={product.images} />
+                    <ProdImage images={product.images} productId={product._id} />
                 </div>
 
                 {/* Product details */}
-                <div className=" px-4 h-auto md:overflow-y-auto">
+                <div className=" px-4 h-auto md:overflow-y-auto backgroundColor custom-scrollbar ">
                     <ProdDetails product={product} />
                 </div>
             </div>

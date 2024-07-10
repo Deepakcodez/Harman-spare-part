@@ -5,6 +5,9 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { Fragment } from "react";
 import { navbarElemsProps, showProps } from "@/types/mobilenavbar.types";
+import { FaUser } from "react-icons/fa";
+
+
 
 const Mobilemenu = ({ show }: showProps) => {
   console.log(">>>>>>>>>>> show", show);
@@ -45,22 +48,25 @@ const Mobilemenu = ({ show }: showProps) => {
   return (
     <>
       <div
-        className={`${
-          show ? "fixed" : "hidden"
-        } md:hidden z-50 outerBox flex flex-col gap-4 py-4 px-5 rounded-s-xl top-[6rem] right-0 w-[15rem] z-10 bg-black/50 backdrop-blur-md  border-[0.2px] border-gray-700 border-l-[#eeff0181]`}
+        className={`${show ? "fixed" : "hidden"
+          } md:hidden z-50 outerBox flex flex-col gap-4 py-4 px-5 rounded-s-xl top-[6rem] right-0 w-[15rem] z-10 bg-black/50 backdrop-blur-md  border-[0.2px] border-gray-700 `}
       >
         {navbarElems.map((elem, index) => (
           <Fragment key={index}>
             <Link
               href={elem.linkTo}
-              className={` elems hover:bg-[#efff01] p-3 px-5 hover:text-black rounded-full transition ease-linear duration-700
-              ${elem.linkTo === pathname ? "bg-[#efff01] text-black " : ""}
+              className={` elems hover:bg-[#efff01] p-3 px-5 hover:text-black text-white rounded-full transition ease-linear duration-700
+              ${elem.linkTo === pathname ? "text-black bg-[#efff01]  " : ""}
               `}
             >
               {elem.tag}
             </Link>
+
           </Fragment>
         ))}
+        <Link href={"/auth/login"} className="w-full bg-violet-700/50 py-3 flex items-center justify-center rounded-full">
+          <FaUser size={22} color={"white"} />
+        </Link>
       </div>
     </>
   );

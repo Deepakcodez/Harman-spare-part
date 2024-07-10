@@ -2,7 +2,6 @@
 import Loader from "@/app/_Components/Shared/Loader/Loader";
 import ProductInfo from "@/app/_Components/SingleProduct/Productinfo";
 import { ProdDocument } from "@/types/product.types";
-import Router from "next/router";
 import { FC } from "react";
 import useSWR from "swr";
 interface ProductProps {
@@ -24,7 +23,7 @@ const  Product:FC<ProductProps>= ({params}) => {
 
     return ( 
         <>
-        <div className="w-full h-screen bg-red-500 ">
+        <div className="w-full h-[101vh]  ">
           <ProductInfo product={product}/>            
         </div>
         </>

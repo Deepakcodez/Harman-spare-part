@@ -11,6 +11,8 @@ import { Fragment, useState } from "react";
 import Searchbutton from "../../search/page";
 import { navbarElemsProps } from "@/types/mobilenavbar.types";
 import Image from "next/image";
+import { FaUser } from "react-icons/fa";
+
 const shadowFont = Shadows_Into_Light({
   weight: "400",
   subsets: ["latin"],
@@ -18,8 +20,8 @@ const shadowFont = Shadows_Into_Light({
 });
 const Navbar = () => {
   const pathname = usePathname();
-  console.log(">>>>>>>>>>>current path", pathname);
   const [showMenu, setShowmenu] = useState(false);
+
   const navbarElems: navbarElemsProps[] = [
     {
       tag: "Home",
@@ -81,14 +83,14 @@ const Navbar = () => {
           ))}
         </ul>
         {/* cart */}
-        <div className="hidden md:flex">
-          {/* <Searchbutton/> */}
+        <div className="hidden md:flex gap-3">
+          <FaUser size={20} />
           <Cart />
         </div>
 
         {/* menu button for mobile devices */}
 
-        <div className="flex gap-3 md:hidden">
+        <div className="flex gap-2 md:hidden">
           <div className="md:hidden">
             <Cart />
           </div>

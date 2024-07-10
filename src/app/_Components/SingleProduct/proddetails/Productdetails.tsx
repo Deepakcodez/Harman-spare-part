@@ -6,6 +6,7 @@ import MakeReview from "../MakeReview/MakeReview";
 import { useAppDispatch, } from "@/lib/store/hooks";
 import { toggleIsShown } from "@/lib/features/review/reviewSlice";
 import Link from "next/link";
+import Image from "next/image";
 
 
 interface ProdProps {
@@ -29,7 +30,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
     return (
         <>
 
-            <div  className=" md:my-[7rem] my-[2rem] h-fit w-full bg-white  flex flex-col gap-3  ">
+            <div className=" md:my-[7rem] my-[2rem] h-fit w-full   flex flex-col gap-3 custom-scrollbar      ">
 
 
                 {/* Product Name */}
@@ -85,7 +86,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
 
                     <div className="flex justify-between">
                         <h1 className="text-md text-black">Product Reviews</h1>
-                        <Link href={'#prodDetails'} 
+                        <Link href={'#prodDetails'}
                             onClick={ReviewHandler}
                             className="bg-violet-50 hover:bg-violet-200 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300 border">
                             <Pencil color="#4d4d4d" size={20} />
@@ -95,8 +96,17 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                         product.reviews.map((rev, index) => (
                             <Fragment key={index}>
                                 <div className="border-t py-3">
-                                    <h1 className="text-black text-md">{rev.name}</h1>
-                                    <h1 className="text-black/75 text-sm ps-2">{rev.comment}</h1>
+                                    <div className="flex gap-2 items-center">
+                                        <Image
+                                        className="rounded-full"
+                                         src={'/defaultavatar.jpg'}
+                                         width={30}
+                                         height={30}
+                                         alt="AVATAR"
+                                        />
+                                        <h1 className="text-black text-md">{rev.name}</h1>
+                                    </div>
+                                    <h1 className="text-black/75 text-sm ps-12">{rev.comment}</h1>
                                 </div>
                             </Fragment>
                         ))

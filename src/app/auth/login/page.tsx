@@ -6,6 +6,8 @@ import loadingAnim from '../../../../public/lading.json'
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
 
 const Login: FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,8 +46,8 @@ const Login: FC = () => {
 
                 if (response.status === 200) {
 
-                    localStorage.setItem("HSPToken",response.data.token)
-                    localStorage.setItem("HSPuser",response.data.user.name)
+                    Cookies.set("HSPToken",response.data.token)
+                    
                     toast.success("Login successfully successfully")
                     router.push('/')
                     setInputValue({

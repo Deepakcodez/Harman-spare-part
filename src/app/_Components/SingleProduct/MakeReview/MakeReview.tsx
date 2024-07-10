@@ -6,7 +6,7 @@ import { PenBoxIcon, X } from "lucide-react";
 import { FC, useState } from "react";
 import axios from 'axios';
 import toast from "react-hot-toast";
-
+import Cookies from "js-cookie";
 
 interface MakeReviewProps {
     productId: string;
@@ -15,7 +15,7 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
     const dispatch = useAppDispatch();
     const [comment, setComment] = useState<string>("");
     const [rating, setRating] = useState<number>(1);
-    const token = localStorage.getItem("HSPToken");
+    const token = Cookies.get("HSPToken");
 
     const ReviewHandler = () => {
         dispatch(toggleIsShown())
@@ -25,7 +25,6 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
         setRating(value);
     };
 
-    // console.log("prduyct id", comment)
 
     const handleSubmit = async () => {
         const reviewData = {
@@ -39,7 +38,7 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
         }
         //   https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review
         try {
-            const response = await axios.put("http://localhost:8000/api/v1/product/create/review", reviewData, {
+            const response = await axios.put("https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review", reviewData, {
                 headers: {
                     Authorization: token,
                 }
@@ -125,7 +124,7 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
                         className="bg-violet-900 hover:bg-violet-800 rounded-md p-2 px-4 mt-3 flex justify-center items-center gap-1 cursor-pointer "
                         onClick={handleSubmit}
                     >
-                        <h1 className="text-sm">Submit</h1>
+                        <h1 className="text-sm text-white">Submit</h1>
 
                     </button>
                 </div>
