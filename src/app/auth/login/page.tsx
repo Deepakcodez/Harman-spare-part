@@ -46,7 +46,7 @@ const Login: FC = () => {
 
                 if (response.status === 200) {
 
-                    Cookies.set("HSPToken",response.data.token)
+                    Cookies.set("HSPToken",response.data.token, { expires: 30 })
                     
                     toast.success("Login successfully successfully")
                     router.push('/')

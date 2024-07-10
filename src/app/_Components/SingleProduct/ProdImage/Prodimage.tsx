@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import mongoose from "mongoose";
 import Cookies from "js-cookie";
 import { CartDocument } from "@/types/cart.types";
+import { useRouter } from "next/navigation";
+import useCurrentUser from "@/hooks/user/currentuser";
 
 interface ProdImageProps {
     images: ImageType[];
@@ -25,13 +27,16 @@ export interface AddProductToCartData {
 const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     const token = Cookies.get("HSPToken");
     const prodimages = [1, 1, 1, , 1, 1]; // Placeholder for product images
-    const [isProductExistInCart, setIsProductExistInCart] =
-        useState<boolean>(false);
+    const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
     const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+    const { data: currentUser, isLoading, isError, error } = useCurrentUser();
+    const router = useRouter()
 
     const fetchCart = async () => {
-        const cartId = Cookies.get("cartId");
-        if (cartId) {
+
+       
+        
+        if (currentUser) {
             try {
                 const resp = await axios.get(
                     `https://harman-spare-parts-backend.vercel.app/api/v1/cart/details`,
@@ -57,12 +62,16 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 
     useEffect(() => {
         fetchCart();
-    }, [productId]);
+    }, [productId, currentUser, isLoading, isError, error]);
 
     const debouncedHandleAddToCart = async () => {
         if (!isAddingToCart) {
             setIsAddingToCart(true);
             const data: AddProductToCartData = { productId };
+
+            if(!currentUser){
+                 router.push("/auth/login")
+            }
 
             try {
                 const response = await axios.post<AddProductToCartResponse>(
@@ -72,14 +81,13 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                         headers: { Authorization: token },
                     }
                 );
-
+                fetchCart()
 
             } catch (error) {
+                setIsAddingToCart(false);
                 toast.error("Something Went Wrong");
 
-            } finally {
-                setIsAddingToCart(false);
-            }
+            } 
         }
     };
 
