@@ -31,7 +31,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
     return (
         <>
 
-            <div className=" md:my-[7rem] my-[2rem] h-fit w-full   flex flex-col gap-3 custom-scrollbar      ">
+            <div className=" md:my-[7rem] my-[2rem] h-fit w-full   flex flex-col gap-1 custom-scrollbar      ">
 
 
                 {/* Product Name */}

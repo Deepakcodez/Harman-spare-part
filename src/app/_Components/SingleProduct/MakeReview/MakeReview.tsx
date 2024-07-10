@@ -4,18 +4,33 @@ import { toggleIsShown } from "@/lib/features/review/reviewSlice";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { PenBoxIcon, X } from "lucide-react";
 import { FC, useState } from "react";
-import axios from 'axios';
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { makeReviewRequest } from "@/services/product/MakeReviewRequest";
 
 interface MakeReviewProps {
     productId: string;
 }
+interface ReviewData {
+    productId: string;
+    comment: string;
+    rating: number;
+}
+
 const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
     const dispatch = useAppDispatch();
     const [comment, setComment] = useState<string>("");
     const [rating, setRating] = useState<number>(1);
-    const token = Cookies.get("HSPToken");
+
+    const queryClient = useQueryClient()
+
+   const mutation = useMutation({
+    mutationFn : (reviewData : ReviewData)=> makeReviewRequest(reviewData),
+    onSuccess : ()=>{
+        queryClient.invalidateQueries({ queryKey: ['allProducts'] })
+        dispatch(toggleIsShown())
+    }
+   })
 
     const ReviewHandler = () => {
         dispatch(toggleIsShown())
@@ -27,7 +42,8 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
 
 
     const handleSubmit = async () => {
-        const reviewData = {
+
+        const reviewData:ReviewData = {
             productId,
             comment,
             rating
@@ -36,22 +52,15 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
             toast.error("Enter Review")
             return
         }
-        //   https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review
-        try {
-            const response = await axios.put("https://harman-spare-parts-backend.vercel.app/api/v1/product/create/review", reviewData, {
-                headers: {
-                    Authorization: token,
-                }
-            });
-            console.log('>>>>>>>>>>>',reviewData, response)
+        if(!comment) return toast.error("Please enter comment")
 
-            toast.success("Review Added")
-            dispatch(toggleIsShown())
-        } catch (error: any) {
-            // Handle error, maybe show an error message to the user
-            toast.error("Something Went Wrong")
-            console.error("Failed to submit review:", error.message);
-        }
+        
+            mutation.mutate(reviewData);
+
+       
+        
+
+
     };
 
     return (
