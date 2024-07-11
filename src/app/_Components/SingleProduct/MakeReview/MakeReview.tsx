@@ -1,7 +1,5 @@
 "use client "
 
-import { toggleIsShown } from "@/lib/features/review/reviewSlice";
-import { useAppDispatch } from "@/lib/store/hooks";
 import { PenBoxIcon, X } from "lucide-react";
 import { FC, useState } from "react";
 import toast from "react-hot-toast";
