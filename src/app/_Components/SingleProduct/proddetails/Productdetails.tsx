@@ -3,11 +3,10 @@ import { ProdDocument } from "@/types/product.types";
 import { Pencil, Star } from "lucide-react";
 import { FC, Fragment, useState } from "react";
 import MakeReview from "../MakeReview/MakeReview";
-import { useAppDispatch, } from "@/lib/store/hooks";
-import { toggleIsShown } from "@/lib/features/review/reviewSlice";
 import Link from "next/link";
 import Image from "next/image";
 import  RenderStar  from "./RenderStar";
+import useReviewStore from "@/Store/review/useReviewStore";
 
 
 interface ProdProps {
@@ -15,14 +14,11 @@ interface ProdProps {
 }
 const ProdDetails: FC<ProdProps> = ({ product }) => {
 
-    const dispatch = useAppDispatch();
+    
+    const toggleIsShown = useReviewStore((state) => state.toggleIsShown);
 
 
-    const ReviewHandler = () => {
-
-        dispatch(toggleIsShown())
-
-    }
+    
 
 
 
@@ -88,7 +84,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     <div className="flex justify-between">
                         <h1 className="text-md text-black">Product Reviews</h1>
                         <Link href={'#prodDetails'}
-                            onClick={ReviewHandler}
+                            onClick={toggleIsShown}
                             className="bg-violet-50 hover:bg-violet-200 rounded-full  flex justify-center items-center p-2 transition ease-linear duration-300 border">
                             <Pencil color="#4d4d4d" size={20} />
                         </Link>

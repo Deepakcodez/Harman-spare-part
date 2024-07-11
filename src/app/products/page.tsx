@@ -1,81 +1,70 @@
-"use client";
+"use client"
 import React, { FC, useEffect, useState } from 'react';
 import { ProdDocument } from '../../types/product.types';
 import { Search } from 'lucide-react';
 import ProductCards from '../_Components/productCards/ProductCards';
-import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
-import {
-  selectCategory,
-  selectSearchKeyword,
-  selectCurrentPage,
-  selectMaxPage,
-  setCategory,
-  setSearchKeyword,
-  setCurrentPage,
-  setMaxPage
-} from '@/lib/features/filter/filterSlice';
+import useFilterStore, { selectCategory, selectSearchKeyword, selectCurrentPage, selectMaxPage } from '@/Store/filter/useFilterStore';
 import { useAllProducts } from '@/hooks/products/Product';
-import { Footer } from '../_Components/footer/Footer';
-
 
 const Products: FC = () => {
-  const dispatch = useAppDispatch();
-  const category = useAppSelector(selectCategory);
-  const searchKeyword = useAppSelector(selectSearchKeyword);
-  const currentPage = useAppSelector(selectCurrentPage);
-  const maxPage = useAppSelector(selectMaxPage);
+  const {
+    category,
+    searchKeyword,
+    currentPage,
+    maxPage,
+    setCategory,
+    setSearchKeyword,
+    setCurrentPage,
+    setMaxPage,
+  } = useFilterStore();
+
   const [searchInput, setSearchInput] = useState<string>("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(setSearchKeyword(searchInput));
+      setSearchKeyword(searchInput);
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [searchInput, dispatch]);
+  }, [searchInput, setSearchKeyword]);
 
   const nextPageHandler = () => {
     if (currentPage < maxPage) {
-      dispatch(setCurrentPage(currentPage + 1));
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPageHandler = () => {
     if (currentPage > 1) {
-      dispatch(setCurrentPage(currentPage - 1));
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     setSearchInput(e.target.value);
   };
 
   const categoryHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
     const selectedCategory = e.target.value;
-    dispatch(setCategory(selectedCategory));
+    setCategory(selectedCategory);
   };
 
-
-
   const { data, error, isLoading } = useAllProducts(currentPage, searchKeyword, category);
-
 
   useEffect(() => {
     if (data) {
       const productCount = data.productCount ?? 0;
       const averageOfProducts = Math.ceil(productCount / 9); // 9 is products shown on one page
-      dispatch(setMaxPage(averageOfProducts));
+      setMaxPage(averageOfProducts);
     }
-  }, [data, dispatch]);
+  }, [data, setMaxPage]);
 
   const products: ProdDocument[] = data?.products ?? [];
 
   return (
     <>
-      <div className="h-auto w-full pt-16 xl:px-16 ">
-        <div className='md:flex w-full '>
+      <div className="h-auto w-full pt-16 xl:px-16">
+        <div className='md:flex w-full'>
           {/* filter parent div */}
           <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7 '>
             {/* filter child div */}
@@ -118,7 +107,6 @@ const Products: FC = () => {
           <ProductCards products={products} data={data} error={error} isLoading={isLoading} />
         </div>
 
-
         {/* pagination div */}
         <div className='h-[3rem] w-full rounded-md flex justify-center items-center gap-2 py-14'>
           {/* prev button */}
@@ -137,8 +125,6 @@ const Products: FC = () => {
             Next
           </div>
         </div>
-
-
       </div>
     </>
   );

@@ -2,9 +2,8 @@ import { ProdDocument } from "@/types/product.types";
 import { FC } from "react";
 import ProdImage from "./ProdImage/Prodimage";
 import ProdDetails from "./proddetails/Productdetails";
-import { useAppSelector } from "@/lib/store/hooks";
-import { selectIsShown } from "@/lib/features/review/reviewSlice";
 import MakeReview from "./MakeReview/MakeReview";
+import useReviewStore from "@/Store/review/useReviewStore";
 
 interface ProdProps {
     product: ProdDocument;
@@ -12,7 +11,8 @@ interface ProdProps {
 
 const ProductInfo: FC<ProdProps> = ({ product }) => {
 
-    const isShown = useAppSelector(selectIsShown);
+    const isShown = useReviewStore((state) => state.isShown);
+
 
 
     return (

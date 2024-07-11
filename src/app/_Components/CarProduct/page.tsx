@@ -4,24 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { ShoppingCart } from "lucide-react";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { add } from "@/lib/features/cart/cartslice";
 import Card from "../Shared/Card/Card";
 import { ProdDocument } from "@/types/product.types";
 import { useAllProducts } from "@/hooks/products/Product";
 import { CardSkelton } from "../Shared/Card/Skelton";
 
 const CarProd = () => {
-  const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const { data, error , isLoading } = useAllProducts(1, "", "car");
   const products: ProdDocument[] = data?.products ?? [];
 
   const FourProd : ProdDocument[] = products.slice(0,4)
 
-  const handleAddToCart = (productId: string) => {
-    dispatch(add(productId));
-  };
+ 
 
    
   return (
