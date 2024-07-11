@@ -2,11 +2,7 @@
 import { MoveRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
-import { ShoppingCart } from "lucide-react";
-import { useAppDispatch } from "@/lib/store/hooks";
-import { add } from "@/lib/features/cart/cartslice";
-import Card from "../Shared/Card/Card";
+import { useState } from "react";
 
 const Best_Selling = () => {
   const dispatch = useAppDispatch();
