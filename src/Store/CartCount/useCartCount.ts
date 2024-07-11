@@ -1,4 +1,4 @@
-// import create from 'zustand';
+import {create} from 'zustand';
 
 // Define a type for the state
 interface CartState {
