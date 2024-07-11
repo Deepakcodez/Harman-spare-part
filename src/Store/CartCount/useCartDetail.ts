@@ -5,6 +5,7 @@ interface CartState {
   isLoading: boolean;
   error: string | null;
   cartCount: number;
+  setCartCount: (count: number) => void;
   checkProductInCart: (token: string | undefined) => Promise<any>;
   increaseCartCount: () => void;
   decreaseCartCount: () => void;
@@ -21,6 +22,7 @@ export const useCartDetailStore = create<CartState>((set) => ({
   isLoading: false,
   error: null,
   cartCount: 0,
+  setCartCount: (count: number) => set({ cartCount: count }),
   checkProductInCart: async (token: string | undefined) => {
     try {
       set({ isLoading: true, error: null });
