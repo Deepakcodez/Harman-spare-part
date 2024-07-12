@@ -35,7 +35,7 @@ const Card: FC<CardProps> = ({ products }) => {
                 <h1 className="text-lg  font-serif text-black leading-4 pb-1">₹{elem.price}</h1>
                 <div className="flex gap-1 items-center justify-start">
                   <div className="bg-violet-400 border border-violet-500 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
-                    <h1 className="text-md">{elem.ratings}</h1>
+                    <h1 className="text-md">{elem.ratings.toFixed(1)}</h1>
                     <Star size={20} />
                   </div>
                   <h1 className="text-sm text-black/75">({elem.reviews.length} Reviews)</h1>

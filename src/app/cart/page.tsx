@@ -1,18 +1,18 @@
 "use client"
 import { useCartDetailStore } from "@/Store/CartCount/useCartDetail";
 import Image from "next/image"
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 
 const CartDetail = () => {
-  const { isLoading, error, checkProductInCart,cartCount,setCartCount  } = useCartDetailStore();
-  const[cartProduct, setCartProduct] = useState<any>(null)
+  const { isLoading, error, checkProductInCart, cartCount, setCartCount } = useCartDetailStore();
+  const [cartProduct, setCartProduct] = useState<any>(null)
   const token = Cookies.get("HSPToken")
 
   useEffect(() => {
     const fetchCartDetails = async () => {
-      if (token) { 
+      if (token) {
         try {
           const cart = await checkProductInCart(token);
           setCartProduct(cart.products)
@@ -24,7 +24,7 @@ const CartDetail = () => {
         console.error('Token is not defined');
       }
     };
-  
+
     fetchCartDetails();
   }, [checkProductInCart, token]);
 
@@ -40,36 +40,55 @@ const CartDetail = () => {
 
             <div className="mt-5 ">
 
-              {/* prod card */}
-              <div className=" flex justify-between  border-t-2  border p-2">
-                <div className="flex gap-2"> 
-                <div>
-                  <Image
-                    className="w-[9rem] h-[9rem] bg-violet-200 rounded-lg p-2"
-                    src={'/rocket.png'}
-                    width={500}
-                    height={500}
-                    alt="prodImage"
-                  />
-                </div>
-                 {/* prod name */}
-                <div className="flex flex-col gap-2  ">
-                 <h1 className="text-xl">Product name</h1>
-                 <h1 className="text-green-600">In Stoke</h1>
-                 <div className="border-2 rounded-lg justify-between flex ">
-                 <button className="hover:bg-violet-100 w-12 rounded-s-lg">-</button>
-                 <div>14</div>
-                 <button className="hover:bg-violet-100 w-12 rounded-e-lg">+</button>
-                 </div>
-                </div>
-              </div>
-              {/* price of single prod */}
-              <div className="flex flex-col items-center justify-between">
-                <h1 className="text-2xl">Rs:111</h1>
-                <button className="text-xs border-1 rounded-full bg-red-100 px-2 ring-1 ring-red-300 hover:bg-red-200 text-black/75">Delete</button>
 
-              </div>
-              </div>
+
+              {/* prod card */}
+              {
+                cartProduct?.map((item: any, index: any) =>
+                  <Fragment key={index}>
+                    <div className=" flex md:flex-row flex-col justify-between   border-t-2  p-2">
+                      <div className="flex gap-2 bg-red-300 w-full">
+                        <div className="min-w-[8rem] w-[15rem]">
+                          <Image
+                            className="w-[9rem] h-auto bg-violet-200 rounded-lg p-2"
+                            src={'/rocket.png'}
+                            width={500}
+                            height={500}
+                            alt="prodImage"
+                          />
+                        </div>
+                        {/* prod name */}
+                        <div className="flex flex-col gap-2  bg-slate-300  w-full flex-wrap">
+                          <h1 className="text-xl w-[80%]  truncate">{item.productId.name}</h1>
+                          <h1 className="text-sm">{item.productId.stock > 0 ?
+                            <div className="text-green-600">In Stock</div>
+                            :
+                            <div className="text-red-600">Out Of Stock</div>}</h1>
+                          <div className="border-2 rounded-lg justify-between flex w-[8rem]">
+                            <button className="hover:bg-violet-100 w-12 rounded-s-lg">-</button>
+                            <div>{item.productId.price}</div>
+                            <button className="hover:bg-violet-100 w-12 rounded-e-lg">+</button>
+                          </div>
+                          <h1 className="text-2xl md:hidden ">  ₹{item.productId.price}</h1>
+                        </div>
+                      </div>
+                      {/* price of single prod */}
+                      <div className="flex flex-col items-center justify-between">
+                        <h1 className="text-2xl hidden md:block">  ₹{item.productId.price}</h1>
+                        <button className="text-xs border-1 rounded-full bg-red-100 px-2 ring-1 ring-red-300 hover:bg-red-200 text-black/75">Delete</button>
+
+                      </div>
+                    </div>
+
+                  </Fragment>)
+              }
+
+
+              {/* prod card end*/}
+
+
+
+
             </div>
           </div>
         </div>
