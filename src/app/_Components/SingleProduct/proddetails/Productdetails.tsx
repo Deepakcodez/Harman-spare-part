@@ -54,7 +54,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     <div className="text-black flex items-center gap-1" >
                         <div
                             className="text-lg text-black/75 w-fit px-2 flex gap-2 items-center justify-center rounded-full  text-violet-800 font-bold border-2 border-violet-600 ">
-                            {product.ratings}
+                            {product.ratings.toFixed(1)}
                             <Star />
                         </div>
                         <div className="text-black flex items-center gap-1">

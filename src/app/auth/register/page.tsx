@@ -80,6 +80,7 @@ const Register: FC = () => {
     return (
         <>
             <div className="  w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
+            
                 <div className="mb-4">
                 <h1 className="text-xl font-bold  text-black/75">Harman Spare Parts </h1>
                     <h5  className="text-xs text-gray-700 ">Convert Your Vehicle Super-Vehicle</h5>

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 
+
 const Login: FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState({
@@ -29,7 +30,7 @@ const Login: FC = () => {
     const loginHandler = async (e: FormEvent) => {
         e.preventDefault();
         const { email, password, } = inputValue;
-         if (email.trim() === "") {
+        if (email.trim() === "") {
             console.log('>>>>>>>>>>>Email missing')
         } else if (!email.includes("@")) {
             console.log('>>>>>>>>>>>invalid email')
@@ -40,14 +41,14 @@ const Login: FC = () => {
         } else {
             try {
                 setIsLoading(true)
-                const response = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/user/login', 
-                    inputValue, 
+                const response = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/user/login',
+                    inputValue,
                     { headers: { 'Content-Type': 'application/json' } })
 
                 if (response.status === 200) {
 
-                    Cookies.set("HSPToken",response.data.token, { expires: 30 })
-                    
+                    Cookies.set("HSPToken", response.data.token, { expires: 30 })
+
                     toast.success("Login successfully successfully")
                     router.push('/')
                     setInputValue({
@@ -76,6 +77,7 @@ const Login: FC = () => {
     return (
         <>
             <div className=" w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
+                
                 <h1 className="text-xl font-bold mb-6 text-black/75">Harman Spare Parts
                     <h1 className="text-xs font-thin">make Your Bike Super-Bike</h1>
                 </h1>
@@ -143,9 +145,9 @@ const Login: FC = () => {
                     </h5>
                 </form>
             </div>
-           
 
-        
+
+
         </>
     );
 }

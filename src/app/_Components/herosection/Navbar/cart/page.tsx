@@ -5,10 +5,10 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useCartDetailStore } from "@/Store/CartCount/useCartDetail";
 import { log } from "console";
+import Link from "next/link";
 const Cart = () => {
   const { isLoading, error, checkProductInCart,cartCount,setCartCount  } = useCartDetailStore();
-  const [cartDetails, setCartDetails] = useState<any>(null); 
-  const token = Cookies.get("HSPToken"); // Replace with actual token or fetch from your authentication context
+  const token = Cookies.get("HSPToken"); 
 
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const Cart = () => {
       if (token) { // Ensure token is defined
         try {
           const cart = await checkProductInCart(token);
-          setCartDetails(cart); 
           setCartCount(cart.products.length)
         } catch (error) {
           console.error('Error fetching cart details:', error);
@@ -33,13 +32,13 @@ const Cart = () => {
   
     return ( 
         <>
-        <div className="relative bg-[#efff01] hover:bg-white   shadow-md p-3 rounded-full ">
+        <Link href={'/cart'} className="relative bg-[#efff01] hover:bg-white   shadow-md p-3 rounded-full ">
           {
             cartCount>0&&
           <h1 className=" absolute text-white bg-violet-500 text-[.6rem] md:h-5 md:w-5 h-3 w-3 rounded-full shadow-md font-semibold left-[1.9rem] text-center flex justify-center items-center top-1 " >{cartCount}</h1>
         }
           <ShoppingCart color="black"  />
-        </div>
+        </Link>
         </>
      );
 }

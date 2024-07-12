@@ -14,8 +14,9 @@ const Hero = () => {
     return ( 
         <>
         <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
-            <div className="relative bg-black w-full h-screen rounded-3xl flex md:items-end ">
-              <h1 className='absolute top-7 left-7 text-white text-5xl font-thin'> <span className='font-serif'>Hello</span> </h1>
+            <div className="relative bg-violet-400 w-full h-screen rounded-3xl flex md:items-end ">
+             
+              
               <div className='  md:h-[35rem] h-[30rem] w-full'>
 
               <Canvas  className='' camera={{ position: [0, 0, 2] }} >
