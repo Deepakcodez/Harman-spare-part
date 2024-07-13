@@ -5,13 +5,15 @@ import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { Shadows_Into_Light } from "next/font/google";
 import { useGSAP } from "@gsap/react";
-import { Menu } from "lucide-react";
+import { IoMenuOutline } from "react-icons/io5";
+
 import Mobilemenu from "./mobilemenu/page";
 import { Fragment, useState } from "react";
 import Searchbutton from "../../search/page";
 import { navbarElemsProps } from "@/types/mobilenavbar.types";
 import Image from "next/image";
-import { FaUser } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
+
 
 const shadowFont = Shadows_Into_Light({
   weight: "400",
@@ -68,7 +70,7 @@ const Navbar = () => {
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
         >
-         <Image src={'/logo.png'} width={60} height={60} alt="HSP"/>
+         <Image  src={'/logo.png'} width={60} height={60} alt="HSP"/>
         </Link>
 
         <ul className="bg-gray-50/75 backdrop-blur-sm border-2	 shadow-lg h-[3rem]  text-gray-700  rounded-full  cursor-pointer hidden md:grid grid-cols-4 gap-2 ">
@@ -87,7 +89,7 @@ const Navbar = () => {
         </ul>
         {/* cart */}
         <div className="hidden md:flex gap-3">
-          <Link href={'/auth/login'}> <FaUser size={20} /> </Link>
+          <Link href={'/auth/login'}> <CiUser size={20} /> </Link>
           <Cart />
         </div>
 
@@ -101,7 +103,7 @@ const Navbar = () => {
             onClick={() => setShowmenu(!showMenu)}
             className=" md:hidden bg-gray-50/50 hover:bg-gray-50/75  transition ease-linear duration-700  p-3 flex justify-center items-center rounded-full"
           >
-            <Menu color="black" />
+            <IoMenuOutline size={25} color="black" />
           </div>
         </div>
       </div>

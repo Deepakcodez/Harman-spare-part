@@ -1,6 +1,7 @@
 "use client"
-// import useCartStore from "@/Store/CartCount/useCartCount";
-import { ShoppingCart } from "lucide-react";
+import { PiShoppingCartSimpleThin } from "react-icons/pi";
+
+
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useCartDetailStore } from "@/Store/CartCount/useCartDetail";
@@ -32,12 +33,12 @@ const Cart = () => {
   
     return ( 
         <>
-        <Link href={'/cart'} className="relative bg-[#efff01] hover:bg-white   shadow-md p-3 rounded-full ">
+        <Link href={'/cart'} className="relative  ">
           {
             cartCount>0&&
-          <h1 className=" absolute text-white bg-violet-500 text-[.6rem] md:h-5 md:w-5 h-3 w-3 rounded-full shadow-md font-semibold left-[1.9rem] text-center flex justify-center items-center top-1 " >{cartCount}</h1>
+          <h1 className=" absolute text-white bg-violet-500 text-[.6rem]  h-3 w-3 max-h-5 max-h-5 rounded-full shadow-md font-semibold left-[1rem] text-center flex justify-center items-center top-0 p-2 " >{cartCount}</h1>
         }
-          <ShoppingCart color="black"  />
+          <PiShoppingCartSimpleThin size={25} color="black"  />
         </Link>
         </>
      );

@@ -46,9 +46,10 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                         },
                     }
                 );
+                console.log("cart detail", resp.data);
                 const cart = resp.data.cart;
                 const productExists = cart.products.some(
-                    (p: any) => p.productId._id.toString() === productId.toString()
+                    (p: any) => p.product.productId._id.toString() === productId.toString()
                 );
 
                 setIsProductExistInCart(productExists);
@@ -64,7 +65,6 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 
     const HandleAddToCart = async () => {
 
-        // setIsAddingToCart(true);
         const data: AddProductToCartData = { productId };
 
         if (!currentUser) {

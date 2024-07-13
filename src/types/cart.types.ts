@@ -1,17 +1,20 @@
 import mongoose from 'mongoose';
 
-// Define CartProduct interface
-export interface CartProduct {
-  productId: mongoose.Types.ObjectId;
+interface Product {
+  productId: string;
+  prodQuantity: number;
+}
+
+interface CartProduct {
+  product: Product;
   quantity: number;
   price: number;
 }
 
-// Define CartDocument interface extending Document
-export interface CartDocument extends mongoose.Document {
-  userId: mongoose.Types.ObjectId;
+export interface CartDocument  {
+  userId: string;
   products: CartProduct[];
   totalPrice: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
