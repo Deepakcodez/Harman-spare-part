@@ -7,28 +7,21 @@ import { useEffect, useState } from "react";
 import { useCartDetailStore } from "@/Store/CartCount/useCartDetail";
 import { log } from "console";
 import Link from "next/link";
+import useCartdetail from "@/hooks/cart/cartDetail";
+import { set } from "mongoose";
 const Cart = () => {
-  const { isLoading, error, checkProductInCart,cartCount,setCartCount  } = useCartDetailStore();
+  // const { isLoading, error, checkProductInCart,cartCount,setCartCount  } = useCartDetailStore();
   const token = Cookies.get("HSPToken"); 
 
+  const { isLoading, error, data:cart} = useCartdetail();
 
-  useEffect(() => {
-    const fetchCartDetails = async () => {
-      if (token) { // Ensure token is defined
-        try {
-          const cart = await checkProductInCart(token);
-          setCartCount(cart.products.length)
-        } catch (error) {
-          console.error('Error fetching cart details:', error);
-        }
-      } else {
-        console.error('Token is not defined');
-      }
-    };
-  
-    fetchCartDetails();
-  }, [checkProductInCart, token]);
+   
+    const [cartCount, setCartCount] = useState<number>(0)
+    
+    useEffect(()=>{
 
+      setCartCount(cart?.products?.length)
+    },[cart, isLoading,error])
 
   
     return ( 

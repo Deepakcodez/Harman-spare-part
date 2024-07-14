@@ -10,6 +10,7 @@ import { CartDocument } from "@/types/cart.types";
 import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/user/currentuser";
 import { useCartDetailStore } from "@/Store/CartCount/useCartDetail";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ProdImageProps {
     images: ImageType[];
@@ -32,6 +33,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
     const { data: currentUser, isLoading, isError, error } = useCurrentUser();
     const router = useRouter();
+    const queryClient = useQueryClient()
 
     const { increaseCartCount, decreaseCartCount } = useCartDetailStore();
 
@@ -87,6 +89,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                 decreaseCartCount()
             } else {
                 fetchCart();
+                queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
 
             }
 
@@ -114,7 +117,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                 setIsProductExistInCart(true)
                 increaseCartCount()
             } else {
-
+                queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
                 fetchCart();
             }
 

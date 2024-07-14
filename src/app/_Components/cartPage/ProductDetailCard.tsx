@@ -2,6 +2,7 @@
 import useCartdetail from "@/hooks/cart/cartDetail";
 import { decreaseProdQuantity } from "@/services/cart/decreaseProdCartQuantity";
 import { addProductToCart } from "@/services/cart/increaseProdQuantity";
+import { handleRemoveFromCart } from "@/services/cart/removeFromCart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { Fragment, useEffect } from "react";
@@ -28,6 +29,13 @@ export const ProductDetailCard = () => {
         decreaseQuantity.mutate(productId)
     }
 
+    const handleRemoveProd = (productId: string) => {
+
+        if (!productId) return toast.error("product ID missing");
+        productRemoverFromCart.mutate(productId)
+
+    }
+
 
 
     const mutation = useMutation({
@@ -49,11 +57,20 @@ export const ProductDetailCard = () => {
             queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
 
 
-            toast.success("quantity decreses");
+            toast.success("quantity decreases");
         },
-        onError: () => {
-            toast.error("Something went wrong")
-        }
+
+    })
+
+    const productRemoverFromCart = useMutation({
+        mutationFn: (productId: string) => handleRemoveFromCart(productId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
+
+
+            toast.success("Product Removed");
+        },
+
     })
 
 
@@ -68,7 +85,9 @@ export const ProductDetailCard = () => {
                 cartProduct.products?.map((item: any, index: number) =>
                     <Fragment key={index}>
                         <div className=" py-2">
-                            <div className="border-t-2 flex justify-end p-1">
+                            <div
+                                onClick={() => handleRemoveProd(item.product.productId._id)}
+                                className="border-t-2 flex justify-end p-1">
                                 <RxCross1 />
                             </div>
                             {/* detail div */}
