@@ -28,12 +28,12 @@ export interface AddProductToCartData {
 
 const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     const token = Cookies.get("HSPToken");
-    const prodimages = [1, 1, 1, , 1, 1]; // Placeholder for product images
+    const prodimages = [1, 1, 1, 1, 1, 1]; // Placeholder for product images
     const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
     const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
     const { data: currentUser, isLoading, isError, error } = useCurrentUser();
     const router = useRouter();
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
     const { increaseCartCount, decreaseCartCount } = useCartDetailStore();
 
@@ -66,16 +66,19 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     }, [productId, currentUser, isLoading, isError, error]);
 
     const HandleAddToCart = async () => {
-
         const data: AddProductToCartData = { productId };
 
         if (!currentUser) {
             router.push("/auth/login");
+            return;
         }
 
         try {
-            setIsProductExistInCart(true)
+            // Optimistically update the UI
+            setIsProductExistInCart(true);
             increaseCartCount();
+            setIsAddingToCart(true);
+
             const response = await axios.post<AddProductToCartResponse>(
                 "https://harman-spare-parts-backend.vercel.app/api/v1/cart/add",
                 data,
@@ -83,28 +86,31 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                     headers: { Authorization: token },
                 }
             );
-            if (response.status !== 200) {
 
-                setIsProductExistInCart(false)
-                decreaseCartCount()
+            if (response.status !== 200) {
+                setIsProductExistInCart(false);
+                decreaseCartCount();
+                toast.error("Something went wrong");
             } else {
                 fetchCart();
-                queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
-
+                queryClient.invalidateQueries({ queryKey: ['cartDetails'] });
+                toast.success("Product added to cart");
             }
-
-            toast.success("Product added to cart");
         } catch (error) {
-            setIsAddingToCart(false);
+            setIsProductExistInCart(false);
+            decreaseCartCount();
             toast.error("Something Went Wrong");
+        } finally {
+            setIsAddingToCart(false);
         }
-
     };
 
     const handleRemoveFromCart = async () => {
         try {
-            setIsProductExistInCart(false)
+            // Optimistically update the UI
+            setIsProductExistInCart(false);
             decreaseCartCount();
+
             const resp = await axios.post(
                 "https://harman-spare-parts-backend.vercel.app/api/v1/cart/remove",
                 { productId },
@@ -112,17 +118,19 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                     headers: { Authorization: token },
                 }
             );
+
             if (resp.status !== 200) {
-
-                setIsProductExistInCart(true)
-                increaseCartCount()
+                setIsProductExistInCart(true);
+                increaseCartCount();
+                toast.error("Something went wrong");
             } else {
-                queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
+                queryClient.invalidateQueries({ queryKey: ['cartDetails'] });
                 fetchCart();
+                toast.success("Product removed from cart");
             }
-
-            toast.success("Product removed from cart");
         } catch (error) {
+            setIsProductExistInCart(true);
+            increaseCartCount();
             toast.error("Something Went Wrong");
         }
     };
@@ -133,7 +141,6 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
         } else {
             HandleAddToCart();
         }
-
     };
 
     return (
@@ -176,6 +183,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
                                 ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"
                                 : "bg-gray-400 hover:bg-gray-500 text-white/75"
                                 }`}
+                            disabled={isAddingToCart}
                         >
                             {isProductExistInCart ? "Remove from cart" : "Add to Cart"}
                         </button>

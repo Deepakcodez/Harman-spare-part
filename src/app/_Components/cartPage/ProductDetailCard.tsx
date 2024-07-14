@@ -148,7 +148,7 @@ export const ProductDetailCard = () => {
                                         +
                                     </button>
                                 </div>
-                                <h1>₹{item.product.productId.price}</h1>
+                                <h1>₹{(item.product.productId.price) * (item.product.prodQuantity)}</h1>
                             </div>
                         </div>
                     </div>
