@@ -11,7 +11,7 @@ const token = Cookies.get("HSPToken")
 
 export const decreaseProdQuantity = async (productId: string, ) => {
   const response = await axios.post<AddProductToCartResponse>(
-    "http://localhost:8000/api/v1/cart/decrease",
+    "https://harman-spare-parts-backend.vercel.app/api/v1/cart/decrease",
     { productId },
     {
       headers: { Authorization: token },
