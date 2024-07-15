@@ -46,9 +46,18 @@ const CartDetail = () => {
         {/*sidebar  price card */}
         <div className="md:col-span-4 col-span-12 lg:pe-12   px-3 ">
           <div className="bg-white h-auto w-full mt-[5rem] shadow-md rounded-md p-2 py-4 ">
-            <h1>Order Summary</h1>
-            <h1 className="text-black/75 flex">Total Amount : {isLoading ? <div>....</div> : <div>{cartProducts.totalPrice}</div>}</h1>
-            <button className="w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white hover:bg-violet-500 py-1 mt-4">Checkout</button>
+            <h1 className="text-2xl">Order Summary</h1>
+            <h1 className="text-black/75 flex">
+            Total Amount : {isLoading ?
+             <div>....</div>
+              :
+               <div>{cartProducts.totalPrice}</div>}
+            </h1>
+            <div className="w-full px-4">
+            <button className=" w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white hover:bg-violet-500 py-1 mt-4 ">
+              Checkout
+            </button>
+            </div>
           </div>
         </div>
       </div>
