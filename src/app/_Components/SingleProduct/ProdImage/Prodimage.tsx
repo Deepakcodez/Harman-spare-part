@@ -34,7 +34,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   const { data: currentUser, isLoading, isError, error } = useCurrentUser();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore(); // Use the Zustand store
+  const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore(); 
 
   const fetchCart = async () => {
     if (currentUser) {

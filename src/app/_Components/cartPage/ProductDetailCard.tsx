@@ -3,6 +3,7 @@ import useCartdetail from "@/hooks/cart/cartDetail";
 import { decreaseProdQuantity } from "@/services/cart/decreaseProdCartQuantity";
 import { addProductToCart } from "@/services/cart/increaseProdQuantity";
 import { handleRemoveFromCart } from "@/services/cart/removeFromCart";
+import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
@@ -13,6 +14,7 @@ export const ProductDetailCard = () => {
     const { isLoading, error, data: cartProduct } = useCartdetail();
     const [localCart, setLocalCart] = useState(cartProduct?.products || []);
     const [previousCart, setPreviousCart] = useState(localCart);
+    const {  decreaseCartCount, increaseCartCount } = useCartCountStore(); 
 
     const queryClient = useQueryClient();
 
@@ -58,6 +60,7 @@ export const ProductDetailCard = () => {
         const updatedCart = localCart.filter(
             (item:any) => item.product.productId._id !== productId
         );
+        decreaseCartCount();
         setPreviousCart(localCart);
         setLocalCart(updatedCart);
         productRemoverFromCart.mutate(productId);
@@ -97,6 +100,7 @@ export const ProductDetailCard = () => {
         },
         onError: () => {
             toast.error("Something went wrong");
+            increaseCartCount()
             setLocalCart(previousCart);
             queryClient.invalidateQueries({ queryKey: ["cartDetails"] });
         },
