@@ -176,7 +176,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
           </div>
 
           {/* buttons */}
-          <div className="w-full flex gap-9 justify-center mt-2">
+          <div className="w-full flex gap-3 justify-center mt-2">
             <button
               onClick={handleClick}
               className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
