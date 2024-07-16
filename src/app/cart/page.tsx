@@ -51,7 +51,7 @@ const CartDetail = () => {
             Total Amount : {isLoading ?
              <div>....</div>
               :
-               <div>{cartProducts.totalPrice}</div>}
+               <div>{cartProducts?.totalPrice}</div>}
             </h1>
             <div className="w-full px-4">
             <button className=" w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white hover:bg-violet-500 py-1 mt-4 ">

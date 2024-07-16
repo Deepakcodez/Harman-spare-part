@@ -1,10 +1,9 @@
 "use client"
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
-import { useState , Suspense} from 'react';
-import { Canvas } from '@react-three/fiber'
-import { Environment, OrbitControls} from '@react-three/drei'
-import Bikemodel from './../../../../../public/Bikemodel'
+import { useState } from 'react';
+import RetroGrid from '@/components/magicui/retro-grid';
+
 
 
 const Hero = () => {
@@ -14,21 +13,14 @@ const Hero = () => {
     return ( 
         <>
         <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
-            <div className="relative bg-violet-400 w-full h-screen rounded-3xl flex md:items-end ">
+            <div className="relative bg-violet-400 w-full h-screen rounded-3xl flex items-center justify-center">
              
+            <span className="pointer-events-none  z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
+             HARMAN SPARE PARTS
+      </span>
+ 
+      <RetroGrid />
               
-              <div className='  md:h-[35rem] h-[30rem] w-full'>
-
-              <Canvas  className='' camera={{ position: [0, 0, 2] }} >
-                <ambientLight/>
-                <OrbitControls enableZoom={false} />  
-                <Suspense fallback = {null}>
-                   <Bikemodel    />
-                </Suspense>
-               <Environment  preset='studio'/>  
-              </Canvas>
-              
-              </div>
 
               {/* product button */}
               <div className='absolute top-[70%]   w-full flex justify-center group'>

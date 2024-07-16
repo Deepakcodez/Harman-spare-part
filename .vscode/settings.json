@@ -1,3 +1,5 @@
 {
-  "editor.fontSize": 6
+  "editor.fontSize": 6,
+  "diffEditor.hideUnchangedRegions.contextLineCount": 8,
+  "better-comments.highlightPlainText": true
 }

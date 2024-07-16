@@ -9,6 +9,9 @@ import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
+import { ProductDetailCartSkelton } from "./ProductDetailCartSkelton";
+import { NoProduct } from "../Shared/no_product/NoProduct";
+import { ErrorPage } from "../Shared/error/ErrorPage";
 
 export const ProductDetailCard = () => {
     const { isLoading, error, data: cartProduct } = useCartdetail();
@@ -93,6 +96,8 @@ export const ProductDetailCard = () => {
     });
 
     const productRemoverFromCart = useMutation({
+
+    
         mutationFn: (productId: string) => handleRemoveFromCart(productId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["cartDetails"] });
@@ -106,8 +111,12 @@ export const ProductDetailCard = () => {
         },
     });
 
-    if (isLoading) return <div className="text-black">Loading</div>;
-    if (error) return <div className="text-black">Error</div>;
+    if (isLoading) return <div className="text-black h-auto w-full flex flex-col justify-center ">  <ProductDetailCartSkelton/> </div>;
+
+    if(localCart.length < 1 ) return <div className="py-12"><NoProduct/></div>;
+
+    if (error) return <div className="py-12"><ErrorPage/></div>;
+
     return (
         <>
             {localCart.map((item: any, index: number) => (
