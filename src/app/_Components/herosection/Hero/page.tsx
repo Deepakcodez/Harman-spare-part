@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
 import { useState } from 'react';
 import RetroGrid from '@/components/magicui/retro-grid';
+import { BikeModel } from '../Models/BikeModel';
 
 
 
@@ -14,8 +15,12 @@ const Hero = () => {
         <>
         <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
             <div className="relative bg-violet-400 w-full h-screen rounded-3xl flex items-center justify-center">
+
+              <div className='z-[9] absolute w-1/2 hidden md:flex  right-0'> 
+                <BikeModel/>
+              </div>
              
-            <span className="pointer-events-none  z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
+            <span className="pointer-events-none  z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent select-none">
              HARMAN SPARE PARTS
       </span>
  
