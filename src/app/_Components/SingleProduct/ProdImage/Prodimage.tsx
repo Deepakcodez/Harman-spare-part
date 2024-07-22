@@ -38,6 +38,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   const prodimages = [1, 1, 1, 1, 1, 1]; // Placeholder for product images
   const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+  const [isALlowToFetch, setIsAllowTOFetch] = useState<boolean>(true)
   const { data: currentUser, isLoading, isError, error } = useCurrentUser();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -86,23 +87,31 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
       increaseCartCount();
       setIsAddingToCart(true);
 
-      const response = await axios.post<AddProductToCartResponse>(
-        "https://harman-spare-parts-backend.vercel.app/api/v1/cart/add",
-        data,
-        {
-          headers: { Authorization: token },
+      if( isALlowToFetch){
+        const response = await axios.post<AddProductToCartResponse>(
+          "https://harman-spare-parts-backend.vercel.app/api/v1/cart/add",
+          data,
+          {
+            headers: { Authorization: token },
+          }
+        );
+  
+        if (response.status !== 200) {
+          setIsProductExistInCart(false);
+          decreaseCartCount();
+          toast.error("Something went wrong");
+        } else {
+          fetchCart();
+          queryClient.invalidateQueries({ queryKey: ['cartDetails'] });
+          toast.success("Product added to cart");
         }
-      );
-
-      if (response.status !== 200) {
-        setIsProductExistInCart(false);
-        decreaseCartCount();
-        toast.error("Something went wrong");
-      } else {
-        fetchCart();
-        queryClient.invalidateQueries({ queryKey: ['cartDetails'] });
-        toast.success("Product added to cart");
       }
+      
+      setIsAllowTOFetch(false)
+      setTimeout(() => {
+        setIsAllowTOFetch(true)
+      }, 1000);
+      
     } catch (error) {
       setIsProductExistInCart(false);
       decreaseCartCount();
