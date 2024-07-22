@@ -11,6 +11,13 @@ import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/user/currentuser";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";  
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 
 interface ProdImageProps {
   images: ImageType[];
@@ -177,16 +184,40 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 
           {/* buttons */}
           <div className="w-full flex gap-3 justify-center mt-2">
-            <button
-              onClick={handleClick}
-              className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
-                ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"
-                : "bg-gray-400 hover:bg-gray-500 text-white/75"
-                }`}
-              disabled={isAddingToCart}
-            >
-              {isProductExistInCart ? "Remove from cart" : "Add to Cart"}
-            </button>
+
+          <TooltipProvider>
+              {currentUser ? (
+                <button
+                  onClick={handleClick}
+                  className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
+                    ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"
+                    : "bg-gray-400 hover:bg-gray-500 text-white/75"
+                    }`}
+                  disabled={isAddingToCart}
+                >
+                  {isProductExistInCart ? "Remove from cart" : "Add to Cart"}
+                </button>
+              ) : (
+                <Tooltip>
+                  <TooltipTrigger>
+                    <button
+                      className={`border-2 p-2 rounded-md transition ease-linear duration-300 bg-violet-900 border-violet-700 text-white hover:bg-violet-800`}
+                      disabled
+                    >
+                      Add to Cart
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-black">Need to Login</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </TooltipProvider>
+
+            
+
+
+
             <button className="border-2 border-violet-800 hover:bg-violet-900 hover:text-white p-2 rounded-md dark:text-black transition ease-linear duration-300 px-5">
               Buy now
             </button>
