@@ -12,13 +12,15 @@ import { RxCross1 } from "react-icons/rx";
 import { ProductDetailCartSkelton } from "./ProductDetailCartSkelton";
 import { NoProduct } from "../Shared/no_product/NoProduct";
 import { ErrorPage } from "../Shared/error/ErrorPage";
+import {motion } from 'framer-motion'
+
 
 export const ProductDetailCard = () => {
     const { isLoading, error, data: cartProduct } = useCartdetail();
     const [localCart, setLocalCart] = useState(cartProduct?.products || []);
     const [previousCart, setPreviousCart] = useState(localCart);
     const {  decreaseCartCount, increaseCartCount } = useCartCountStore(); 
-
+    const [isALlowToFetch, setIsAllowTOFetch] = useState<boolean>(true)
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -30,6 +32,8 @@ export const ProductDetailCard = () => {
 
     const quantityAdder = (productId: string) => {
         if (!productId) return toast.error("product ID missing");
+        
+        if(!isALlowToFetch) return
 
         const updatedCart = localCart.map((item:any) =>
             item.product.productId._id === productId
@@ -39,22 +43,32 @@ export const ProductDetailCard = () => {
         setPreviousCart(localCart);
         setLocalCart(updatedCart);
         mutation.mutate(productId);
+        setIsAllowTOFetch(false)
+        setTimeout(()=>{
+            setIsAllowTOFetch(true)
+        },1000)
     };
 
     const quantityDecreaser = (productId: string) => {
         if (!productId) return toast.error("product ID missing");
+        
+        if(!isALlowToFetch) return
 
         const updatedCart = localCart.map((item:any) => {
             if (item.product.productId._id === productId) {
                 const newQuantity = item.product.prodQuantity - 1;
-                if (newQuantity < 1) return item; // Ensure quantity does not go below 1
+                if (newQuantity < 1) return item;
                 return { ...item, product: { ...item.product, prodQuantity: newQuantity } };
             }
             return item;
         });
         setPreviousCart(localCart);
         setLocalCart(updatedCart);
+        setIsAllowTOFetch(false)
         decreaseQuantity.mutate(productId);
+        setTimeout(()=>{
+            setIsAllowTOFetch(true)
+        },1000)
     };
 
     const handleRemoveProd = (productId: string) => {
@@ -124,9 +138,9 @@ export const ProductDetailCard = () => {
                     <div className="py-2">
                         <div
                             onClick={() => handleRemoveProd(item.product.productId._id)}
-                            className="border-t-2 flex justify-end p-1"
+                            className="border-t-2 flex justify-end p-1  "
                         >
-                            <RxCross1 />
+                            <RxCross1 size={20} className="  hover:bg-red-100 rounded-full p-1" />
                         </div>
                         {/* detail div */}
                         <div className="flex md:gap-4 gap-1">
@@ -147,19 +161,21 @@ export const ProductDetailCard = () => {
                                     )}
                                 </h1>
                                 <div className="border-2 rounded-lg justify-between flex w-[8rem]">
-                                    <button
+                                    <motion.button
+                                        whileTap={{ scale: 0.9 }}
                                         onClick={() => quantityDecreaser(item.product.productId._id)}
                                         className="hover:bg-violet-100 w-12 rounded-s-lg"
                                     >
                                         -
-                                    </button>
+                                    </motion.button>
                                     <div>{item.product.prodQuantity}</div>
-                                    <button
+                                    <motion.button
+                                        whileTap={{ scale: 0.9 }}
                                         onClick={() => quantityAdder(item.product.productId._id)}
                                         className="hover:bg-violet-100 w-12 rounded-e-lg"
                                     >
                                         +
-                                    </button>
+                                    </motion.button>
                                 </div>
                                 <h1>₹{(item.product.productId.price) * (item.product.prodQuantity)}</h1>
                             </div>

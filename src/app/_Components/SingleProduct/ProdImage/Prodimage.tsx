@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/user/currentuser";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";  
+import {motion} from 'framer-motion'
 import {
   Tooltip,
   TooltipContent,
@@ -197,6 +198,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
           <TooltipProvider>
               {currentUser ? (
                 <button
+                 
                   onClick={handleClick}
                   className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
                     ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"

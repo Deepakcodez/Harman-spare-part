@@ -8,6 +8,7 @@ import Card from "../Shared/Card/Card";
 import { useAllProducts } from '@/hooks/products/Product';
 import { ProdDocument } from "@/types/product.types";
 import { CardSkelton } from "../Shared/Card/Skelton"
+import { BIkeSkelton } from "../Shared/bikesectionSkelton/BIkeSkelton";
 
 const BikeProd = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -47,7 +48,7 @@ const BikeProd = () => {
         <div className="flex gap-5 overflow-x-scroll custom-scrollbar py-4">
           {/* CARDS */}
           {isLoading ? (
-            <CardSkelton />
+            <BIkeSkelton />
           ) : (
             products.map((product, index) => (
               <Link
