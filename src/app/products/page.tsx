@@ -5,6 +5,9 @@ import { Search } from 'lucide-react';
 import ProductCards from '../_Components/productCards/ProductCards';
 import useFilterStore, { selectCategory, selectSearchKeyword, selectCurrentPage, selectMaxPage } from '@/Store/filter/useFilterStore';
 import { useAllProducts } from '@/hooks/products/Product';
+import useCurrentUser from '@/hooks/user/currentuser';
+import useCurrentUserStore from '@/Store/userStore/currentUser';
+
 
 const Products: FC = () => {
   const {
@@ -19,6 +22,17 @@ const Products: FC = () => {
   } = useFilterStore();
 
   const [searchInput, setSearchInput] = useState<string>("");
+  const { data: user,  isError, } = useCurrentUser();
+  const { setCurrentUser,currentUser } =  useCurrentUserStore();
+
+  useEffect(() => {
+    if (user) {
+      setCurrentUser(user);
+      console.log('>>> Current User:', user, currentUser);
+    }
+  }, [user, setCurrentUser, currentUser]);
+
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,6 +74,8 @@ const Products: FC = () => {
   }, [data, setMaxPage]);
 
   const products: ProdDocument[] = data?.products ?? [];
+
+
 
   return (
     <>

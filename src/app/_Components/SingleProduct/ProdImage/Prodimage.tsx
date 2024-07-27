@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useCallback, useEffect, useState } from "react";
 import { Image as ImageType } from "@/types/product.types";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import useCurrentUserStore from "@/Store/userStore/currentUser";
 
 
 interface ProdImageProps {
@@ -40,12 +41,13 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [isALlowToFetch, setIsAllowTOFetch] = useState<boolean>(true)
-  const { data: currentUser, isLoading, isError, error } = useCurrentUser();
+  // const { data: currentUser, isLoading, isError, error } = useCurrentUser();
+  const { currentUser } =  useCurrentUserStore();
   const router = useRouter();
   const queryClient = useQueryClient();
   const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore(); 
 
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     if (currentUser) {
       try {
         const resp = await axios.get(
@@ -68,11 +70,11 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
         console.error("Error fetching cart:", error);
       }
     }
-  };
+  }, [currentUser, productId, setCartCount, token]);
 
   useEffect(() => {
     fetchCart();
-  }, [productId, currentUser, isLoading, isError, error]);
+  }, [fetchCart]);
 
   const HandleAddToCart = async () => {
     const data: AddProductToCartData = { productId };
