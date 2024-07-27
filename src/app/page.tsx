@@ -30,7 +30,6 @@ const Home: React.FC = () => {
         <OurWork />
         <Stats />
         <Map/>
-        <Footer/>
       </div>
     </>
   );

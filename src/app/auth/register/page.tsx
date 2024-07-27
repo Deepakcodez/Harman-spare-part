@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 import loadingAnim from '../../../../public/lading.json'
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 const Register: FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -81,9 +82,13 @@ const Register: FC = () => {
         <>
             <div className="  w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
             
-                <div className="mb-4">
-                <h1 className="text-xl font-bold  text-black/75">Harman Spare Parts </h1>
-                    <h5  className="text-xs text-gray-700 ">Convert Your Vehicle Super-Vehicle</h5>
+            <div className="flex justify-center">
+                    <Image
+                      src={'/logo.png'}
+                      width={100}
+                      height={100}
+                      alt="LOGO"
+                    />
                 </div>
                 <h3 className="text-2xl font-bold mb-1 text-black/75"> Create your account</h3>
                 <h5 className="text-xs text-gray-700">

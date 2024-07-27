@@ -26,7 +26,7 @@ export const BikeModel = () => {
  <Canvas  className='' camera={{ position: [2, 0, 2] }} >
   <ambientLight/>
   <OrbitControls enableZoom={false} />  
-  <Suspense fallback = {<Rocket/>}>
+  <Suspense fallback = {null}>
      <Bikemodel    />
   </Suspense>
  <Environment  preset='studio'/>  

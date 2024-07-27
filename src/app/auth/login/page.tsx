@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 
 
@@ -76,12 +77,17 @@ const Login: FC = () => {
     };
     return (
         <>
-            <div className=" w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40">
+            <div className=" w-[90%] sm:w-[30rem] text-center bg-transparent relative z-40 ">
                 
-                <h1 className="text-xl font-bold mb-6 text-black/75">Harman Spare Parts
-                    <h1 className="text-xs font-thin">make Your Bike Super-Bike</h1>
-                </h1>
-                <h3 className="text-2xl font-bold mb-1 text-white"> Log in to your account</h3>
+                <div className="flex justify-center">
+                    <Image
+                      src={'/logo.png'}
+                      width={100}
+                      height={100}
+                      alt="LOGO"
+                    />
+                </div>
+                <h3 className="text-2xl font-bold mb-1 text-black"> Log in to your account</h3>
                 <h5 className="text-xs text-gray-400">
                     Welcome back, Please enter your details.
                 </h5>
@@ -137,7 +143,7 @@ const Login: FC = () => {
                         )}
 
                     </button>
-                    <h5 className="mt-3 font-thin text-gray-400">
+                    <h5 className="mt-3 text-sm text-black">
                         haven&apos;t any account ?{" "}
                         <Link href="/auth/register" className="text-blue-300">
                             Create an account
