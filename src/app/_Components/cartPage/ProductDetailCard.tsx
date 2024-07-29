@@ -1,5 +1,4 @@
 "use client"
-import useCartdetail from "@/hooks/cart/cartDetail";
 import { decreaseProdQuantity } from "@/services/cart/decreaseProdCartQuantity";
 import { addProductToCart } from "@/services/cart/increaseProdQuantity";
 import { handleRemoveFromCart } from "@/services/cart/removeFromCart";
@@ -13,10 +12,14 @@ import { ProductDetailCartSkelton } from "./ProductDetailCartSkelton";
 import { NoProduct } from "../Shared/no_product/NoProduct";
 import { ErrorPage } from "../Shared/error/ErrorPage";
 import {motion } from 'framer-motion'
+import useCartProductStore from "@/Store/CartCount/usecartProducts";
 
 
 export const ProductDetailCard = () => {
-    const { isLoading, error, data: cartProduct } = useCartdetail();
+    // const { isLoading, error, data: cartProduct } = useCartdetail();
+    const { cart : cartProduct,isLoadingInStore, isErrorInStore}  = useCartProductStore()
+
+
     const [localCart, setLocalCart] = useState(cartProduct?.products || []);
     const [previousCart, setPreviousCart] = useState(localCart);
     const {  decreaseCartCount, increaseCartCount } = useCartCountStore(); 
@@ -125,11 +128,11 @@ export const ProductDetailCard = () => {
         },
     });
 
-    if (isLoading) return <div className="text-black h-auto w-full flex flex-col justify-center ">  <ProductDetailCartSkelton/> </div>;
+    if (isLoadingInStore) return <div className="text-black h-auto w-full flex flex-col justify-center ">  <ProductDetailCartSkelton/> </div>;
 
     if(localCart.length < 1 ) return <div className="py-12"><NoProduct/></div>;
 
-    if (error) return <div className="py-12"><ErrorPage/></div>;
+    if (isErrorInStore) return <div className="py-12"><ErrorPage/></div>;
 
     return (
         <>

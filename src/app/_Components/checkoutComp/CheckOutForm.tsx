@@ -1,9 +1,14 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import useCartdetail from "@/hooks/cart/cartDetail";
 import { Button } from "@/components/ui/button";
+import useRazorpay from "react-razorpay";
+
 import {
     Form,
     FormControl,
@@ -21,6 +26,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import Cookies from "js-cookie";
 
 const formSchema = z.object({
     city: z.string().min(2, {
@@ -44,6 +50,22 @@ const formSchema = z.object({
 });
 
 export const CheckOutForm: FC = () => {
+    const router = useRouter();
+    const [Razorpay] = useRazorpay();
+    const { isLoading, error, data: cartProducts } = useCartdetail();
+
+    useEffect(() => {
+        if (cartProducts) {
+            localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+        }
+    }, [cartProducts, isLoading, error]);
+
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem("cartProducts");
+        };
+    }, []);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,13 +73,85 @@ export const CheckOutForm: FC = () => {
         },
     });
 
-    const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log(data);
-        //TODO add on submit feature
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        if (!cartProducts) return;
+
+        const shippingInfo = {
+            address: data.address,
+            city: data.city,
+            state: data.state,
+            country: data.country,
+            pinCode: parseInt(data.pincode),
+            phoneNo: parseInt(data.phone),
+        };
+
+        const orderData = {
+            shippingInfo,
+            orderItems: cartProducts.products.map((product: any) => ({
+                name: product.product.productId.name ,  // Add a default value if necessary
+                price: product.product.productId.price,
+                quantity: product.product.prodQuantity,
+                image:  "default-image.jpg",  // Add a default value if necessary
+                product: product.product.productId._id,
+            })),
+            paymentInfo: {
+                id: "sample id",
+                status: "pending",
+            },
+            itemsPrice: cartProducts.totalPrice,
+            taxPrice: 0,
+            shippingPrice: 0,
+            totalPrice: cartProducts.totalPrice,
+        };
+
+        try {
+            const response = await axios.post("http://localhost:8000/api/v1/order/create", orderData,
+                {
+                    headers: {
+                        Authorization: Cookies.get('HSPToken'),
+                    }
+                });
+        
+            if (response.data.success) {
+                console.log(`>>>>>>>>>>>payment success`,response.data.order.totalPrice)
+                // Initialize Razorpay payment
+                const options = {
+                    key: "rzp_test_980PnjWWdgqLfA",
+                    amount: 100,   // response.data.order.totalPrice
+                    currency: "INR",
+                    name: "Harman Spare Parts",
+                    description: "Test Transaction",
+                    image: "https://example.com/your_logo",
+                    order_id: response.data.order.id, // Order ID from your order creation response
+                    handler: function (response: any) {
+                        alert(response.razorpay_payment_id);
+                        alert(response.razorpay_order_id);
+                        alert(response.razorpay_signature);
+                        // Optionally, you can redirect the user to the success page
+                        // router.push(`/order/success/${response.data.order._id}`);
+                    },
+                    prefill: {
+                        name: "Gaurav Kumar",
+                        email: "gaurav.kumar@example.com",
+                        contact: "9000090000",
+                    },
+                    notes: {
+                        address: "Razorpay Corporate Office",
+                    },
+                    theme: {
+                        color: "#3399cc",
+                    },
+                };
+                const rzp1 = new Razorpay(options);
+                rzp1.open();
+            }
+        } catch (error) {
+            console.error("Error creating order:", error);
+        }
     };
 
     return (
-        <div className="px-12 py-5 h-auto  text-black">
+        <div className="px-12 py-5 h-auto text-black">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-3/4">
                     {/* city */}

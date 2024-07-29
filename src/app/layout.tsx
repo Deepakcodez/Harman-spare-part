@@ -21,11 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <QueryProvider>
-         
-              <Navbar />
-              {children}
-              <Footer/>
+
+          <Navbar />
+          {children}
+          <Footer />
         </QueryProvider>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        
       </body>
     </html>
   );
