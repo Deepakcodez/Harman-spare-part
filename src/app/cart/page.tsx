@@ -23,7 +23,7 @@ const CartDetail = () => {
       setIsLoadingInStore(isLoading)
       setIsErrorInStore(error)
     }
-  }, [isLoading, error, cartProducts, cart, setCart, setIsLoadingInStore, isErrorInStore])
+  }, [isLoading, error, cartProducts, cart, setCart, setIsLoadingInStore, isErrorInStore,setIsErrorInStore])
 
 
   const CheckOutClickHandler = () => {

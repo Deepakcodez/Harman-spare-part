@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./_Components/herosection/Navbar/page";
 import { QueryProvider } from "./QueryProvider";
 import { Footer } from "./_Components/footer/Footer";
+import Script from "next/script"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,10 @@ export default function RootLayout({
           <Footer />
         </QueryProvider>
 
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="afterInteractive" // Load script after the page has loaded
+        />
         
       </body>
     </html>
