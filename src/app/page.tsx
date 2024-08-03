@@ -1,12 +1,20 @@
-import Image from "next/image";
-import Hero from "./_Components/herosection/Hero/page";
-import Stats from "./_Components/stats/page";
-import Our_products from "./_Components/ourProducts/Ourprod";
-import OurWork from "./_Components/ourWork/Our_work";
-import BikeProd from "./_Components/bikeProd/BikeProd";
-import CarProd from "./_Components/CarProduct/page";
-import Map from "./_Components/map/Map";
-import { Footer } from "./_Components/footer/Footer";
+// import Our_products from "./_Components/ourProducts/Ourprod";
+// import BikeProd from "./_Components/bikeProd/BikeProd";
+// import Map from "./_Components/map/Map";
+// import CarProd from "./_Components/CarProduct/page";
+// import OurWork from "./_Components/ourWork/Our_work";
+// import Stats from "./_Components/stats/page";
+// import Hero from "./_Components/herosection/Hero/page";
+import {  lazy, Suspense} from 'react'
+import { BIkeSkelton } from "./_Components/Shared/bikesectionSkelton/BIkeSkelton";
+const Our_products = lazy(()=> import ("./_Components/ourProducts/Ourprod"))
+const BikeProd = lazy(()=> import ("./_Components/bikeProd/BikeProd"))
+const CarProd = lazy(()=> import ("./_Components/CarProduct/page"))
+const Map = lazy(()=> import ("./_Components/map/Map"))
+const Stats = lazy(()=> import ("./_Components/stats/page"))
+const OurWork = lazy(()=> import ("./_Components/ourWork/Our_work"))
+const Hero = lazy(()=> import ("./_Components/herosection/Hero/page"))
+
 
 const Home: React.FC = () => {
 
@@ -15,21 +23,34 @@ const Home: React.FC = () => {
   return (
     <>
       <div className=" relative h-full w-full  overflow-hidden">
+      <Suspense fallback={null}>
         <Hero />
+        </Suspense>
+
+        <Suspense fallback={<BIkeSkelton/>}>
         <Our_products />
-        <Image
-          className="absolute md:-bottom-[8rem] bottom-[8rem]  md:left-[10rem] opacity-45 "
-          alt="light"
-          src={"/pinklight.svg"}
-          width={1000}
-          height={1000}
-        />
+        </Suspense>
+
+        <Suspense fallback={<BIkeSkelton/>}>
         <BikeProd />
-       
+        </Suspense>
+
+        <Suspense fallback={<BIkeSkelton/>}>
         <CarProd />
+        </Suspense>
+
+        <Suspense fallback={null}>
         <OurWork />
+        </Suspense>
+
+        <Suspense fallback={null}>
         <Stats />
+        </Suspense>
+
+        <Suspense fallback={null}>
         <Map/>
+        </Suspense>
+
       </div>
     </>
   );

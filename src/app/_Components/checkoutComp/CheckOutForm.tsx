@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import useCartdetail from "@/hooks/cart/cartDetail";
 import { Button } from "@/components/ui/button";
 import useRazorpay from "react-razorpay";
+import Lottie from "lottie-react";
+import loadingAnimation from "@/../public/loadingballs.json";
 
 import {
     Form,
@@ -52,6 +54,7 @@ const formSchema = z.object({
 export const CheckOutForm: FC = () => {
     const router = useRouter();
     const [Razorpay] = useRazorpay();
+    const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
     const { isLoading, error, data: cartProducts } = useCartdetail();
 
     useEffect(() => {
@@ -105,42 +108,40 @@ export const CheckOutForm: FC = () => {
         };
 
         try {
+            setIsLoaderShow(true)
             const response = await axios.post("http://localhost:8000/api/v1/order/create", orderData,
                 {
                     headers: {
                         Authorization: Cookies.get('HSPToken'),
                     }
                 });
+
+                console.log("user name",response.data.order.user.name, "price",response.data.order.totalPrice)
         
             if (response.data.success) {
+                setIsLoaderShow(false)
                 console.log(`>>>>>>>>>>>payment success`,response.data.order.totalPrice)
                 // Initialize Razorpay payment
-                const options = {
-                    key: "rzp_test_980PnjWWdgqLfA",
-                    amount: 100,   // response.data.order.totalPrice
-                    currency: "INR",
-                    name: "Harman Spare Parts",
-                    description: "Test Transaction",
-                    image: "https://example.com/your_logo",
-                    order_id: response.data.order.id, // Order ID from your order creation response
-                    handler: function (response: any) {
-                        alert(response.razorpay_payment_id);
-                        alert(response.razorpay_order_id);
-                        alert(response.razorpay_signature);
-                        // Optionally, you can redirect the user to the success page
-                        // router.push(`/order/success/${response.data.order._id}`);
+                var options = {
+                    "key": "rzp_test_980PnjWWdgqLfA", 
+                    "amount" : response.data.order.totalPrice || 10000,
+                    "currency": "INR",
+                    "name": "Harman Spare Parts", 
+                    "description": "Test Transaction",
+                    "image": "https://github.com/Deepakcodez/Harman-spare-part/blob/main/public/logo.png?raw=true",
+                    "order_id": response.data.order.paymentInfo.razorpayOrderId || "sample id", 
+                    "callback_url": "http://localhost:8000/api/v1/order/paymentVerify",
+                    "prefill": {
+                        "name": response.data.order.user.name || "Gaurav Kumar", 
+                        "email": response.data.order.user.email || "gaurav.kumar@example.com",
+                        "contact": response.data.order.shippingInfo.phoneNo || "7814897900"     
                     },
-                    prefill: {
-                        name: "Gaurav Kumar",
-                        email: "gaurav.kumar@example.com",
-                        contact: "9000090000",
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
                     },
-                    notes: {
-                        address: "Razorpay Corporate Office",
-                    },
-                    theme: {
-                        color: "#3399cc",
-                    },
+                    "theme": {
+                        "color": "#a78bfa"
+                    }
                 };
                 const rzp1 = new Razorpay(options);
                 rzp1.open();
@@ -151,9 +152,10 @@ export const CheckOutForm: FC = () => {
     };
 
     return (
-        <div className="px-12 py-5 h-auto text-black">
+        <div className="md:px-12 px-6 py-5 h-auto text-black">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-3/4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 lg:w-3/4 ">
+                    <h1 className="text-center text-2xl font-bold text-black/75">Fill Shipping Details</h1>
                     {/* city */}
                     <FormField
                         control={form.control}
@@ -267,7 +269,20 @@ export const CheckOutForm: FC = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <div className="pt-7">
+                    <Button  
+                    className="relative overflow-hidden "
+                      disabled={isLoading}
+                      variant={"hspButton"}
+                       type="submit">
+                        {
+                            isLoaderShow ? <div className=" w-full h-full absolute bottom-8 "> <Lottie className="h-[6rem] w-auto overflow-hidden "  animationData={loadingAnimation} loop={true} /></div> 
+                            :
+                            <h1>Submit</h1>
+                        }
+                        
+                    </Button>
+                    </div>
                 </form>
             </Form>
         </div>
