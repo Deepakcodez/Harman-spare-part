@@ -1,20 +1,40 @@
 "use client";
-import { MoveRight, Star } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, MoveRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import Card from "../Shared/Card/Card";
 import { useAllProducts } from '@/hooks/products/Product';
 import { ProdDocument } from "@/types/product.types";
-import { CardSkelton } from "../Shared/Card/Skelton"
+import { CardSkelton } from "../Shared/Card/Skelton";
 import { BIkeSkelton } from "../Shared/bikesectionSkelton/BIkeSkelton";
 
 const BikeProd = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { data, error, isLoading } = useAllProducts(1, "", "bike");
   const products: ProdDocument[] = data?.products ?? [];
+  const parentOfProdRef = useRef<HTMLDivElement>(null);
 
+  const prevButton = () => {
+    if (parentOfProdRef.current) {
+      let width = parentOfProdRef.current.clientWidth;
+      parentOfProdRef.current.scrollTo({
+        left: parentOfProdRef.current.scrollLeft - width,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const nextButton = () => {
+    if (parentOfProdRef.current) {
+      let width = parentOfProdRef.current.clientWidth;
+      parentOfProdRef.current.scrollTo({
+        left: parentOfProdRef.current.scrollLeft + width,
+        behavior: "smooth",
+      });
+    }
+  };
   if (!products) return <CardSkelton />;
 
   return (
@@ -45,7 +65,19 @@ const BikeProd = () => {
           </div>
         </div>
 
-        <div className="flex gap-5 overflow-x-scroll custom-scrollbar py-4">
+        <div ref={parentOfProdRef} className="parentOfProd flex bg-red-5 gap-5 overflow-x-scroll py-4 no-scrollbar">
+          <button
+            onClick={prevButton}
+            className="absolute z-50 top-1/2 left-2 bg-violet-200 hover:bg-violet-300 scale-110 shadow-md transition ease-linear duration-300 "
+          >
+            <ChevronsLeft />
+          </button>
+          <button
+            onClick={nextButton}
+            className="absolute z-50 top-1/2 right-2 scale-110 bg-violet-200 hover:bg-violet-300 shadow-md transition ease-linear duration-300 "
+          >
+            <ChevronsRight />
+          </button>
           {/* CARDS */}
           {isLoading ? (
             <BIkeSkelton />
@@ -75,19 +107,17 @@ const BikeProd = () => {
                   <h1 className="text-lg font-serif text-black leading-4 pb-1">
                     ₹{product.price}
                   </h1>
-                  {
-                    product.ratings > 0.0 &&
-                  <div className="flex gap-1 items-center justify-start">
-                    <div className="bg-violet-400 border border-violet-500 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
-                      <h1 className="text-md">{product.ratings.toFixed(1)}</h1>
-                      <Star size={20} />
+                  {product.ratings > 0.0 && (
+                    <div className="flex gap-1 items-center justify-start">
+                      <div className="bg-violet-400 border border-violet-500 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
+                        <h1 className="text-md">{product.ratings.toFixed(1)}</h1>
+                        <Star size={20} />
+                      </div>
+                      <h1 className="text-sm text-black/75">
+                        ({product.reviews.length} Reviews)
+                      </h1>
                     </div>
-                    <h1 className="text-sm text-black/75">
-                      ({product.reviews.length} Reviews)
-                    </h1>
-                  </div>
-                    }
-
+                  )}
                 </div>
               </Link>
             ))

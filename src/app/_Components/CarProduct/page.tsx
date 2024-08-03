@@ -1,8 +1,8 @@
 "use client";
-import { MoveRight, Star } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, MoveRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import Card from "../Shared/Card/Card";
 import { ProdDocument } from "@/types/product.types";
@@ -17,7 +17,27 @@ const CarProd = () => {
 
   const FourProd : ProdDocument[] = products.slice(0,4)
 
- 
+ const parentOfProdRef = useRef<HTMLDivElement>(null);
+
+  const prevButton = () => {
+    if (parentOfProdRef.current) {
+      let width = parentOfProdRef.current.clientWidth;
+      parentOfProdRef.current.scrollTo({
+        left: parentOfProdRef.current.scrollLeft - width,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const nextButton = () => {
+    if (parentOfProdRef.current) {
+      let width = parentOfProdRef.current.clientWidth;
+      parentOfProdRef.current.scrollTo({
+        left: parentOfProdRef.current.scrollLeft + width,
+        behavior: "smooth",
+      });
+    }
+  };
 
    
   return (
@@ -49,7 +69,21 @@ const CarProd = () => {
         </div>
 
        
-        <div className="flex gap-5 overflow-x-scroll custom-scrollbar py-4">
+        <div ref={parentOfProdRef} className="parentOfProd flex bg-red-5 gap-5 overflow-x-scroll py-4 no-scrollbar">
+        <button
+            onClick={prevButton}
+            className="absolute z-50 top-1/2 left-2 bg-violet-200 hover:bg-violet-300 scale-110 shadow-md transition ease-linear duration-300 "
+          >
+            <ChevronsLeft />
+          </button>
+          <button
+            onClick={nextButton}
+            className="absolute z-50 top-1/2 right-2 scale-110 bg-violet-200 hover:bg-violet-300 shadow-md transition ease-linear duration-300 "
+          >
+            <ChevronsRight />
+          </button>
+
+
           {/* CARDS */}
           {isLoading ? (
             <BIkeSkelton />

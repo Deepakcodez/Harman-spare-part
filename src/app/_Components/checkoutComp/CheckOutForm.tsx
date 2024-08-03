@@ -226,7 +226,7 @@ export const CheckOutForm: FC = () => {
                                         placeholder="Enter Your Address"
                                         id="message"
                                         {...field}
-                                        className="max-h-24 min-h-8"
+                                        className="h-24 min-h-24 max-h-24"
                                     />
                                 </FormControl>
                                 <FormMessage />

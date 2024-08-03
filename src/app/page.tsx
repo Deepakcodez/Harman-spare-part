@@ -12,7 +12,6 @@ const BikeProd = lazy(()=> import ("./_Components/bikeProd/BikeProd"))
 const CarProd = lazy(()=> import ("./_Components/CarProduct/page"))
 const Map = lazy(()=> import ("./_Components/map/Map"))
 const Stats = lazy(()=> import ("./_Components/stats/page"))
-const OurWork = lazy(()=> import ("./_Components/ourWork/Our_work"))
 const Hero = lazy(()=> import ("./_Components/herosection/Hero/page"))
 
 
@@ -22,6 +21,9 @@ const Home: React.FC = () => {
 
   return (
     <>
+    <Suspense fallback={<><h1>Loading</h1></>}>
+
+    
       <div className=" relative h-full w-full  overflow-hidden">
       <Suspense fallback={null}>
         <Hero />
@@ -39,9 +41,7 @@ const Home: React.FC = () => {
         <CarProd />
         </Suspense>
 
-        <Suspense fallback={null}>
-        <OurWork />
-        </Suspense>
+        
 
         <Suspense fallback={null}>
         <Stats />
@@ -52,6 +52,7 @@ const Home: React.FC = () => {
         </Suspense>
 
       </div>
+      </Suspense>
     </>
   );
 }
