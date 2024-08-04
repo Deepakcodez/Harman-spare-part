@@ -28,7 +28,7 @@ const Products: FC = () => {
   useEffect(() => {
     if (user) {
       setCurrentUser(user);
-      console.log('>>> Current User:', user, currentUser);
+      
     }
   }, [user, setCurrentUser, currentUser]);
 
@@ -68,7 +68,7 @@ const Products: FC = () => {
   useEffect(() => {
     if (data) {
       const productCount = data.productCount ?? 0;
-      const averageOfProducts = Math.ceil(productCount / 9); // 9 is products shown on one page
+      const averageOfProducts = Math.ceil(productCount / 15); // 9 is products shown on one page
       setMaxPage(averageOfProducts);
     }
   }, [data, setMaxPage]);

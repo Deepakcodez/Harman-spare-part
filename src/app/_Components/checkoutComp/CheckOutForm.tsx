@@ -5,9 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import useCartdetail from "@/hooks/cart/cartDetail";
 import { Button } from "@/components/ui/button";
-import useRazorpay from "react-razorpay";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/../public/loadingballs.json";
 
@@ -29,6 +27,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
     city: z.string().min(2, {
@@ -52,22 +51,9 @@ const formSchema = z.object({
 });
 
 export const CheckOutForm: FC = () => {
-    const router = useRouter();
-    const [Razorpay] = useRazorpay();
     const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
-    const { isLoading, error, data: cartProducts } = useCartdetail();
-
-    useEffect(() => {
-        if (cartProducts) {
-            localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-        }
-    }, [cartProducts, isLoading, error]);
-
-    useEffect(() => {
-        return () => {
-            localStorage.removeItem("cartProducts");
-        };
-    }, []);
+    const router = useRouter();
+   
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -77,7 +63,6 @@ export const CheckOutForm: FC = () => {
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-        if (!cartProducts) return;
 
         const shippingInfo = {
             address: data.address,
@@ -88,66 +73,31 @@ export const CheckOutForm: FC = () => {
             phoneNo: parseInt(data.phone),
         };
 
-        const orderData = {
-            shippingInfo,
-            orderItems: cartProducts.products.map((product: any) => ({
-                name: product.product.productId.name ,  // Add a default value if necessary
-                price: product.product.productId.price,
-                quantity: product.product.prodQuantity,
-                image:  "default-image.jpg",  // Add a default value if necessary
-                product: product.product.productId._id,
-            })),
-            paymentInfo: {
-                id: "sample id",
-                status: "pending",
-            },
-            itemsPrice: cartProducts.totalPrice,
-            taxPrice: 0,
-            shippingPrice: 0,
-            totalPrice: cartProducts.totalPrice,
-        };
+        
 
         try {
             setIsLoaderShow(true)
-            const response = await axios.post("http://localhost:8000/api/v1/order/create", orderData,
+            const response = await axios.put("http://localhost:8000/api/v1/shipping/shippingInfo", shippingInfo,
                 {
                     headers: {
                         Authorization: Cookies.get('HSPToken'),
                     }
                 });
+                console.log(response.data)
 
-                console.log("user name",response.data.order.user.name, "price",response.data.order.totalPrice)
+               
+               
         
             if (response.data.success) {
+
+              
+              
+                toast.success("shipping address submitted")
                 setIsLoaderShow(false)
-                console.log(`>>>>>>>>>>>payment success`,response.data.order.totalPrice)
-                // Initialize Razorpay payment
-                var options = {
-                    "key": "rzp_test_980PnjWWdgqLfA", 
-                    "amount" : response.data.order.totalPrice || 10000,
-                    "currency": "INR",
-                    "name": "Harman Spare Parts", 
-                    "description": "Test Transaction",
-                    "image": "https://github.com/Deepakcodez/Harman-spare-part/blob/main/public/logo.png?raw=true",
-                    "order_id": response.data.order.paymentInfo.razorpayOrderId || "sample id", 
-                    "callback_url": "http://localhost:8000/api/v1/order/paymentVerify",
-                    "prefill": {
-                        "name": response.data.order.user.name || "Gaurav Kumar", 
-                        "email": response.data.order.user.email || "gaurav.kumar@example.com",
-                        "contact": response.data.order.shippingInfo.phoneNo || "7814897900"     
-                    },
-                    "notes": {
-                        "address": "Razorpay Corporate Office"
-                    },
-                    "theme": {
-                        "color": "#a78bfa"
-                    }
-                };
-                const rzp1 = new Razorpay(options);
-                rzp1.open();
+                router.push('/cart') 
             }
         } catch (error) {
-            console.error("Error creating order:", error);
+            console.error("Error in saving shipping Info:", error);
         }
     };
 
@@ -272,7 +222,6 @@ export const CheckOutForm: FC = () => {
                     <div className="pt-7">
                     <Button  
                     className="relative overflow-hidden "
-                      disabled={isLoading}
                       variant={"hspButton"}
                        type="submit">
                         {
