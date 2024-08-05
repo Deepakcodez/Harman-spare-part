@@ -169,11 +169,12 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
         <div className="h-fit w-full flex justify-center">
           <div className="h-auto px-3">
             <Image
-              className="h-auto md:w-[40vw] w-[100vw] rounded-sm hover:scale-105 transition ease-linear duration-300"
-              src={"/bike4.jpg"}
+              className="h-auto md:w-[20vw] w-[50vw] rounded-sm hover:scale-105 transition ease-linear duration-300"
+              src={images?.[0]?.url}
               width={500}
-              height={200}
+              height={500}
               alt="Prod image"
+              loading="lazy"
             />
           </div>
         </div>

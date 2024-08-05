@@ -139,7 +139,7 @@ const Login: FC = () => {
                         {isLoading ? (
                             <Lottie className='h-[5rem] w-full ' animationData={loadingAnim} loop={true} />
                         ) : (
-                            <h1 className="text-center w-full text-white">Register</h1>
+                            <h1 className="text-center w-full text-white">Login</h1>
                         )}
 
                     </button>

@@ -16,17 +16,18 @@ const Card: FC<CardProps> = ({ products }) => {
         products?.map((elem, index) =>
           <Fragment key={index}>
             <Link href={`/products/${elem?._id}`} className="h-auto pb-6 max-w-full w-full sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm ">
-              <div className=" h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent py-1 border-b-2 shadow-md bg-violet-100/25">
+             
                 <Image
-                  className="overflow-hidden transition ease-linear duration-300  h-auto w-auto  hover:scale-110"
+                  className="overflow-hidden transition ease-linear duration-300  h-auto w-auto  hover:scale-105 object-fill border-b-2 shadow-md"
                   alt="product image"
-                  src={"/rocket.png"}
-                  width={800}
-                  height={800}
+                  src={elem.images?.[0]?.url}
+                  
+                  width={200}
+                  height={200}
 
                 />
 
-              </div>
+             
               {/* DETAIL */}
               <div className="mt-1 flex flex-col ">
                 <h1 className="text-md truncate text-black  w-[90%]">{elem.name}</h1>

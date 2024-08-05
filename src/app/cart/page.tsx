@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import useCartProductStore from "@/Store/CartCount/usecartProducts";
 import useShippingdetail from "@/hooks/shippingDetail/useShippingDetails";
 import useRazorpay from "react-razorpay";
-import { shippingDetailsTypes } from "@/types/shipping.types";
+import { OrderDataType, shippingDetailsTypes } from "@/types/shipping.types";
 import axios from "axios";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 
 const CartDetail = () => {
@@ -36,20 +37,21 @@ const CartDetail = () => {
   }
 
 
-   const  shippingAddress: shippingDetailsTypes = {
-                          address : shippingDetails?.address,
-                          city : shippingDetails?.city,
-                          state : shippingDetails?.state,
-                          country : shippingDetails?.country,
-                          pinCode : shippingDetails?.pinCode,
-                          phoneNo : shippingDetails?.phoneNo,
-                }
 
 
 
   const CheckOutClickHandler = async () => {
-   const orderData = {
-            shippingInfo : shippingAddress,
+
+    if(!shippingDetails){
+      toast.error("Add Shipping Address")
+      return
+    }
+    if(cartProducts?.products?.length < 1) {
+      toast.error("Add Products in cart")
+      return
+    }
+   const orderData:OrderDataType = {
+            shippingInfo :  shippingDetails?._id,
             orderItems: cartProducts.products.map((product: any) => ({
                 name: product.product.productId.name ,  
                 price: product.product.productId.price,
@@ -146,7 +148,7 @@ const CartDetail = () => {
               </button>
               }
               <button
-              disabled= {cartProducts?.products?.length >=1 ? false : true}
+                disabled= {cartProducts?.products?.length >=1 ? false : true}
                 onClick={CheckOutClickHandler}
                 className=" min-w-1/2 max-w-1/2 w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white text-sm hover:bg-violet-500 py-1 mt-4 ">
                 Checkout
@@ -154,7 +156,7 @@ const CartDetail = () => {
             </div>
             {
               shippingDetails &&
-              <p className="text-black/75 text-sm text-center mt-4 hover:underline"> <span onClick={addShippingInfo} className="text-blue-600 cursor-pointer">edit</span> shipping address</p>}
+              <p className="text-black/50 text-sm text-center mt-4 hover:underline"> <span onClick={addShippingInfo} className="text-blue-600 cursor-pointer">edit</span> shipping address</p>}
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const  Product:FC<ProductProps>= ({params}) => {
 
     return ( 
         <>
-        <div className="w-full h-[101vh]  ">
+        <div className="w-full h-[101vh] max-h-auto ">
           <ProductInfo product={product}/>            
         </div>
         </>

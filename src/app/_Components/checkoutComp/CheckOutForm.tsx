@@ -77,7 +77,7 @@ export const CheckOutForm: FC = () => {
 
         try {
             setIsLoaderShow(true)
-            const response = await axios.put("http://localhost:8000/api/v1/shipping/shippingInfo", shippingInfo,
+            const response = await axios.put("https://harman-spare-parts-backend.vercel.app/api/v1/shipping/shippingInfo", shippingInfo,
                 {
                     headers: {
                         Authorization: Cookies.get('HSPToken'),

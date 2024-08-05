@@ -5,7 +5,8 @@ const nextConfig = {
         remotePatterns:[
             {
                 protocol : "https",
-                hostname : 'e-commerce-pied-xi.vercel.app'
+                hostname : 'res.cloudinary.com',
+                pathname: '/**',
 
             }
         ]

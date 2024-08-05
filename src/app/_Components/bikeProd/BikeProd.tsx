@@ -92,7 +92,7 @@ const BikeProd = () => {
                   <Image
                     className="overflow-hidden transition ease-linear duration-300 h-auto w-auto"
                     alt="product image"
-                    src={"/rocket.png"}
+                    src={product.images[0].url}
                     width={500}
                     height={500}
                   />

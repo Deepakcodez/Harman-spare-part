@@ -9,7 +9,7 @@ const fetchShippingDetail = async () => {
     throw new Error("No token found");
   }
 
-  const response = await axios.get('http://localhost:8000/api/v1/shipping/getShippingInfo',
+  const response = await axios.get('https://harman-spare-parts-backend.vercel.app/api/v1/shipping/getShippingInfo',
    
     {
     headers: {

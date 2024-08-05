@@ -149,13 +149,13 @@ export const ProductDetailCard = () => {
                         <div className="flex md:gap-4 gap-1">
                             <Image
                                 className="bg-violet-50 p-2 rounded-lg shadow-md h-[8rem]  w-[8rem] md:h-[10rem] md:w-[10rem]"
-                                src={"/rocket.png"}
+                                src={item.product.productId.images[0].url}
                                 width={150}
                                 height={150}
                                 alt="ProductImage"
                             />
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-lg">{item.product.productId.name}</h1>
+                                <h1 className="text-lg">{ item.product.productId.name }</h1>
                                 <h1 className="text-sm">
                                     {item.product.productId.stock > 0 ? (
                                         <div className="text-green-600">In Stock</div>
