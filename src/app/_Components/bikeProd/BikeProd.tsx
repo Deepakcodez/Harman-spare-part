@@ -86,17 +86,17 @@ const BikeProd = () => {
               <Link
                 key={index}
                 href={`/products/${product._id}`}
-                className="h-auto pb-6 max-w-full w-[12rem] sm:w-[15rem] backdrop-blur-md rounded-md hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm flex-none"
+               className="h-auto pb-6 max-w-full w-full sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm "
               >
-                <div className="h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent py-1 border-b-2 shadow-md bg-violet-100/25">
+               
                   <Image
-                    className="overflow-hidden transition ease-linear duration-300 h-auto w-auto"
+                    className="overflow-hidden transition ease-linear duration-300  h-auto w-auto  hover:scale-105 object-fill border-b-2 shadow-md"
                     alt="product image"
                     src={product.images[0].url}
-                    width={500}
-                    height={500}
+                    width={200}
+                    height={200}
                   />
-                </div>
+              
                 {/* DETAIL */}
                 <div className="mt-1 flex flex-col">
                   <h1 className="text-md truncate text-black w-[90%]">

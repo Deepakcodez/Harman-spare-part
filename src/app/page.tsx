@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     <Suspense fallback={<><h1>Loading</h1></>}>
 
     
-      <div className=" relative h-full w-full  overflow-hidden">
+      <div className=" relative h-full w-full  overflow-hidden backgroundColor  ">
       <Suspense fallback={null}>
         <Hero />
         </Suspense>
