@@ -71,7 +71,7 @@ const CartDetail = () => {
 
         try {
          
-          const response = await axios.post("http://localhost:8000/api/v1/order/create", orderData,
+          const response = await axios.post("https://harman-spare-parts-backend.vercel.app/api/v1/order/create", orderData,
               {
                   headers: {
                       Authorization: Cookies.get('HSPToken'),
@@ -92,7 +92,7 @@ const CartDetail = () => {
                   "description": "Test Transaction",
                   "image": "https://github.com/Deepakcodez/Harman-spare-part/blob/main/public/logo.png?raw=true",
                   "order_id":response.data.razorpayOrder?.id, 
-                  "callback_url": "http://localhost:8000/api/v1/order/paymentVerify",
+                  "callback_url": "https://harman-spare-parts-backend.vercel.app/api/v1/order/paymentVerify",
                   "prefill": {
                       "name": response.data.order.user.name , 
                       "email": response.data.order.user.email ,
@@ -109,6 +109,7 @@ const CartDetail = () => {
               rzp1.open();
           }
       } catch (error) {
+          toast.error("something went wrong")
           console.error("Error creating order:", error);
       }
 
