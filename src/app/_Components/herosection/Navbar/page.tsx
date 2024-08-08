@@ -10,6 +10,7 @@ import Mobilemenu from "./mobilemenu/page";
 import Cart from "./cart/page";
 import { navbarElemsProps } from "@/types/mobilenavbar.types";
 import { SideMenuBtn } from "./sidemenubutton/MenuButton";
+import useNavbarShow from "@/Store/navbar/useNavbar";
 
 const shadowFont = Shadows_Into_Light({
   weight: "400",
@@ -19,7 +20,7 @@ const shadowFont = Shadows_Into_Light({
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [showMenu, setShowmenu] = useState(false);
+  const {showMenu, setShowmenu} = useNavbarShow();
 
   const navbarElems: navbarElemsProps[] = [
     {

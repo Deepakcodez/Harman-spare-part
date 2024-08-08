@@ -1,18 +1,18 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
+import { motion} from "framer-motion";
 import { Fragment } from "react";
 import { navbarElemsProps, showProps } from "@/types/mobilenavbar.types";
-import { FaUser } from "react-icons/fa";
 import ShinyButton from "@/components/magicui/shiny-button";
+import useNavbarShow from "@/Store/navbar/useNavbar";
 
 
 
 const Mobilemenu = ({ show }: showProps) => {
   console.log(">>>>>>>>>>> show", show);
   const pathname = usePathname();
+  const { setShowmenu} = useNavbarShow()
   const navbarElems: navbarElemsProps[] = [
     {
       tag: "Home",
@@ -54,19 +54,35 @@ const Mobilemenu = ({ show }: showProps) => {
       >
         {navbarElems.map((elem, index) => (
           <Fragment key={index}>
-            <Link
-              href={elem.linkTo}
-              className={` elems hover:bg-[#efff01] p-3 px-5 text-black rounded-full transition ease-linear duration-700
-              ${elem.linkTo === pathname ? "text-black bg-[#f9ffa553]  " : ""}
-              `}
+            <motion.div
+             onClick={()=>setShowmenu(false)}
+             initial={{ opacity: 0, x: 100 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{
+              type: "spring",
+              stiffness: 150,
+              duration: .2,
+              delay: (index * 0.3),
+
+             }}
+             className="p-3 px-5"
             >
+
+            <Link
+            
+              href={elem.linkTo}
+              className={`  text-xl font-extrabold   rounded-full transition ease-linear duration-700
+                ${elem.linkTo === pathname ? "text-gray-800   " : "text-gray-400"}
+                `}
+                >
               {elem.tag}
             </Link>
+              </motion.div>
 
           </Fragment>
         ))}
         <Link href={"/auth/login"} className="  flex items-center justify-center rounded-full">
-        <ShinyButton text="Register/Login" className="bg-violet-300 text-black" />
+        <ShinyButton text="Register/Login" className="bg-violet-500 " />
         </Link>
       </div>
     </>

@@ -7,8 +7,9 @@ import Bikemodel from './../../../../../public/Bikemodel'
 import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
 import { Rocket } from '../../bikeModelFallback/AnimatedRocket';
+import { Bike } from 'lucide-react';
 
-export const BikeModel = () => {
+ const BikeModel = () => {
 
     const bikeRef = useRef(null)
    
@@ -36,3 +37,5 @@ export const BikeModel = () => {
    </>
   )
 }
+
+export default BikeModel

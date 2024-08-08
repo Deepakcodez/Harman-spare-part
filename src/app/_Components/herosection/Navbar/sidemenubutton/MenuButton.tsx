@@ -1,16 +1,17 @@
 'use client'
 
+import useNavbarShow from '@/Store/navbar/useNavbar'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 //just move open/close state to parent component
 export const SideMenuBtn = () => {
-  const [crossed, setCrossedState] = useState(false)
+  // const [crossed, setCrossedState] = useState(false)
+  const{showMenu , setShowmenu} = useNavbarShow()
 
   return (
     <button
-      aria-expanded={crossed}
-      onClick={() => setCrossedState((e) => !e)}
+      aria-expanded={showMenu}
+      onClick={() => setShowmenu(!showMenu)}
       className={
         ' flex aspect-square h-fit select-none flex-col items-center justify-center rounded-full'
       }>
@@ -22,7 +23,7 @@ export const SideMenuBtn = () => {
         }}
         initial={{ translateY: '-3px' }}
         animate={
-          crossed ? { rotate: '45deg', translateY: '1px' } : { translateY: '-3px', rotate: '0deg' }
+          showMenu ? { rotate: '45deg', translateY: '1px' } : { translateY: '-3px', rotate: '0deg' }
         }
         transition={{ bounce: 0, duration: 0.1 }}
       />
@@ -35,7 +36,7 @@ export const SideMenuBtn = () => {
         }}
         initial={{ translateY: '3px' }}
         animate={
-          crossed
+          showMenu
             ? { rotate: '-45deg', translateY: '-1px' }
             : { translateY: '3px', rotate: '0deg', scaleX: 1 }
         }
