@@ -62,7 +62,7 @@ const Navbar = () => {
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
         >
-          <Image src={'/logo.png'} width={60} height={60} alt="HSP" />
+          <Image onClick={()=>setShowmenu(false)} src={'/logo.png'} width={60} height={60} alt="HSP" />
         </Link>
 
         <ul className="bg-gray-50/75 backdrop-blur-sm border-2 shadow-lg h-[3rem] text-gray-700 rounded-full cursor-pointer hidden md:grid grid-cols-4 gap-2">

@@ -84,6 +84,7 @@ const ProgressiveImage: FC<ProgressiveImageProps> = ({ src }) => {
         className={`absolute  backdrop-blur-lg inset-0 w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
         layout="fill"
         quality={10}
+        onContextMenu={(e) => e.preventDefault()}
       />
       {src && (
         <Image
@@ -92,6 +93,7 @@ const ProgressiveImage: FC<ProgressiveImageProps> = ({ src }) => {
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
           layout="fill"
           onLoadingComplete={() => setIsLoaded(true)}
+          onContextMenu={(e) => e.preventDefault()}
         />
       )}
     </>

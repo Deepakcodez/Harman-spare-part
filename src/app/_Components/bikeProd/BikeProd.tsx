@@ -94,6 +94,7 @@ const BikeProd = () => {
                     width={200}
                     height={200}
                     loading="lazy"
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                </div>
                 {/* DETAIL */}

@@ -81,7 +81,7 @@ const Mobilemenu = ({ show }: showProps) => {
 
           </Fragment>
         ))}
-        <Link href={"/auth/login"} className="  flex items-center justify-center rounded-full">
+        <Link  onClick={()=>setShowmenu(false)} href={"/auth/login"} className="  flex items-center justify-center rounded-full">
         <ShinyButton text="Register/Login" className="bg-violet-500 " />
         </Link>
       </div>
