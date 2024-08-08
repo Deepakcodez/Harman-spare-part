@@ -7,12 +7,12 @@
 // import Hero from "./_Components/herosection/Hero/page";
 import {  lazy, Suspense} from 'react'
 import { BIkeSkelton } from "./_Components/Shared/bikesectionSkelton/BIkeSkelton";
+import Hero from './_Components/herosection/Hero/page';
 const Our_products = lazy(()=> import ("./_Components/ourProducts/Ourprod"))
 const BikeProd = lazy(()=> import ("./_Components/bikeProd/BikeProd"))
 const CarProd = lazy(()=> import ("./_Components/CarProduct/page"))
 const Map = lazy(()=> import ("./_Components/map/Map"))
 const Stats = lazy(()=> import ("./_Components/stats/page"))
-const Hero = lazy(()=> import ("./_Components/herosection/Hero/page"))
 
 
 const Home: React.FC = () => {
@@ -25,9 +25,9 @@ const Home: React.FC = () => {
 
     
       <div className=" relative h-full w-full  overflow-hidden backgroundColor  ">
-      <Suspense fallback={null}>
+      
         <Hero />
-        </Suspense>
+       
 
         <Suspense fallback={<BIkeSkelton/>}>
         <Our_products />

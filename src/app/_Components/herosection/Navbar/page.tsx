@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Shadows_Into_Light } from "next/font/google";
-import { IoMenuOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import { Fragment, useState } from "react";
 import Image from "next/image";
@@ -49,7 +48,15 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar h-[4rem] w-full backdrop-blur fixed bg-transparent flex justify-between px-[1rem] items-center top-0 z-[1000]">
+      <motion.div
+       initial={{ opacity: 0, y: -60 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{
+         type: "spring",
+         stiffness : 50
+        
+       }}
+      className="navbar h-[4rem] w-full backdrop-blur fixed bg-transparent flex justify-between px-[1rem] items-center top-0 z-[1000]">
         <Link
           href={"/"}
           className={`${shadowFont.className} text-3xl text-black`}
@@ -89,7 +96,7 @@ const Navbar = () => {
             <SideMenuBtn />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <AnimatePresence>
         {showMenu && (

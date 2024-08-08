@@ -3,6 +3,8 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, Fragment, useState } from "react";
+import { motion} from "framer-motion";
+
 import smallImage from '../../../../../public/smallimage.jpg'
 interface CardProps {
   products: ProdDocument[];
@@ -15,7 +17,19 @@ const Card: FC<CardProps> = ({ products }) => {
       {
         products?.map((elem, index) =>
           <Fragment key={index}>
-            <Link href={`/products/${elem?._id}`} className="h-auto pb-6 max-w-full w-full  sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm ">
+            <Link  href={`/products/${elem?._id}`}
+            className="h-auto pb-6 max-w-full w-full  sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm "
+            >
+            <motion.div 
+             initial={{ opacity: 0, x: -60 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{
+               type: "spring",
+               stiffness: 150,
+               duration: .2,
+               delay: (index * 0.3)
+             }}
+            >
               <div className="relative h-[80vw] sm:h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 "
                 
               >
@@ -42,8 +56,8 @@ const Card: FC<CardProps> = ({ products }) => {
                 }
 
               </div>
+            </motion.div>
             </Link>
-
           </Fragment>)
       }
 
