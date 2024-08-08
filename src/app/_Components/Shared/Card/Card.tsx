@@ -15,19 +15,11 @@ const Card: FC<CardProps> = ({ products }) => {
       {
         products?.map((elem, index) =>
           <Fragment key={index}>
-            <Link href={`/products/${elem?._id}`} className="h-auto pb-6 max-w-full w-full sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm ">
-              <div className="relative  h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 "
+            <Link href={`/products/${elem?._id}`} className="h-auto pb-6 max-w-full w-full  sm:w-[15rem]    backdrop-blur-md rounded-md  hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm ">
+              <div className="relative h-[80vw] sm:h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 "
                 
               >
-                {/* <Image
-                  className=" absolute h-full w-full overflow-hidden transition ease-linear duration-300   hover:scale-105 object-cover shadow-md"
-                  alt="product image"
-                  src={elem.images?.[0]?.url}
-                  loading="lazy"
-                  width={200}
-                  height={200}
-
-                /> */}
+                
                  <ProgressiveImage src={elem.images?.[0]?.url} />
               </div>
 

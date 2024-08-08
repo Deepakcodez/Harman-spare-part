@@ -92,7 +92,7 @@ const CarProd = () => {
               <Link
                 key={index}
                 href={`/products/${product._id}`}
-                className="h-auto pb-6 max-w-full w-[12rem] sm:w-[15rem] backdrop-blur-md rounded-md hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm flex-none"
+                className="h-auto pb-6 max-w-full w-[15rem] sm:w-[15rem] backdrop-blur-md rounded-md hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm flex-none"
               >
                 <div className="relative  h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 ">
                   <Image
