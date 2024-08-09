@@ -5,6 +5,7 @@ import { useState } from 'react';
 import RetroGrid from '@/components/magicui/retro-grid';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import BlurIn from '@/components/magicui/blur-in';
 // import { BikeModel } from '../Models/BikeModel';
 
 const BikeModel = dynamic(() => import('../Models/BikeModel').then((mod) => mod.default), {
@@ -19,7 +20,7 @@ const Hero = () => {
   return (
     <>
       <div className=" relative z-0 h-screen w-full  md:p-5  md:mt-[3rem] mt-[4rem]  ">
-        <div className="relative bg-violet-400 w-full h-screen rounded-3xl flex items-center justify-center">
+        <div className="relative bg-violet-500 w-full h-screen rounded-3xl flex items-center justify-center">
 
           <div className='z-[9] absolute w-1/2 hidden md:flex right-0  '>
             <Suspense fallback={null}>
@@ -27,8 +28,14 @@ const Hero = () => {
             </Suspense>
           </div>
 
-          <span className="pointer-events-none  z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent select-none px-2">
-            HARMAN SPARE PARTS
+          <span 
+          className='z-[99] '
+          >
+            <BlurIn
+              word="  HARMAN SPARE PARTS"
+              className="pointer-events-none  whitespace-pre-wrap bg-gradient-to-b from-[#ffd415] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent select-none px-2"
+            />
+          
           </span>
 
           <RetroGrid />

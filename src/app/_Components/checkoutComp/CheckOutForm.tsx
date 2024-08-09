@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import BlurIn from "@/components/magicui/blur-in";
 
 const formSchema = z.object({
     city: z.string().min(2, {
@@ -53,7 +54,7 @@ const formSchema = z.object({
 export const CheckOutForm: FC = () => {
     const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
     const router = useRouter();
-   
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -73,7 +74,7 @@ export const CheckOutForm: FC = () => {
             phoneNo: parseInt(data.phone),
         };
 
-        
+
 
         try {
             setIsLoaderShow(true)
@@ -83,18 +84,18 @@ export const CheckOutForm: FC = () => {
                         Authorization: Cookies.get('HSPToken'),
                     }
                 });
-                console.log(response.data)
+            console.log(response.data)
 
-               
-               
-        
+
+
+
             if (response.data.success) {
 
-              
-              
+
+
                 toast.success("shipping address submitted")
                 setIsLoaderShow(false)
-                router.push('/cart') 
+                router.push('/cart')
             }
         } catch (error) {
             console.error("Error in saving shipping Info:", error);
@@ -105,7 +106,13 @@ export const CheckOutForm: FC = () => {
         <div className="md:px-12 px-6 py-5 h-auto text-black">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 lg:w-3/4 ">
-                    <h1 className="text-center text-2xl font-bold text-black/75">Fill Shipping Details</h1>
+                    <h1 className="text-center text-2xl font-bold text-black/75">
+                        <BlurIn
+                            word=" Fill Shipping Details"
+                            className="text-4xl font-bold text-black dark:text-white"
+                        />
+                       
+                    </h1>
                     {/* city */}
                     <FormField
                         control={form.control}
@@ -220,17 +227,17 @@ export const CheckOutForm: FC = () => {
                         )}
                     />
                     <div className="pt-7">
-                    <Button  
-                    className="relative overflow-hidden "
-                      variant={"hspButton"}
-                       type="submit">
-                        {
-                            isLoaderShow ? <div className=" w-full h-full absolute bottom-8 "> <Lottie className="h-[6rem] w-auto overflow-hidden "  animationData={loadingAnimation} loop={true} /></div> 
-                            :
-                            <h1>Submit</h1>
-                        }
-                        
-                    </Button>
+                        <Button
+                            className="relative overflow-hidden "
+                            variant={"hspButton"}
+                            type="submit">
+                            {
+                                isLoaderShow ? <div className=" w-full h-full absolute bottom-8 "> <Lottie className="h-[6rem] w-auto overflow-hidden " animationData={loadingAnimation} loop={true} /></div>
+                                    :
+                                    <h1>Submit</h1>
+                            }
+
+                        </Button>
                     </div>
                 </form>
             </Form>

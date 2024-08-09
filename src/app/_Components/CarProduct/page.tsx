@@ -102,7 +102,6 @@ const CarProd = () => {
                     height={500}
                     alt="prod image"
                     loading="lazy"
-                    onContextMenu={(e) => e.preventDefault()}
                   />
                 </div>
                 {/* DETAIL */}

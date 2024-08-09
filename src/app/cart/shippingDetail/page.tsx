@@ -19,7 +19,6 @@ const CheckOut:React.FC = () => {
       alt="shipping Image"
       height={500}
       width={500}
-      onContextMenu={(e) => e.preventDefault()}
       />
     </div>
      
