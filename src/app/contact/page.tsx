@@ -9,7 +9,6 @@ import { ContactForm } from "../_Components/checkoutComp/ContactForm";
     <div className="grid-cols-9 md:grid-cols-6 md:pt-[4.2rem]  ">
       <div className="mt-[8rem]">
         <ContactForm/>
-
       </div>
     </div>
 

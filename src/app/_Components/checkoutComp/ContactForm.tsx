@@ -68,8 +68,8 @@ export const ContactForm: FC = () => {
         if (currentUserdetail) {
             setCurrentUser(currentUserdetail);
             form.reset({
-                name: currentUser.name || "",
-                email: currentUser.email || "",
+                name: currentUser?.name || "",
+                email: currentUser?.email || "",
                 message: "",
             });
         }
