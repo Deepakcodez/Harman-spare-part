@@ -29,6 +29,7 @@ import {
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import BlurIn from "@/components/magicui/blur-in";
+import useShippingdetail from "@/hooks/shippingDetail/useShippingDetails";
 
 const formSchema = z.object({
     city: z.string().min(2, {
@@ -53,6 +54,7 @@ const formSchema = z.object({
 
 export const CheckOutForm: FC = () => {
     const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
+    const { data: shippingDetails } = useShippingdetail()
     const router = useRouter();
 
 
@@ -60,8 +62,34 @@ export const CheckOutForm: FC = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             city: "",
+            address : "",
+            state : " ",
+            country : "INDIA",
+           
+
+
+
+
         },
     });
+
+    useEffect(() => {
+       
+        if (shippingDetails) {
+          
+            form.reset({
+                address:  shippingDetails?.address || "",
+                state : shippingDetails?.state || "",
+                city : shippingDetails?.city || "",
+                pincode : shippingDetails?.pinCode || "",
+                phone : shippingDetails?.phoneNo || "",
+
+               
+            });
+        }
+    }, [, form.reset, ]);
+
+
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
 
