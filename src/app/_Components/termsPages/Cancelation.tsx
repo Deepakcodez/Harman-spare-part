@@ -1,4 +1,6 @@
-export const Cancelation = () => {
+import { FC } from "react"
+
+export const Cancelation:FC = () => {
   return (
     <div>
         <h1>Last updated on Aug 12th 2024</h1>

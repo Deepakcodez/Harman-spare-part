@@ -9,9 +9,10 @@ import { ContactUs } from "../_Components/termsPages/ContactUs"
 import { Cancelation } from "../_Components/termsPages/Cancelation"
 import { ShippingAndDelivery } from "../_Components/termsPages/ShippingAndDelivery"
 import { Privacy } from "../_Components/termsPages/Privacy"
+import { FC } from "react"
 
 
-const Terms = () => {
+const Terms:FC = () => {
 
   return (
     <>

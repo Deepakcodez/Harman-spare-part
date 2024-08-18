@@ -1,4 +1,6 @@
-export const TermsAndConditions = () => {
+import { FC } from "react"
+
+export const TermsAndConditions:FC = () => {
     return (
         <>
             <div className="w-full h-auto">

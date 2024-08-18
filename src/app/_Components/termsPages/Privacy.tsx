@@ -1,4 +1,6 @@
-export const Privacy = () => {
+import { FC } from "react"
+
+export const Privacy:FC = () => {
   return (
     <div className="w-full text-justify">
         <h1>Last updated on Aug 12th 2024</h1>
