@@ -23,8 +23,8 @@ const Mobilemenu = ({ show }: showProps) => {
       linkTo: "/products",
     },
     {
-      tag: "Shop",
-      linkTo: "/#shop",
+      tag: "Contact",
+      linkTo: "/contact",
     },
     {
       tag: "About-us",

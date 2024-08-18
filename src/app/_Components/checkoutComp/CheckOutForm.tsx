@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/../public/loadingballs.json";
-
 import {
     Form,
     FormControl,
@@ -151,7 +150,6 @@ export const CheckOutForm: FC = () => {
                                 <FormControl>
                                     <Input
                                         autoComplete="off"
-                                        placeholder="Enter your city"
                                         {...field}
                                         className="text-black"
                                     />
@@ -170,8 +168,8 @@ export const CheckOutForm: FC = () => {
                                 <FormControl>
                                     <Input
                                         autoComplete="off"
-                                        placeholder="Enter your state"
                                         {...field}
+                                         className="text-black"
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -185,10 +183,10 @@ export const CheckOutForm: FC = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Country</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} defaultValue={"INDIA"}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select your country" />
+                                            <SelectValue  />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>

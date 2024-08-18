@@ -4,7 +4,7 @@ import Link from "next/link"
 export const Footer = () => {
   return (
     <>
-      <footer className="footer  bg-neutral text-neutral-content p-10">
+      <footer className="footer   bg-neutral text-neutral-content p-10">
         <aside>
           {/* <svg
       width="50"
@@ -64,7 +64,11 @@ export const Footer = () => {
             </Link>
           </div>
         </nav>
+
+        <Link href={"/terms_and_conditions"} className=" text-xs hover:underline"> <p >Terms and Conditions</p> </Link>
       </footer>
+
+
     </>
   )
 }

@@ -69,9 +69,14 @@ const CartDetail = () => {
       totalPrice: cartProducts.totalPrice,
     };
 
-    try {
 
-      const response = await axios.post("harman-spare-parts-backend.vercel.app/order/create", orderData,
+    
+
+    try {
+      // harman-spare-parts-backend.vercel.app
+      // http://localhost:8000
+
+      const response = await axios.post("http://localhost:8000/order/create", orderData,
         {
           headers: {
             Authorization: Cookies.get('HSPToken'),
@@ -85,14 +90,14 @@ const CartDetail = () => {
         console.log(`>>>>>>>>>>>payment success`, response.data, response.data.razorpayOrder?.id)
         // Initialize Razorpay payment
         var options = {
-          "key": "rzp_test_980PnjWWdgqLfA",
+          "key": "rzp_test_gNPLsBsw66mZ7m",
           "amount": response.data.order.totalPrice || 10000,
           "currency": "INR",
           "name": "Harman Spare Parts",
           "description": "Test Transaction",
           "image": "https://github.com/Deepakcodez/Harman-spare-part/blob/main/public/logo.png?raw=true",
           "order_id": response.data.razorpayOrder?.id,
-          "callback_url": "harman-spare-parts-backend.vercel.app/api/v1/order/paymentVerify",
+          "callback_url": "http://localhost:8000/api/v1/order/paymentVerify",
           "prefill": {
             "name": response.data.order.user.name,
             "email": response.data.order.user.email,
