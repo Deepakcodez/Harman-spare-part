@@ -1,11 +1,11 @@
 import { FC } from "react"
 
-export const TermsAndConditions:FC = () => {
+export const TermsAndConditions: FC = () => {
     return (
         <>
             <div className="w-full h-auto">
                 <h1>Last updated on Aug 12th 2024</h1>
-                <h1 className="text-xs">For the purpose of these Terms and Conditions, The term "we", "us", "our" used anywhere on this page shall mean HARMAN DAVID, whose registered/operational office is Ladhewali road Jalandhar Jalandhar PUNJAB 144006 . "you", “your”, "user", “visitor” shall mean any natural or legal person who is visiting our website and/or agreed to purchase from us.</h1>
+                <h1 className="text-xs">For the purpose of these Terms and Conditions, The term &ldquo;we&ldquo;, &ldquo;us&ldquo;, &ldquo;our&ldquo; used anywhere on this page shall mean HARMAN DAVID, whose registered/operational office is Ladhewali road Jalandhar Jalandhar PUNJAB 144006 . &ldquo;you&ldquo;, &ldquo;your&ldquo;, &ldquo;user&ldquo;, &ldquo;visitor&ldquo; shall mean any natural or legal person who is visiting our website and/or agreed to purchase from us.</h1>
                 <h1 className="font-semibold">Your use of the website and/or purchase from us are governed by following Terms and Conditions:</h1>
                 <ul className="list-disc list-inside mb-4  text-pretty text-justify text-xs flex flex-col gap-2">
                     <li>The content of the pages of this website is subject to change without notice.</li>
