@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FC, useState } from "react"
 import BlurIn from "@/components/magicui/blur-in";
 import { motion } from "framer-motion"
-const contact: FC = () => {
+const Aboutus: FC = () => {
   const [isShowMore, setShowMore] = useState<boolean>(false)
   return (
     <div className="w-full  grid  grid-cols-12 pb-20  ">
@@ -60,7 +60,7 @@ const contact: FC = () => {
         </div>
       </div>
 
-      <div className="col-span-12 md:col-span-6 md:h-screen w-full    flex items-center justify-center bg-blue-20  order-first md:order-last  mt-[3rem] md:mt-0  ">
+      <div className="col-span-12 md:col-span-6 md:h-screen w-full   flex items-center justify-center bg-blue-20  order-first md:order-last  mt-[3rem] md:mt-0  ">
         <Image
           className="  w-[30vh] md:w-auto md:h-[80vh]  md:p-16  "
           src={'/aboutus.png'}
@@ -74,4 +74,4 @@ const contact: FC = () => {
   )
 }
 
-export default contact;
+export default Aboutus;
