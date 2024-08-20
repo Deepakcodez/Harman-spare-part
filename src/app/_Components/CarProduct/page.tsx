@@ -114,7 +114,9 @@ const CarProd = () => {
                   <h1 className="text-lg font-serif text-black leading-4 pb-1">
                     ₹{product.price}
                   </h1>
-                  <div className="flex gap-1 items-center justify-start">
+                  {
+                    product.ratings > 0 &&
+                    <div className="flex gap-1 items-center justify-start">
                     <div className="bg-violet-400 border border-violet-500 w-fit px-2 text-black rounded-full flex gap-1 items-center justify-start">
                       <h1 className="text-md">{product.ratings.toFixed(1)}</h1>
                       <Star size={20} />
@@ -123,6 +125,8 @@ const CarProd = () => {
                       ({product.reviews.length} Reviews)
                     </h1>
                   </div>
+                  }
+                  
                 </div>
               </Link>
             ))

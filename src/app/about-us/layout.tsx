@@ -8,7 +8,7 @@ const Layout = ({
 }>) => {
     return (
         <>
-            <div className="relative h-screen flex w-full items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+            <div className="relative min-h-screen h-auto max-h-[auto] flex w-full items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
 
                 {children}
 
