@@ -17,7 +17,7 @@ const  Product:FC<ProductProps>= ({params}) => {
     const { data, error} = useSingleProduct(params.product);
 
     if (error) return <div>Failed to load</div>;
-    if (!data) return <div><SingleProductPageSkelton /></div>;
+    if (!data) return <div className="h-auto "><SingleProductPageSkelton /></div>;
     
     console.log(data)
 

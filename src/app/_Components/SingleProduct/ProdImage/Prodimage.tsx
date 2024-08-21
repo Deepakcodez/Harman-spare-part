@@ -78,6 +78,14 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     fetchCart();
   }, [fetchCart]);
 
+   // Reset currentImage when images prop changes
+   useEffect(() => {
+    if (images && images.length > 0) {
+      setCurrentImage(images[0]?.url);
+    }
+  }, [images]);
+  
+
   const HandleAddToCart = async () => {
     const data: AddProductToCartData = { productId };
 

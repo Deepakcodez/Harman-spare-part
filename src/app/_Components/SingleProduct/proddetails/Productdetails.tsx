@@ -1,7 +1,7 @@
 "use state"
 import { ProdDocument } from "@/types/product.types";
 import { Pencil, Star } from "lucide-react";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import MakeReview from "../MakeReview/MakeReview";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,7 +18,9 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
     const toggleIsShown = useReviewStore((state) => state.toggleIsShown);
 
 
-    
+    useEffect(()=>{
+   console.log('>>>>>>>>>>>', product.ratings)
+    },[product])
 
 
 

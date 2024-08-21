@@ -44,6 +44,7 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
     
 
     const handleRatingChange = (value: number) => {
+        console.log('>>>>>>>>>>>rating is', value)
         setRating(value);
     };
 
