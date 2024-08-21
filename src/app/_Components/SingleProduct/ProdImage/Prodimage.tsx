@@ -8,10 +8,8 @@ import mongoose from "mongoose";
 import Cookies from "js-cookie";
 import { CartDocument } from "@/types/cart.types";
 import { useRouter } from "next/navigation";
-import useCurrentUser from "@/hooks/user/currentuser";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";  
-import {motion} from 'framer-motion'
 import {
   Tooltip,
   TooltipContent,
@@ -37,15 +35,19 @@ export interface AddProductToCartData {
 
 const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   const token = Cookies.get("HSPToken");
-  const prodimages = [1, 1, 1, 1, 1, 1]; // Placeholder for product images
+  const [currentImage, setCurrentImage] = useState<string>(images?.[0]?.url);
   const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [isALlowToFetch, setIsAllowTOFetch] = useState<boolean>(true)
-  // const { data: currentUser, isLoading, isError, error } = useCurrentUser();
   const { currentUser } =  useCurrentUserStore();
   const router = useRouter();
   const queryClient = useQueryClient();
   const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore(); 
+
+  
+  const handleImageClick = (url: string) => {
+    setCurrentImage(url);
+  };
 
   const fetchCart = useCallback(async () => {
     if (currentUser) {
@@ -170,7 +172,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
           <div className="h-auto px-3">
             <Image
               className="h-auto md:w-[20vw] w-[50vw] rounded-sm hover:scale-105 transition ease-linear duration-300"
-              src={images?.[0]?.url}
+              src={currentImage}
               width={500}
               height={500}
               alt="Prod image"
@@ -181,15 +183,17 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 
         {/* option images */}
         <div>
-          <div className="flex justify-center py-3 gap-2 flex-wrap px-2">
-            {prodimages.map((image, index) => (
+          
+        <div className="flex justify-center py-3 gap-2 flex-wrap px-2">
+            {images.map((image, index) => (
               <Fragment key={index}>
                 <Image
                   className="border cursor-pointer rounded-md"
-                  src={"/bike4.jpg"}
+                  src={image.url}
                   width={50}
                   height={50}
-                  alt="Prod image"
+                  alt={`Prod image ${index + 1}`}
+                  onClick={() => handleImageClick(image.url)}
                 />
               </Fragment>
             ))}

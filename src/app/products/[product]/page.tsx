@@ -1,29 +1,27 @@
 "use client"
 import Loader from "@/app/_Components/Shared/Loader/Loader";
+import { SingleProductPageSkelton } from "@/app/_Components/Shared/SingleProdSkelton";
 import ProductInfo from "@/app/_Components/SingleProduct/Productinfo";
 import { useSingleProduct } from "@/hooks/products/useSingleProduct";
 import { ProdDocument } from "@/types/product.types";
 import { FC } from "react";
-import useSWR from "swr";
 interface ProductProps {
     params: {
         product: string;
     };
 }
 
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const  Product:FC<ProductProps>= ({params}) => {
 
-    // const { data, error } = useSWR(`https://harman-spare-parts-backend.vercel.app/api/v1/product/product/${params.product}`, fetcher);
-    const { data, error, isLoading } = useSingleProduct(params.product);
+    const { data, error} = useSingleProduct(params.product);
 
     if (error) return <div>Failed to load</div>;
-    if (!data) return <div><Loader /></div>;
-
+    if (!data) return <div><SingleProductPageSkelton /></div>;
+    
     console.log(data)
 
-    const product: ProdDocument = data.product;
+    const product : ProdDocument | undefined = data?.product;
 
     return ( 
         <>
