@@ -31,7 +31,7 @@ const MakeReview: FC<MakeReviewProps> = ({ productId }) => {
     const mutation = useMutation({
         mutationFn: (reviewData: ReviewData) => makeReviewRequest(reviewData),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['allProducts'] })
+            queryClient.invalidateQueries({ queryKey: ['singleProduct'] })
             // dispatch(toggleIsShown())
             toggleIsShown();
             toast.success("Review Added");

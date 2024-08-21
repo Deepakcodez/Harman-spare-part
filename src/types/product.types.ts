@@ -39,3 +39,10 @@ export interface ProductResponse {
   products: ProdDocument[];
   productCount: number;
 }
+
+export interface singleProductResponse {
+  product: ProdDocument;
+  productCount: number;
+}
+
+
