@@ -9,14 +9,9 @@ import Cookies from "js-cookie";
 import { CartDocument } from "@/types/cart.types";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";  
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";
 import useCurrentUserStore from "@/Store/userStore/currentUser";
+import { Alert } from "../../Shared/Alert";
 
 
 interface ProdImageProps {
@@ -39,12 +34,12 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   const [isProductExistInCart, setIsProductExistInCart] = useState<boolean>(false);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
   const [isALlowToFetch, setIsAllowTOFetch] = useState<boolean>(true)
-  const { currentUser } =  useCurrentUserStore();
+  const { currentUser } = useCurrentUserStore();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore(); 
+  const { increaseCartCount, decreaseCartCount, setCartCount } = useCartCountStore();
+  const [isShowAlert, setShowAlert] = useState<boolean>(false);
 
-  
   const handleImageClick = (url: string) => {
     setCurrentImage(url);
   };
@@ -78,19 +73,19 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
     fetchCart();
   }, [fetchCart]);
 
-   // Reset currentImage when images prop changes
-   useEffect(() => {
+  // Reset currentImage when images prop changes
+  useEffect(() => {
     if (images && images.length > 0) {
       setCurrentImage(images[0]?.url);
     }
   }, [images]);
-  
+
 
   const HandleAddToCart = async () => {
     const data: AddProductToCartData = { productId };
 
     if (!currentUser) {
-      router.push("/auth/login");
+      setShowAlert(true)
       return;
     }
 
@@ -100,7 +95,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
       increaseCartCount();
       setIsAddingToCart(true);
 
-      if( isALlowToFetch){
+      if (isALlowToFetch) {
         const response = await axios.post<AddProductToCartResponse>(
           "https://harman-spare-parts-backend.vercel.app/api/v1/cart/add",
           data,
@@ -108,7 +103,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
             headers: { Authorization: token },
           }
         );
-  
+
         if (response.status !== 200) {
           setIsProductExistInCart(false);
           decreaseCartCount();
@@ -119,12 +114,12 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
           toast.success("Product added to cart");
         }
       }
-      
+
       setIsAllowTOFetch(false)
       setTimeout(() => {
         setIsAllowTOFetch(true)
       }, 1000);
-      
+
     } catch (error) {
       setIsProductExistInCart(false);
       decreaseCartCount();
@@ -165,6 +160,8 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   };
 
   const handleClick = () => {
+
+
     if (isProductExistInCart) {
       handleRemoveFromCart();
     } else {
@@ -174,79 +171,73 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 
   return (
     <>
-      <div className="mt-[7rem]">
-        {/* main image */}
-        <div className="h-fit w-full flex justify-center">
-          <div className="h-auto px-3">
-            <Image
-              className="h-auto md:w-[20vw] w-[50vw] rounded-sm hover:scale-105 transition ease-linear duration-300"
-              src={currentImage}
-              width={500}
-              height={500}
-              alt="Prod image"
-              loading="lazy"
-            />
-          </div>
-        </div>
+      <div className="">
+        {
+          isShowAlert &&
+        <Alert
+        headerMessage="Need to Login"
+         message="Need Login to add product in cart" 
+         buttonText="Login" 
+         buttonLink='/auth/login' 
+         isShow={isShowAlert} 
+         setShow={setShowAlert} />
+        }
 
-        {/* option images */}
-        <div>
-          
-        <div className="flex justify-center py-3 gap-2 flex-wrap px-2">
-            {images.map((image, index) => (
-              <Fragment key={index}>
-                <Image
-                  className="border cursor-pointer rounded-md"
-                  src={image.url}
-                  width={50}
-                  height={50}
-                  alt={`Prod image ${index + 1}`}
-                  onClick={() => handleImageClick(image.url)}
-                />
-              </Fragment>
-            ))}
+        <div className="mt-[7rem]">
+          {/* main image */}
+          <div className="h-fit w-full flex justify-center">
+            <div className="h-auto px-3">
+              <Image
+                className="h-auto md:w-[20vw] w-[50vw] rounded-sm hover:scale-105 transition ease-linear duration-300"
+                src={currentImage}
+                width={500}
+                height={500}
+                alt="Prod image"
+                loading="lazy"
+              />
+            </div>
           </div>
 
-          {/* buttons */}
-          <div className="w-full flex gap-3 justify-center mt-2">
+          {/* option images */}
+          <div>
 
-          <TooltipProvider>
-              {currentUser ? (
-                <button
-                 
-                  onClick={handleClick}
-                  className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
-                    ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"
-                    : "bg-gray-400 hover:bg-gray-500 text-white/75"
-                    }`}
-                  disabled={isAddingToCart}
-                >
-                  {isProductExistInCart ? "Remove from cart" : "Add to Cart"}
-                </button>
-              ) : (
-                <Tooltip>
-                  <TooltipTrigger>
-                    <button
-                      className={`border-2 p-2 rounded-md transition ease-linear duration-300 bg-violet-900 border-violet-700 text-white hover:bg-violet-800`}
-                      disabled
-                    >
-                      Add to Cart
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-black">Need to Login</p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
-            </TooltipProvider>
+            <div className="flex justify-center py-3 gap-2 flex-wrap px-2">
+              {images.map((image, index) => (
+                <Fragment key={index}>
+                  <Image
+                    className="border cursor-pointer rounded-md"
+                    src={image.url}
+                    width={50}
+                    height={50}
+                    alt={`Prod image ${index + 1}`}
+                    onClick={() => handleImageClick(image.url)}
+                  />
+                </Fragment>
+              ))}
+            </div>
 
-            
+            {/* buttons */}
+            <div className="w-full flex gap-3 justify-center mt-2">
 
 
 
-            <button className="border-2 border-violet-800 hover:bg-violet-900 hover:text-white p-2 rounded-md dark:text-black transition ease-linear duration-300 px-5">
-              Buy now
-            </button>
+              <button
+
+                onClick={handleClick}
+                className={`border-2 p-2 rounded-md transition ease-linear duration-300 ${!isProductExistInCart
+                  ? "bg-violet-900 border-violet-700 text-white hover:bg-violet-800"
+                  : "bg-gray-400 hover:bg-gray-500 text-white/75"
+                  }`}
+                disabled={isAddingToCart}
+              >
+                {isProductExistInCart ? "Remove from cart" : "Add to Cart"}
+              </button>
+
+
+              <button className="border-2 border-violet-800 hover:bg-violet-900 hover:text-white p-2 rounded-md dark:text-black transition ease-linear duration-300 px-5">
+                Buy now
+              </button>
+            </div>
           </div>
         </div>
       </div>
