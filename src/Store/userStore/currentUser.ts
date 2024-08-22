@@ -5,7 +5,7 @@ interface Avatar {
   url: string;
 }
 
-interface User {
+export interface User {
   name: string;
   email: string;
   avatar: Avatar;

@@ -7,7 +7,12 @@ import { useAllProducts } from '@/hooks/products/Product';
 import { ProdDocument } from "@/types/product.types";
 import { CardSkelton } from "../Shared/Card/Skelton";
 import { BIkeSkelton } from "../Shared/bikesectionSkelton/BIkeSkelton";
+import { Rajdhani } from "next/font/google";
 
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['400',"500"]
+});
 const BikeProd = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { data, error, isLoading } = useAllProducts(1, "", "bike");
@@ -40,7 +45,7 @@ const BikeProd = () => {
       <div className="relative z-20 w-full px-4 py-5 mt-5">
         <div className="flex justify-between flex-wrap gap-2">
           <div className="w-full flex flex-wrap flex-row justify-between">
-            <h1 className="md:text-3xl text-2xl text-black/75">Bike Products</h1>
+            <h1 className={`${rajdhani.className} font-[500]  text-4xl  px-4 text-black/75`}>Bike Products</h1>
 
             {/* button  */}
             <Link

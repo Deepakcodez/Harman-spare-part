@@ -1,10 +1,4 @@
-// import Our_products from "./_Components/ourProducts/Ourprod";
-// import BikeProd from "./_Components/bikeProd/BikeProd";
-// import Map from "./_Components/map/Map";
-// import CarProd from "./_Components/CarProduct/page";
-// import OurWork from "./_Components/ourWork/Our_work";
-// import Stats from "./_Components/stats/page";
-// import Hero from "./_Components/herosection/Hero/page";
+
 import {  lazy, Suspense} from 'react'
 import { BIkeSkelton } from "./_Components/Shared/bikesectionSkelton/BIkeSkelton";
 import Hero from './_Components/herosection/Hero/page';
