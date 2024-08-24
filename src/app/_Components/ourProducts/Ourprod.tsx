@@ -4,7 +4,7 @@ import { Rajdhani } from "next/font/google";
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
-  weight: ['400',"500","600","700"]
+  weight: ['400', "500", "600", "700"]
 });
 const Our_products = () => {
   return (

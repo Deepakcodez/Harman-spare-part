@@ -2,10 +2,9 @@
 import { ProdDocument } from "@/types/product.types";
 import { Pencil, Star } from "lucide-react";
 import { FC, Fragment, useEffect, useState } from "react";
-import MakeReview from "../MakeReview/MakeReview";
 import Link from "next/link";
 import Image from "next/image";
-import  RenderStar  from "./RenderStar";
+import RenderStar from "./RenderStar";
 import useReviewStore from "@/Store/review/useReviewStore";
 
 
@@ -14,13 +13,13 @@ interface ProdProps {
 }
 const ProdDetails: FC<ProdProps> = ({ product }) => {
 
-    
+
     const toggleIsShown = useReviewStore((state) => state.toggleIsShown);
 
 
-    useEffect(()=>{
-   console.log('>>>>>>>>>>>', product.ratings)
-    },[product])
+    useEffect(() => {
+        console.log('>>>>>>>>>>>', product.ratings)
+    }, [product])
 
 
 
@@ -54,15 +53,23 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     <h1 className="text-md text-black">Product Detail</h1>
                     <h1 className="text-sm text-black/75 ">{product.description}</h1>
                     <div className="text-black flex items-center gap-1" >
-                        <div
-                            className="text-lg text-black/75 w-fit px-2 flex gap-2 items-center justify-center rounded-full  text-violet-800 font-bold border-2 border-violet-600 ">
-                            {product.ratings.toFixed(1)}
-                            <Star />
-                        </div>
-                        <div className="text-black flex items-center gap-1">
-                            <h1 className="text-3xl text-black/50">/</h1>
-                            <h1 className="text-violet-900">{product.reviews.length}{" "} Reviews</h1>
-                        </div>
+                        {
+                            product?.ratings > 0 &&
+                            <>
+                                <div
+                                    className="text-lg text-black/75 w-fit px-2 flex gap-2 items-center justify-center rounded-full  text-violet-800 font-bold border-2 border-violet-600 ">
+                                    {product.ratings.toFixed(1)}
+                                    <Star />
+                                </div>
+                                <div className="text-black flex items-center gap-1">
+                                    <h1 className="text-3xl text-black/50">/</h1>
+                                    <h1 className="text-violet-900">{product?.reviews?.length}{" "} Reviews</h1>
+                                </div>
+
+                            </>
+                        }
+
+
                     </div>
                     <div className="text-black flex items-center gap-1">
                         <h1>Status : </h1>
@@ -98,17 +105,17 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                                     <div className="flex gap-2 items-center justify-between">
                                         <div className="flex gap-2 items-center">
 
-                                        <Image
-                                        className="rounded-full"
-                                        src={'/defaultavatar.jpg'}
-                                        width={30}
-                                        height={30}
-                                        alt="AVATAR"
-                                        />
-                                        <h1 className="text-black text-md">{rev.name}</h1>
+                                            <Image
+                                                className="rounded-full"
+                                                src={'/defaultavatar.jpg'}
+                                                width={30}
+                                                height={30}
+                                                alt="AVATAR"
+                                            />
+                                            <h1 className="text-black text-md">{rev.name}</h1>
                                         </div>
                                         <div>
-                                        {rev.rating ? <RenderStar rating={rev.rating} /> : "...."}
+                                            {rev.rating ? <RenderStar rating={rev.rating} /> : "...."}
                                         </div>
                                     </div>
                                     <h1 className="text-black/75 text-sm ps-12">{rev.comment}</h1>
