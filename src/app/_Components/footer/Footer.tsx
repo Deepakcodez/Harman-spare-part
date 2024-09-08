@@ -30,6 +30,8 @@ export const Footer = () => {
               Harman Spare Parts.
               <br />
               Providing Auto Services since 2021
+              <br />
+              +91 98765 75346
             </p>
           </aside>
           <nav>
@@ -72,7 +74,7 @@ export const Footer = () => {
         </footer>
 
         <Link href={"/terms_and_conditions"} className=" text-xs hover:underline float-end py-2 ">
-          <p  className="flex items-center">
+          <p className="flex items-center">
             <Asterisk />
             Terms and Conditions</p> </Link>
 
