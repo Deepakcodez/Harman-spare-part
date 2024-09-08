@@ -51,7 +51,7 @@ const Login: FC = () => {
                     Cookies.set("HSPToken", response.data.token, { expires: 30 })
 
                     toast.success("Login successfully successfully")
-                    router.push('/')
+                    router.back()
                     setInputValue({
                         email: "",
                         password: "",
@@ -150,6 +150,7 @@ const Login: FC = () => {
                         </Link>{" "}
                     </h5>
                 </form>
+               
             </div>
 
 

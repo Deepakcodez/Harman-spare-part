@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCartCountStore } from "@/Store/CartCount/useCartCountStore";
 import useCurrentUserStore from "@/Store/userStore/currentUser";
 import { Alert } from "../../Shared/Alert";
+import { json } from "stream/consumers";
 
 
 interface ProdImageProps {
@@ -79,6 +80,10 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
       setCurrentImage(images[0]?.url);
     }
   }, [images]);
+
+  const handleBuyButton = () => {
+    router.replace(`/products/buy/${productId}  `)
+  }
 
 
   const HandleAddToCart = async () => {
@@ -174,13 +179,13 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
       <div className="">
         {
           isShowAlert &&
-        <Alert
-        headerMessage="Need to Login"
-         message="Need Login to add product in cart" 
-         buttonText="Login" 
-         buttonLink='/auth/login' 
-         isShow={isShowAlert} 
-         setShow={setShowAlert} />
+          <Alert
+            headerMessage="Need to Login"
+            message="Need Login to add product in cart"
+            buttonText="Login"
+            buttonLink='/auth/login'
+            isShow={isShowAlert}
+            setShow={setShowAlert} />
         }
 
         <div className="mt-[7rem]">
@@ -235,7 +240,9 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
               </button>
 
 
-              <button className="border-2 border-violet-800 hover:bg-violet-900 hover:text-white p-2 rounded-md dark:text-black transition ease-linear duration-300 px-5">
+              <button
+                onClick={handleBuyButton}
+                className="border-2 border-violet-800 hover:bg-violet-900 hover:text-white p-2 rounded-md dark:text-black transition ease-linear duration-300 px-5">
                 Buy now
               </button>
             </div>

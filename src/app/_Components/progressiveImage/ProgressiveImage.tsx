@@ -1,14 +1,19 @@
 import { Image as ImageProp } from "@/types/product.types";
 import Image from "next/image";
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 
 interface ProgressiveImageProps {
   src: ImageProp[] | undefined;
 }
 
 export const ProgressiveImage: FC<ProgressiveImageProps> = ({ src }) => {
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageToShow, setImageToShow] = useState<string | undefined>(src?.[0]?.url);
+
+  React.useEffect(() => {
+    setImageToShow(src?.[0].url)
+  }, [src])
 
   const changeImageOnHover = (src: ImageProp[]) => {
     if (src?.length > 1) {
@@ -28,9 +33,8 @@ export const ProgressiveImage: FC<ProgressiveImageProps> = ({ src }) => {
       <Image
         src={'/smallimage.jpg'}
         alt="Low res placeholder"
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-          isLoaded ? 'opacity-0' : 'opacity-100'
-        }`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
         fill
         quality={10}
       />
