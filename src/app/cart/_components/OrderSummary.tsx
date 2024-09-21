@@ -94,7 +94,7 @@ const OrderSummary: React.FC = () => {
                     </div>
                     :
                     <div className="w-full flex justify-center">
-                        <PuffLoader size={40} />
+                        <PuffLoader size={40}  color="#a78bfa" />
                     </div>
             }
 

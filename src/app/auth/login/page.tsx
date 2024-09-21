@@ -8,10 +8,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
 const Login: FC = () => {
+    const queryClient = useQueryClient()
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState({
         email: "",
@@ -57,6 +60,8 @@ const Login: FC = () => {
                         password: "",
                     })
                     setIsLoading(false)
+                    queryClient.invalidateQueries({ queryKey: ['currentUser'] })
+
 
                 } else {
                     toast.error("Something Went Wrong")
