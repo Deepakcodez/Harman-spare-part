@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import useCurrentUser from "@/hooks/user/currentuser";
 import { PuffLoader } from "react-spinners"; // Optional: for loading animation
+import { TopBar } from "./_components/TopBar";
+import { Sidebar } from "./_components/Sidebar/Sidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -32,7 +34,15 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <div>{children}</div>
+      <div>
+        <div className="bg-white rounded-lg  shadow">
+          <TopBar />
+        </div>
+        <div className="grid gap-4  grid-cols-[220px,_1fr]">
+          <Sidebar />
+          {children}
+        </div>
+      </div>
     </>
   );
 };

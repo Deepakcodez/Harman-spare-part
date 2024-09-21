@@ -1,4 +1,4 @@
-import { ProdDocument, ProductResponse } from '@/types/product.types';
+import {  ProductResponse } from '@/types/product.types';
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 

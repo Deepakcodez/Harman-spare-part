@@ -2,27 +2,28 @@ import {useQuery,} from '@tanstack/react-query'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const fetchShippingDetail = async () => {
+const fetchAllOrders = async () => {
   const token = Cookies.get("HSPToken");
   if (!token) {
     throw new Error("No token found");
   }
 
-  const response = await axios.get('https://harman-spare-parts-backend.vercel.app/api/v1/shipping/getShippingInfo',
+  const response = await axios.get(`https://harman-spare-parts-backend.vercel.app/api/v1/order/admin/all/orders`,
    
     {
     headers: {
       Authorization: token,
     }
   });
-  return response.data.shippingDetails;
+  console.log(response.data);
+  return response.data;
 };
 
 /// Create the custom hook
-const useShippingdetail = () => {
+const useAllOrders = () => {
     return useQuery({
-      queryKey: ['shippingDetails'],
-      queryFn:fetchShippingDetail,
+      queryKey: ['AllOrders'],
+      queryFn:fetchAllOrders,
       staleTime: 5 * 10 * 1000, // 5 min
       gcTime: 10 * 60 * 1000, // 10 minutes
       retry: 4,
@@ -31,4 +32,4 @@ const useShippingdetail = () => {
   };
   
 
-export default useShippingdetail;
+export default useAllOrders;
