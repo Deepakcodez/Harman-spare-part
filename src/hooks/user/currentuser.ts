@@ -9,7 +9,7 @@ const fetchCurrentUser = async () => {
     throw new Error("No token found");
   }
 
-  const response = await axios.get('https://harman-spare-parts-backend.vercel.app/api/v1/user/detail', {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/v1/user/detail`, {
     headers: {
       Authorization: token,
     }

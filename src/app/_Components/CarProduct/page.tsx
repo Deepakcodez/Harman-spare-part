@@ -111,8 +111,8 @@ const CarProd = () => {
                   />
                 </div>
                 {/* DETAIL */}
-                <div className="mt-1 flex flex-col">
-                  <h1 className="text-md truncate text-black w-[90%]">
+                <div className="mt-1 flex flex-col gap-1">
+                  <h1 className="text-md line-clamp-2 text-black ">
                     {product.name}
                   </h1>
 

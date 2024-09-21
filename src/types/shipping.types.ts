@@ -20,11 +20,11 @@ interface OrderItemType {
   }
 
 export interface OrderDataType {
-    shippingInfo: string;
-    orderItems: OrderItemType[];
-    paymentInfo: PaymentInfoType;
-    itemsPrice: number;
-    taxPrice: number;
-    shippingPrice: number;
-    totalPrice: number;
+    shippingInfo: string  | undefined;
+    orderItems: OrderItemType[]  | undefined;
+    paymentInfo: PaymentInfoType  | undefined;
+    itemsPrice: number | undefined;
+    taxPrice: number  | undefined;
+    shippingPrice: number  | undefined;
+    totalPrice: number  | undefined;
   }

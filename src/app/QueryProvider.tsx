@@ -8,7 +8,7 @@ export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <Toaster />
+      <Toaster position='bottom-right' />
 
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

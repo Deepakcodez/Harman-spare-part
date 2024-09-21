@@ -2,7 +2,7 @@
 import { ChevronsLeft, ChevronsRight, MoveRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAllProducts } from '@/hooks/products/Product';
 import { ProdDocument } from "@/types/product.types";
 import { CardSkelton } from "../Shared/Card/Skelton";
@@ -11,7 +11,7 @@ import { Rajdhani } from "next/font/google";
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
-  weight: ['400',"500"]
+  weight: ['400', "500"]
 });
 const BikeProd = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -90,8 +90,8 @@ const BikeProd = () => {
                 key={index}
                 href={`/products/${product._id}`}
                 className="h-auto pb-6 max-w-full w-[15rem] sm:w-[15rem] backdrop-blur-md rounded-md hover:-translate-y-2 transition ease-linear duration-300 hover:bg-violet-5 p-2 hover:shadow-sm flex-none"
-                >
-               <div className="relative  h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 ">
+              >
+                <div className="relative  h-[15rem] w-full flex items-center justify-center rounded-sm hover:rounded-md transition ease-linear duration-300 hover:bg-transparent  shadow-md bg-violet-100/25 ">
                   <Image
                     className=" absolute h-full w-full overflow-hidden transition ease-linear duration-300   hover:scale-105 object-cover shadow-md"
                     alt="product image"
@@ -100,10 +100,10 @@ const BikeProd = () => {
                     height={200}
                     loading="lazy"
                   />
-               </div>
+                </div>
                 {/* DETAIL */}
-                <div className="mt-1 flex flex-col">
-                  <h1 className="text-md truncate text-black w-[90%]">
+                <div className="mt-1 flex flex-col gap-1">
+                  <h1 className="text-md  text-black  line-clamp-2">
                     {product.name}
                   </h1>
 

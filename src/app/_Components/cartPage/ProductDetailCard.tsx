@@ -16,7 +16,6 @@ import useCartProductStore from "@/Store/CartCount/usecartProducts";
 
 
 export const ProductDetailCard = () => {
-    // const { isLoading, error, data: cartProduct } = useCartdetail();
     const { cart : cartProduct,isLoadingInStore, isErrorInStore}  = useCartProductStore()
 
 
@@ -146,16 +145,16 @@ export const ProductDetailCard = () => {
                             <RxCross1 size={20} className="  hover:bg-red-100 rounded-full p-1" />
                         </div>
                         {/* detail div */}
-                        <div className="flex md:gap-4 gap-1">
+                        <div className="flex md:gap-4 gap-2">
                             <Image
-                                className="bg-violet-50 p-2 rounded-lg shadow-md h-[8rem]  w-[8rem] md:h-[10rem] md:w-[10rem]"
+                                className="p-2 rounded-lg shadow-md h-[8rem]  w-[8rem] md:h-[10rem] md:w-[10rem]"
                                 src={item.product.productId.images[0].url}
                                 width={150}
                                 height={150}
                                 alt="ProductImage"
                             />
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-lg">{ item.product.productId.name }</h1>
+                                <h1 className="md:text-base text-xs">{ item.product.productId.name }</h1>
                                 <h1 className="text-sm">
                                     {item.product.productId.stock > 0 ? (
                                         <div className="text-green-600">In Stock</div>
@@ -180,7 +179,7 @@ export const ProductDetailCard = () => {
                                         +
                                     </motion.button>
                                 </div>
-                                <h1>₹{(item.product.productId.price) * (item.product.prodQuantity)}</h1>
+                                <h1>₹ {(item.product.productId.price) * (item.product.prodQuantity)}</h1>
                             </div>
                         </div>
                     </div>

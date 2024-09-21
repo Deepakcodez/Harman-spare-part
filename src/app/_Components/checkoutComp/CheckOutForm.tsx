@@ -61,10 +61,10 @@ export const CheckOutForm: FC = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             city: "",
-            address : "",
-            state : " ",
-            country : "INDIA",
-           
+            address: "",
+            state: " ",
+            country: "INDIA",
+
 
 
 
@@ -73,20 +73,20 @@ export const CheckOutForm: FC = () => {
     });
 
     useEffect(() => {
-       
-        if (shippingDetails) {
-          
-            form.reset({
-                address:  shippingDetails?.address || "",
-                state : shippingDetails?.state || "",
-                city : shippingDetails?.city || "",
-                pincode : shippingDetails?.pinCode || "",
-                phone : shippingDetails?.phoneNo || "",
 
-               
+        if (shippingDetails) {
+
+            form.reset({
+                address: shippingDetails?.address || "",
+                state: shippingDetails?.state || "",
+                city: shippingDetails?.city || "",
+                pincode: shippingDetails?.pinCode || "",
+                phone: shippingDetails?.phoneNo || "",
+
+
             });
         }
-    }, [, form.reset, ]);
+    }, [, form.reset,]);
 
 
 
@@ -138,65 +138,48 @@ export const CheckOutForm: FC = () => {
                             word=" Fill Shipping Details"
                             className="text-4xl font-bold text-black dark:text-white"
                         />
-                       
+
                     </h1>
-                    {/* city */}
-                    <FormField
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>City</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        autoComplete="off"
-                                        {...field}
-                                        className="text-black"
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    {/* state */}
-                    <FormField
-                        control={form.control}
-                        name="state"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>State</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        autoComplete="off"
-                                        {...field}
-                                         className="text-black"
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    {/* country */}
-                    <FormField
-                        control={form.control}
-                        name="country"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Country</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={"INDIA"}>
+                    <div className=" w-full flex gap-2">
+
+                        {/* city */}
+                        <FormField
+                            control={form.control}
+                            name="city"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>City</FormLabel>
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue  />
-                                        </SelectTrigger>
+                                        <Input
+                                            autoComplete="off"
+                                            {...field}
+                                            className="text-black "
+                                        />
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="India">India</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        {/* state */}
+                        <FormField
+                            control={form.control}
+                            name="state"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>State</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            autoComplete="off"
+                                            {...field}
+                                            className="text-black"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                   
                     {/* address */}
                     <FormField
                         control={form.control}
@@ -216,12 +199,34 @@ export const CheckOutForm: FC = () => {
                             </FormItem>
                         )}
                     />
-                    {/* pincode */}
+                    <div className="w-full flex gap-2">
+                         {/* country */}
                     <FormField
+                        control={form.control}
+                        name="country"
+                        render={({ field }) => (
+                            <FormItem className="w-full">
+                                <FormLabel>Country</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={"INDIA"}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="India">India</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                     {/* pincode */}
+                     <FormField
                         control={form.control}
                         name="pincode"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="w-full">
                                 <FormLabel>Pincode</FormLabel>
                                 <FormControl>
                                     <Input
@@ -234,6 +239,8 @@ export const CheckOutForm: FC = () => {
                             </FormItem>
                         )}
                     />
+                    </div>
+                   
                     {/* phone */}
                     <FormField
                         control={form.control}

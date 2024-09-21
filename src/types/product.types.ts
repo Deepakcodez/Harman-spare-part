@@ -26,6 +26,7 @@ export interface ProdDocument extends UserReference {
   name: string;
   description: string;
   price: number;
+  refPrice?: number;
   ratings: number;
   images: Image[];
   category: string;

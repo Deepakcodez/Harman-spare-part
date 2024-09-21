@@ -16,15 +16,6 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
 
     const toggleIsShown = useReviewStore((state) => state.toggleIsShown);
 
-
-    useEffect(() => {
-        console.log('>>>>>>>>>>>', product.ratings)
-    }, [product])
-
-
-
-
-
     return (
         <>
 
@@ -35,7 +26,10 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
 
                 <div className="flex flex-col gap-3 border-[.2px] border-black/25 rounded-md p-4  py-5">
                     <h1 className="text-xl text-black/75 ">{product.name}</h1>
-                    <h1 className="text-2xl text-black "> ₹{product.price}/-</h1>
+                    <div className="flex gap-2 items-center">
+                        <h1 className="text-2xl text-black "> ₹{product.price}/-</h1>
+                       {product?.refPrice && <h1 className="text-md text-red-600/50  line-through"> ₹{product.refPrice}/-</h1>}
+                    </div>
                     {
                         product.isFreeDelivery ?
                             <div className="bg-violet-600/25 text-violet-800  border-2 border-violet-600/25 hover:bg-violet-800/50 w-fit  p-2 rounded-full px-4 transition ease-linear duration-300 cursor-pointer text-sm">Free Delivery</div>
@@ -73,7 +67,7 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     </div>
                     <div className="text-black flex items-center gap-1">
                         <h1>Status : </h1>
-                        <h1 className="text-green-700">
+                        <h1 className={`${product?.stock > 0 ? "text-green-600" : "text-red-600"}`}>
                             {
                                 product.stock > 0 ? "In-Stock" : "Out Of Stock"
                             }

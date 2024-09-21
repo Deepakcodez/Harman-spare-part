@@ -82,7 +82,7 @@ const Products: FC = () => {
       <div className="h-auto w-full pt-16 xl:px-16">
         <div className='md:flex w-full'>
           {/* filter parent div */}
-          <div className='md:w-[25rem] w-full h-auto md:h-[100vh] py-7 '>
+          <div className='md:w-[25rem] w-full h-auto  py-7 border-r-[1px] border-[#efefef] '>
             {/* filter child div */}
             <div className='h-full w-full bg-white/50 rounded-md flex flex-col py-5 '>
               {/* search option */}

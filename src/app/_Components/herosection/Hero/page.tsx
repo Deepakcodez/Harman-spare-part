@@ -1,31 +1,35 @@
 "use client"
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import RetroGrid from '@/components/magicui/retro-grid';
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 import BlurIn from '@/components/magicui/blur-in';
 import useCurrentUserStore from '@/Store/userStore/currentUser';
-// import { BikeModel } from '../Models/BikeModel';
 import { Rajdhani } from "next/font/google";
 import useCurrentUser from '@/hooks/user/currentuser';
+import Image from 'next/image';
+import { useGSAP } from '@gsap/react';
+import gsap from "gsap";
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
   weight: ['400']
 });
 
-const BikeModel = dynamic(() => import('../Models/BikeModel').then((mod) => mod.default), {
-  ssr: false,
-  loading: () => <div></div>, // Optional loading component
-});
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [currentUserName, setCurrentUserName] = useState<string>("");
-  const { currentUser,setCurrentUser } = useCurrentUserStore()
+  const { currentUser, setCurrentUser } = useCurrentUserStore()
   const { data } = useCurrentUser()
+
+  const bikeRef = useRef(null)
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+    tl.to(bikeRef.current, { y: -12, duration: 1, ease: 'power1.inOut' })
+      .to(bikeRef.current, { y: 12, duration: 1, ease: 'power1.inOut' });
+  }, []);
 
   useEffect(() => {
     setCurrentUser(data)
@@ -39,12 +43,21 @@ const Hero = () => {
         <div className="relative bg-violet-500 w-full h-screen rounded-3xl flex items-center justify-center">
           {
             currentUserName &&
-            <h1 className={` ${rajdhani.className} absolute top-12 left-8 text-5xl text-violet-300`}>Hello {currentUserName}</h1>
+            <h1 className={` ${rajdhani.className} absolute top-12 left-8 text-5xl text-violet-300`}>
+              Hello {currentUserName}
+              </h1>
           }
-          <div className='z-[9] absolute w-1/2 hidden md:flex right-0  '>
-            <Suspense fallback={null}>
-              <BikeModel />
-            </Suspense>
+          <div className='z-[9] absolute flex md:right-[17vw] top-28 md:top-[34vh] '>
+            <div
+              ref={bikeRef}
+              className=''>
+              <Image
+                src={'/rocket.png'}
+                alt={'rocket'}
+                width={150}
+                height={150}
+              />
+            </div>
           </div>
 
           <span
