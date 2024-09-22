@@ -1,8 +1,11 @@
+"use client"
 import React from "react";
 import { AccountToggle } from "./AccountToggle";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Sidebar = () => {
+  const pathname = usePathname();
 
   const sidebarRoutes = [
     {
@@ -34,7 +37,7 @@ export const Sidebar = () => {
         <div className="flex flex-col gap-4 mt-4 ">
           {
             sidebarRoutes.map((route, index) =>
-              <Link href={route.path} key={`SIDEBAR_ROUTES_${index}}`}>
+              <Link href={route.path} key={`SIDEBAR_ROUTES_${index}}`} className={`${pathname === route.path ? 'bg-slate-200' : ''} rounded-md p-2 text-slate-500 hover:bg-slate-200 hover:text-slate-600 transition-all duration-200`}>
                 {route.name}
               </Link>
             )

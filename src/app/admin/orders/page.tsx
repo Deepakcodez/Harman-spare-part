@@ -42,23 +42,38 @@ import React from "react"
 import moment from 'moment'
 import { exportTableToExcel } from "../_components/ExportToExcel"
 import { PuffLoader } from "react-spinners"
+import EditStatus from "../_components/EditStatus"
 
 
 
 
 export default function Orders() {
   const { data, isLoading, error } = useAllOrders()
+  const [isEditStatus, setIsEditStatus] = React.useState<boolean>(false)
+  const [OrderId, setOrderId] = React.useState<string>("")
 
   React.useEffect(() => {
-    console.log("o",data?.orders)
+    console.log("o", data?.orders)
   })
+
   const handleExport = () => {
     if (data?.orders) {
       exportTableToExcel(data.orders);
     }
   };
+
+  const editHandler = (id: string) => {
+    setOrderId(id)
+    setIsEditStatus(true)
+  }
   return (
     <>
+      {
+        isEditStatus &&
+        <EditStatus
+          setIsOpen={setIsEditStatus}
+          orderId={OrderId} />
+      }
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 overflow-x-auto">
         <Tabs defaultValue="all">
           <div className="flex items-center">
@@ -125,6 +140,9 @@ export default function Orders() {
                             Total Price
                           </TableHead>
                           <TableHead className="hidden md:table-cell">
+                            Payment
+                          </TableHead>
+                          <TableHead className="hidden md:table-cell">
                             Created at
                           </TableHead>
                           <TableHead>
@@ -143,7 +161,7 @@ export default function Orders() {
                                     alt="Product image"
                                     className="aspect-square rounded-md object-cover"
                                     height="64"
-                                    src={!order?.orderItems[0].image ?"/car.png" :  order?.orderItems[0]?.image  }
+                                    src={!order?.orderItems[0].image ? "/car.png" : order?.orderItems[0]?.image}
                                     width="64"
                                   />
                                 </TableCell>
@@ -157,7 +175,13 @@ export default function Orders() {
                                   ))}
                                 </TableCell>
                                 <TableCell>
-                                  <Badge variant="outline">{order?.orderStatus}</Badge>
+                                  <Badge variant={
+                                    order?.orderStatus === "Delivered"
+                                      ? "success"
+                                      : order?.orderStatus === "Returned"
+                                        ? "destructive"
+                                        : "outline"
+                                  }>{order?.orderStatus}</Badge>
                                 </TableCell>
                                 <TableCell>
                                   {order.orderItems.map((item: any, idx: number) => (
@@ -170,6 +194,10 @@ export default function Orders() {
                                 </TableCell>
                                 <TableCell className="hidden md:table-cell">
                                   {order.totalPrice}
+                                </TableCell>
+                                <TableCell className="hidden md:table-cell cursor-default">
+                                  <Badge variant={order.paymentInfo.status === "Success" ? "success" : "outline"}  > {order.paymentInfo.status}</Badge>
+
                                 </TableCell>
                                 <TableCell className="hidden md:table-cell">
                                   {
@@ -190,8 +218,7 @@ export default function Orders() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
                                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => editHandler(order?._id)}>Edit</DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </TableCell>
@@ -199,13 +226,6 @@ export default function Orders() {
                             </>
                           )
                         }
-
-
-
-
-
-
-
                       </TableBody>
                     </Table>
                 }
