@@ -4,9 +4,7 @@ import { useRouter } from "next/navigation";
 import useShippingdetail from "@/hooks/shippingDetail/useShippingDetails";
 import useCartProductStore from "@/Store/CartCount/usecartProducts";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 import { OrderDataType } from "@/types/shipping.types";
-import axios from "axios";
 import {  PuffLoader } from "react-spinners";
 import placeOder from "@/services/order/PlaceOrder";
 import { useQueryClient } from "@tanstack/react-query";
@@ -21,6 +19,10 @@ const OrderSummary: React.FC = () => {
         router.push('/cart/shippingDetail')
     }
 
+    React.useEffect(() => {
+        console.log('>>>>>>>>>>>cartProducts?.products', cartProducts?.products)
+    })
+
     const checkOutHandler = async () => {
         const orderData: OrderDataType = {
             shippingInfo: shippingDetails?._id,
@@ -28,7 +30,7 @@ const OrderSummary: React.FC = () => {
                 name: product.product.productId.name,
                 price: product.product.productId.price,
                 quantity: product.product.prodQuantity,
-                image: "default-image.jpg",
+                image:  product.product.productId.images[0].url,
                 product: product.product.productId._id,
             })),
             paymentInfo: {

@@ -41,6 +41,7 @@ import useAllOrders from "@/hooks/orders/Order"
 import React from "react"
 import moment from 'moment'
 import { exportTableToExcel } from "../_components/ExportToExcel"
+import { PuffLoader } from "react-spinners"
 
 
 
@@ -49,11 +50,11 @@ export default function Orders() {
   const { data, isLoading, error } = useAllOrders()
 
   React.useEffect(() => {
-    console.log(data?.orders)
+    console.log("o",data?.orders)
   })
   const handleExport = () => {
     if (data?.orders) {
-      exportTableToExcel(data.orders); 
+      exportTableToExcel(data.orders);
     }
   };
   return (
@@ -109,102 +110,106 @@ export default function Orders() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="hidden w-[100px] sm:table-cell">
-                        <span className="sr-only">Image</span>
-                      </TableHead>
-                      <TableHead >Name</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Price</TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Total Price
-                      </TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Created at
-                      </TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
+                {
+                  isLoading ? <div className="h-full w-full flex items-center justify-center"> <PuffLoader size={60} color="#a78bfa" /></div> :
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="hidden w-[100px] sm:table-cell">
+                            <span className="sr-only">Image</span>
+                          </TableHead>
+                          <TableHead >Name</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead>Price</TableHead>
+                          <TableHead className="hidden md:table-cell">
+                            Total Price
+                          </TableHead>
+                          <TableHead className="hidden md:table-cell">
+                            Created at
+                          </TableHead>
+                          <TableHead>
+                            <span className="sr-only">Actions</span>
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
 
-                    {
-                      data?.orders && data?.orders.map((order: any, index:number) =>
-                        <>
-                          <TableRow key={`ALL_ORDERS_${index}`}>
-                            <TableCell className="hidden sm:table-cell">
-                              <Image
-                                alt="Product image"
-                                className="aspect-square rounded-md object-cover"
-                                height="64"
-                                src="/placeholder.svg"
-                                width="64"
-                              />
-                            </TableCell>
-                            <TableCell className="font-medium ">
-                              {order.orderItems.map((item: any, idx: number) => (
-                                <div className="w-[16rem] truncate" key={`ORDER_ITEM_${idx}`}>
-                                  <span className="border-b border-b-slate-400 truncate ">
-                                    {item.name}
-                                  </span>
-                                </div>
-                              ))}
-                            </TableCell>
-                            <TableCell>
-                              <Badge variant="outline">{order?.orderStatus}</Badge>
-                            </TableCell>
-                            <TableCell>
-                              {order.orderItems.map((item: any, idx: number) => (
-                                <div key={`ORDER_ITEM_${idx}`}>
-                                  <span className="border-b border-b-slate-400">
-                                    {item.price}
-                                  </span>
-                                </div>
-                              ))}
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell">
-                              {order.totalPrice}
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell">
-                              {
-                                moment(order.createdAt).format("MMM Do YY, h:mm a")
-                              }
-                            </TableCell>
-                            <TableCell>
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button
-                                    aria-haspopup="true"
-                                    size="icon"
-                                    variant="ghost"
-                                  >
-                                    <MoreHorizontal className="h-4 w-4" />
-                                    <span className="sr-only">Toggle menu</span>
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
-                                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                                  <DropdownMenuItem>Delete</DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            </TableCell>
-                          </TableRow>
-                        </>
-                      )
-                    }
-
-
-
-
+                        {
+                          data?.orders && data?.orders.map((order: any, index: number) =>
+                            <>
+                              <TableRow key={`ALL_ORDERS_${index}`}>
+                                <TableCell className="hidden sm:table-cell">
+                                  <Image
+                                    alt="Product image"
+                                    className="aspect-square rounded-md object-cover"
+                                    height="64"
+                                    src={!order?.orderItems[0].image ?"/car.png" :  order?.orderItems[0]?.image  }
+                                    width="64"
+                                  />
+                                </TableCell>
+                                <TableCell className="font-medium ">
+                                  {order.orderItems.map((item: any, idx: number) => (
+                                    <div className="w-[16rem] truncate" key={`ORDER_ITEM_${idx}`}>
+                                      <span className="border-b border-b-slate-400 truncate ">
+                                        {item.name}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </TableCell>
+                                <TableCell>
+                                  <Badge variant="outline">{order?.orderStatus}</Badge>
+                                </TableCell>
+                                <TableCell>
+                                  {order.orderItems.map((item: any, idx: number) => (
+                                    <div key={`ORDER_ITEM_${idx}`}>
+                                      <span className="border-b border-b-slate-400">
+                                        {item.price}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </TableCell>
+                                <TableCell className="hidden md:table-cell">
+                                  {order.totalPrice}
+                                </TableCell>
+                                <TableCell className="hidden md:table-cell">
+                                  {
+                                    moment(order.createdAt).format("MMM Do YY, h:mm a")
+                                  }
+                                </TableCell>
+                                <TableCell>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button
+                                        aria-haspopup="true"
+                                        size="icon"
+                                        variant="ghost"
+                                      >
+                                        <MoreHorizontal className="h-4 w-4" />
+                                        <span className="sr-only">Toggle menu</span>
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </TableCell>
+                              </TableRow>
+                            </>
+                          )
+                        }
 
 
 
-                  </TableBody>
-                </Table>
+
+
+
+
+                      </TableBody>
+                    </Table>
+                }
+
               </CardContent>
               <CardFooter>
                 <div className="text-xs text-muted-foreground">
