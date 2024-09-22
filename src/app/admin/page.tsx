@@ -1,7 +1,7 @@
 import React from "react"
-import { Sidebar } from "./_components/Sidebar/Sidebar"
+import { Sidebar } from "./_components/Sidebar"
 
-const Admin:React.FC = () => {
+const Admin: React.FC = () => {
 
 
   return (

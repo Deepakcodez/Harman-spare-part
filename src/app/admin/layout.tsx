@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import useCurrentUser from "@/hooks/user/currentuser";
 import { PuffLoader } from "react-spinners"; // Optional: for loading animation
 import { TopBar } from "./_components/TopBar";
-import { Sidebar } from "./_components/Sidebar/Sidebar";
+import { Sidebar } from "./_components/Sidebar";
 
 interface Props {
   children: React.ReactNode;
