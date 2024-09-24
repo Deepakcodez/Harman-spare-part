@@ -101,7 +101,7 @@ const Navbar = () => {
             <div className="hidden md:flex gap-3">
               {
                 currentUser?.role === "admin" &&
-                <Link href={'/admin'}> 
+                <Link href={'/admin/dashboard'}> 
                 <h1>Dashboard</h1>
                 </Link>
               }

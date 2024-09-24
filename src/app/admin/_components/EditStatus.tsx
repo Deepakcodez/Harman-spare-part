@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import updateOrderStatus from "@/services/order/updateOrder";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   setIsOpen: (status: boolean) => void;
@@ -26,11 +27,12 @@ interface Props {
 const EditStatus: React.FC<Props> = ({ setIsOpen, orderId }) => {
   const [orderStatus, setOrderStatus] = React.useState<string>("Processing");
   const [paymentStatus, setPaymentStatus] = React.useState<string>("Pending");
-
+  const queryClient = useQueryClient  ()
   const updateHandler = async () => {
     try {
       const response = await updateOrderStatus(orderId, orderStatus, paymentStatus);
-      console.log('Order status updated:', response);
+      setIsOpen(false)
+      queryClient.invalidateQueries({ queryKey: ['AllOrders'] })
     } catch (error) {
       console.error('Failed to update order status:', error);
     }

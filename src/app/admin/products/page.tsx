@@ -3,7 +3,6 @@ import Image from "next/image"
 import {
   File,
   MoreHorizontal,
-  Ship,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -38,56 +37,34 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import useAllOrders from "@/hooks/orders/Order"
 import React from "react"
-import moment from 'moment'
-import { exportTableToExcel } from "../_components/ExportToExcel"
 import { PuffLoader } from "react-spinners"
-import EditStatus from "../_components/EditStatus"
-import OrderDetails from "../_components/OrderDetails"
+import useAllProductsAdmin from "@/hooks/products/ProductAdmin"
+import EditProductDetails from "../_components/EditProductDetails"
+import deleteProduct from "@/services/product/deleteProduct"
 
 
-
-
-export default function Orders() {
-  const { data, isLoading, error } = useAllOrders()
-  const [isEditStatus, setIsEditStatus] = React.useState<boolean>(false)
-  const [isShowAddress, setIsShowAddress] = React.useState<boolean>(false)
-  const [OrderId, setOrderId] = React.useState<string>("")
-  const [shippingId, setShippingId] = React.useState<string>("")
-  React.useEffect(() => {
-    console.log('>>>>>>>>>>>', data)
-  },[data])
-
-  const handleExport = () => {
-    if (data?.orders) {
-      exportTableToExcel(data.orders);
-    }
-  };
+const Products = () => {
+  const { data, isLoading, isError } = useAllProductsAdmin()
+  const [productId, setProductId] = React.useState<string>("")
+  const [isEditDetails, setIsEditDetails] = React.useState<boolean>(false)
 
   const editHandler = (id: string) => {
-    setOrderId(id)
-    setIsEditStatus(true)
+    setProductId(id);
+    setIsEditDetails(true)
     window.scrollTo(0, 0);
   }
 
-  const showAddresstHandler= (shippingId:string)=>{
-    setIsShowAddress(true)
-    setShippingId(shippingId)
+  const deleteHandler = async (id: string) => {
+    await deleteProduct(id)
   }
   return (
     <>
-    {
-      isShowAddress &&
-      <OrderDetails
-        setIsOpen={setIsShowAddress}
-        shippingId={shippingId} />
-    }
       {
-        isEditStatus &&
-        <EditStatus
-          setIsOpen={setIsEditStatus}
-          orderId={OrderId} />
+        isEditDetails &&
+        <EditProductDetails
+          setIsOpen={setIsEditDetails}
+          productId={productId} />
       }
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 overflow-x-auto">
         <Tabs defaultValue="all">
@@ -101,8 +78,8 @@ export default function Orders() {
               </TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
-             
-              <Button onClick={handleExport} size="sm" variant="outline" className="h-7 gap-1">
+
+              <Button size="sm" variant="outline" className="h-7 gap-1">
                 <File className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   Export
@@ -114,9 +91,9 @@ export default function Orders() {
           <TabsContent value="all">
             <Card x-chunk="dashboard-06-chunk-0">
               <CardHeader>
-                <CardTitle>Orders</CardTitle>
+                <CardTitle>All Products</CardTitle>
                 <CardDescription>
-                  All the orders make by user.
+                  All the Products.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -129,16 +106,13 @@ export default function Orders() {
                             <span className="sr-only">Image</span>
                           </TableHead>
                           <TableHead >Name</TableHead>
-                          <TableHead>Status</TableHead>
+                          <TableHead>Stock</TableHead>
                           <TableHead>Price</TableHead>
                           <TableHead className="hidden md:table-cell">
-                            Total Price
+                            Rating
                           </TableHead>
                           <TableHead className="hidden md:table-cell">
-                            Payment
-                          </TableHead>
-                          <TableHead className="hidden md:table-cell">
-                            Created at
+                            Category
                           </TableHead>
                           <TableHead>
                             <span className="sr-only">Actions</span>
@@ -148,57 +122,41 @@ export default function Orders() {
                       <TableBody>
 
                         {
-                          data?.orders && data?.orders.map((order: any, index: number) =>
+                          data?.products && data?.products.map((product: any, index: number) =>
                             <>
-                              <TableRow key={`ALL_ORDERS_${index}`}>
+                              <TableRow key={`ALL_PRODUCTS_${index}`}>
                                 <TableCell className="hidden sm:table-cell">
                                   <Image
                                     alt="Product image"
                                     className="aspect-square rounded-md object-cover"
                                     height="64"
-                                    src={!order?.orderItems[0].image ? "/car.png" : order?.orderItems[0]?.image}
+                                    src={!product?.images ? "/car.png" : product?.images[0].url}
                                     width="64"
                                   />
                                 </TableCell>
-                                <TableCell className="font-medium ">
-                                  {order.orderItems.map((item: any, idx: number) => (
-                                    <div className="w-[16rem] truncate" key={`ORDER_ITEM_${idx}`}>
-                                      <span className="border-b border-b-slate-400 truncate ">
-                                        {item.name}
-                                      </span>
-                                    </div>
-                                  ))}
+                                <TableCell className="font-medium w-5/12">
+                                  <h1 >{product?.name}</h1>
                                 </TableCell>
-                                <TableCell>
-                                  <Badge variant={
-                                    order?.orderStatus === "Delivered"
-                                      ? "success"
-                                      : order?.orderStatus === "Returned"
-                                        ? "destructive"
-                                        : "outline"
-                                  }>{order?.orderStatus}</Badge>
-                                </TableCell>
-                                <TableCell>
-                                  {order.orderItems.map((item: any, idx: number) => (
-                                    <div key={`ORDER_ITEM_${idx}`}>
-                                      <span className="border-b border-b-slate-400">
-                                        {item.price}
-                                      </span>
-                                    </div>
-                                  ))}
-                                </TableCell>
-                                <TableCell className="hidden md:table-cell">
-                                  {order.totalPrice}
-                                </TableCell>
-                                <TableCell className="hidden md:table-cell cursor-default">
-                                  <Badge variant={order.paymentInfo.status === "Success" ? "success" : "outline"}  > {order.paymentInfo.status}</Badge>
 
+                                <TableCell>
+                                  <h1>{product.stock}</h1>
                                 </TableCell>
-                                <TableCell className="hidden md:table-cell">
-                                  {
-                                    moment(order.createdAt).format("MMM Do YY, h:mm a")
-                                  }
+
+                                <TableCell>
+                                  <h1>{product.price}</h1>
                                 </TableCell>
+
+                                <TableCell>
+                                  <h1>{product.ratings}</h1>
+                                </TableCell>
+
+                                <TableCell>
+                                  <h1>{product.category}</h1>
+                                </TableCell>
+
+
+
+
                                 <TableCell>
                                   <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
@@ -213,8 +171,8 @@ export default function Orders() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
                                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                      <DropdownMenuItem onClick={() => editHandler(order?._id)}>Edit</DropdownMenuItem>
-                                      <DropdownMenuItem onClick={() => showAddresstHandler(order?.shippingInfo)}>Detail</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => editHandler(product?._id)}>Edit</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => deleteHandler(product?._id)}>Delete</DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </TableCell>
@@ -227,12 +185,12 @@ export default function Orders() {
                 }
 
               </CardContent>
-              {/* <CardFooter>
-                <div className="text-xs text-muted-foreground">
+              <CardFooter>
+                {/* <div className="text-xs text-muted-foreground">
                   Showing <strong>1-10</strong> of <strong>32</strong>{" "}
                   products
-                </div>
-              </CardFooter> */}
+                </div> */}
+              </CardFooter>
             </Card>
           </TabsContent>
         </Tabs>
@@ -240,3 +198,4 @@ export default function Orders() {
     </>
   )
 }
+export default Products

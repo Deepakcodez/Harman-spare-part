@@ -2,17 +2,19 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
-async function placeOder(orderData: any) {
-    console.log('>>>>>>>>>>>orderdata', orderData)
+async function updateProduct(id:string, data: any) {
+
     let response
     try {
-        // https://harman-spare-parts-backend.vercel.app/api/v1/order/create
-         response = await axios.post("https://harman-spare-parts-backend.vercel.app/api/v1/order/create", orderData,
+         response = await axios.put(`https://harman-spare-parts-backend.vercel.app/api/v1/product/admin/update/${id}`, data,
             {
                 headers: {
                     Authorization: Cookies.get('HSPToken'),
                 }
             });
+            if(response.status === 200){
+                toast.success("Product Added Successfully")
+            }
 
     } catch (error) {
         toast.error("something went wrong")
@@ -21,4 +23,4 @@ async function placeOder(orderData: any) {
     return response
 }
 
-export default placeOder
+export default updateProduct;

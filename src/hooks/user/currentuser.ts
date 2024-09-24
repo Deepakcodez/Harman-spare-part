@@ -17,7 +17,7 @@ const fetchCurrentUser = async () => {
   return response.data.user;
 };
 
-/// Create the custom hook
+// Create the custom hook
 const useCurrentUser = () => {
     return useQuery({
       queryKey: ['currentUser'],

@@ -27,5 +27,6 @@ export interface OrderDataType {
     taxPrice: number  | undefined;
     shippingPrice: number  | undefined;
     totalPrice: number  | undefined;
+    userMessage?: string;
     orderStatus?: "Processing" | "Out-For-Delivery" | "Delivered" | "Returned"
   }

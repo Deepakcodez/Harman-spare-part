@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import placeOder from "@/services/order/PlaceOrder";
 import { OrderDataType } from "@/types/shipping.types";
+import PlaceOrder from "../_components/placeOrder";
 interface ProductProps {
   params: {
     productid: string;
@@ -18,6 +19,8 @@ interface ProductProps {
 const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
   const { data, error } = useSingleProduct(params.productid);
   const { data: shippingDetails } = useShippingdetail()
+  const [isShowPopUp, setIsShowPopUp] = React.useState<boolean>(false)
+
   const router = useRouter();
   React.useEffect(() => {
     if (error) {
@@ -30,7 +33,11 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
     router.push('/cart/shippingDetail')
   }
 
-  const checkOutHandler = async () => {
+  const checkOutHandler = () => {
+      setIsShowPopUp(true)
+  }
+
+  const placeOrderHandler = async () => {
     const orderData: OrderDataType = {
       shippingInfo: shippingDetails?._id ? shippingDetails._id.toString() : "",
       orderItems: [{
@@ -59,7 +66,12 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
 
   return (
     <>
-      <div className="grid grid-cols-12 min-h-[100vh] max-h-auto pb-12">
+      <div className="relative grid grid-cols-12 min-h-[100vh] max-h-auto pb-12">
+
+        {
+          isShowPopUp && <PlaceOrder setIsOpen={setIsShowPopUp} productId={params.productid} />
+        }
+
         {/* product detail */}
         <div className="md:col-span-8 col-span-12  lg:px-12  px-3 ">
           <div className="bg-white     h-auto w-full mt-[5rem] shadow-md rounded-md p-2 py-4">
@@ -116,7 +128,7 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
                 </button>
               }
               <button
-              onClick={checkOutHandler}
+                onClick={checkOutHandler}
                 className=" min-w-1/2 max-w-1/2 w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white text-sm hover:bg-violet-500 py-1 mt-4 ">
                 Place Order
               </button>
