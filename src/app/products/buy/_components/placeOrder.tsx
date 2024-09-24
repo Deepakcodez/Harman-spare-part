@@ -48,7 +48,7 @@ const PlaceOrder: React.FC<Props> = ({ setIsOpen, productId }) => {
             taxPrice: 0,
             shippingPrice: 0,
             totalPrice: data?.product.price,
-            userMessage:  message ,
+            userMessage: message,
         }
         const response = await placeOder(orderData)
         if (response?.data.success) {
@@ -58,11 +58,15 @@ const PlaceOrder: React.FC<Props> = ({ setIsOpen, productId }) => {
 
     }
 
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
 
 
     return (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-black/30 z-50">
-            <Card className="w-[550px] absolute top-[40vh]">
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-black/30 backdrop-blur-md z-50 ">
+            <Card className="md:w-auto w-10/12  absolute top-[20vh] md:top-[35vh]">
                 <CardHeader>
                     <CardTitle>Confirmation</CardTitle>
                     <CardDescription>Are you want to place order on existing address or
@@ -72,14 +76,14 @@ const PlaceOrder: React.FC<Props> = ({ setIsOpen, productId }) => {
                 <CardContent>
                     <h1>Write any message you want to reach us (optional)</h1>
                     <p className="text-xs text-gray-500">Abusive or offensive messages are prohibited.It will not be tolerated.</p>
-                     <Textarea 
-                     className="max-h-24 mt-2" 
-                     placeholder="Type your message here."
-                     onChange={(e) => setMessage(e.target.value)} />
+                    <Textarea
+                        className="max-h-24 mt-2"
+                        placeholder="Type your message here."
+                        onChange={(e) => setMessage(e.target.value)} />
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                    <Button variant="outline" onClick={()=>setIsOpen(false)} >Cancel</Button>
-                    <Button onClick={placeOrderHandler}>Place Order</Button>
+                    <Button variant="outline" onClick={() => setIsOpen(false)} >Cancel</Button>
+                    <Button variant={"hspButton2"} onClick={placeOrderHandler}>Place Order</Button>
                 </CardFooter>
             </Card>
         </div>

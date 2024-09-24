@@ -37,6 +37,10 @@ const EditStatus: React.FC<Props> = ({ setIsOpen, orderId }) => {
       console.error('Failed to update order status:', error);
     }
   };
+  
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+},[])
 
   return (
     <div className="absolute top-0 z-40 h-screen w-full bg-violet-200/50 flex flex-col items-center justify-center">

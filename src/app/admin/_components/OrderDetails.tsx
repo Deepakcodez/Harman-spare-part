@@ -13,39 +13,33 @@ import html2canvas from 'html2canvas';
 
 interface Props {
     setIsOpen: (status: boolean) => void;
-    shippingId: string;
+    shippingDetail : any
 }
 
 
-const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingId }) => {
-    const [fullDetail, setFullDetail] = React.useState<any>({})
-    const getShippingAddressAndUser = async () => {
-        const response = await getAddress(shippingId)
-        setFullDetail(response?.data.address)
+const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail }) => {
 
-    }
 
-    React.useEffect(() => {
-        getShippingAddressAndUser()
-    }, [])
-
-    const printHandler=()=>{
+    const printHandler = () => {
         window.print()
     }
-    const screenShotHandler=async()=>{
+    const screenShotHandler = async () => {
         const canvas = await html2canvas(document.body);
 
         // Convert the canvas to a data URL
         const dataUrl = canvas.toDataURL('image/png');
-    
+
         // Create a link element to download the image
         const link = document.createElement('a');
         link.href = dataUrl;
         link.download = 'shippingDetail.png';
-    
+
         // Programmatically trigger the download
         link.click();
     }
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    },[])
 
     return (
         <div className="absolute z-40 top-0 h-screen w-full bg-white/50 backdrop-blur-md flex justify-center items-center">
@@ -55,48 +49,48 @@ const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingId }) => {
                     <CardDescription>Address of user where we have to ship the order.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                      <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2">
                         <div className="flex gap-6">
                             <p className="font-semibold">Address:</p>
-                            <p>{fullDetail?.shippingDetails?.address || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.address || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">State:</p>
-                            <p>{fullDetail?.shippingDetails?.state || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.state || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">City:</p>
-                            <p>{fullDetail?.shippingDetails?.city || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.city || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Country:</p>
-                            <p>{fullDetail?.shippingDetails?.country || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.country || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Pincode:</p>
-                            <p>{fullDetail?.shippingDetails?.pinCode || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.pinCode || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Phone:</p>
-                            <p>{fullDetail?.shippingDetails?.phoneNo || "Loading...."}</p>
+                            <p>{shippingDetail?.shippingInfo?.phoneNo || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Client Name:</p>
-                            <p>{fullDetail?.user?.name || "Loading...."}</p>
+                            <p>{shippingDetail?.user?.name || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Email:</p>
-                            <p>{fullDetail?.user?.email || "Loading...."}</p>
+                            <p>{shippingDetail?.user?.email || "Loading...."}</p>
                         </div>
 
-                      </div>
+                    </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>

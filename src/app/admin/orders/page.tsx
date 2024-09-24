@@ -54,7 +54,7 @@ export default function Orders() {
   const [isEditStatus, setIsEditStatus] = React.useState<boolean>(false)
   const [isShowAddress, setIsShowAddress] = React.useState<boolean>(false)
   const [OrderId, setOrderId] = React.useState<string>("")
-  const [shippingId, setShippingId] = React.useState<string>("")
+  const [shippingDetail, setShippingDetail] = React.useState({})
   React.useEffect(() => {
     console.log('>>>>>>>>>>>', data)
   },[data])
@@ -71,9 +71,9 @@ export default function Orders() {
     window.scrollTo(0, 0);
   }
 
-  const showAddresstHandler= (shippingId:string)=>{
+  const showAddresstHandler= (order:any)=>{
     setIsShowAddress(true)
-    setShippingId(shippingId)
+    setShippingDetail(order)
   }
   return (
     <>
@@ -81,7 +81,9 @@ export default function Orders() {
       isShowAddress &&
       <OrderDetails
         setIsOpen={setIsShowAddress}
-        shippingId={shippingId} />
+        // shippingId={shippingId} 
+        shippingDetail={shippingDetail}
+        />
     }
       {
         isEditStatus &&
@@ -214,7 +216,7 @@ export default function Orders() {
                                     <DropdownMenuContent align="end">
                                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                       <DropdownMenuItem onClick={() => editHandler(order?._id)}>Edit</DropdownMenuItem>
-                                      <DropdownMenuItem onClick={() => showAddresstHandler(order?.shippingInfo)}>Detail</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => showAddresstHandler(order)}>Detail</DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </TableCell>
