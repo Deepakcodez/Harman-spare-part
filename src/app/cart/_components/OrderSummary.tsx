@@ -3,17 +3,14 @@ import React from "react"
 import { useRouter } from "next/navigation";
 import useShippingdetail from "@/hooks/shippingDetail/useShippingDetails";
 import useCartProductStore from "@/Store/CartCount/usecartProducts";
-import toast from "react-hot-toast";
-import { OrderDataType } from "@/types/shipping.types";
-import {  PuffLoader } from "react-spinners";
-import placeOder from "@/services/order/PlaceOrder";
-import { useQueryClient } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
+import PlaceCartOrder from "./PlaceCartOrder";
 
 const OrderSummary: React.FC = () => {
     const router = useRouter();
     const { setCart, cart: cartProducts, isLoadingInStore, isErrorInStore } = useCartProductStore();
     const { data: shippingDetails } = useShippingdetail()
-    const queryClient = useQueryClient()
+    const [isShowPopUp, setIsShowPopUp] = React.useState<boolean>(false)
 
     const addShippingInfo = () => {
         router.push('/cart/shippingDetail')
@@ -23,50 +20,18 @@ const OrderSummary: React.FC = () => {
         console.log('>>>>>>>>>>>cartProducts?.products', cartProducts?.products)
     })
 
-    const checkOutHandler = async () => {
-        const orderData: OrderDataType = {
-            shippingInfo: shippingDetails?._id,
-            orderItems: cartProducts?.products.map((product: any) => ({
-                name: product.product.productId.name,
-                price: product.product.productId.price,
-                quantity: product.product.prodQuantity,
-                image:  product.product.productId.images[0].url,
-                product: product.product.productId._id,
-            })),
-            paymentInfo: {
-                id: "Cash On Delivery",
-                status: "pending",
-            },
-            itemsPrice: cartProducts?.totalPrice,
-            taxPrice: 0,
-            shippingPrice: 0,
-            totalPrice: cartProducts?.totalPrice,
-        }
-        const response = await placeOder(orderData)
-        queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
-        if (response?.data.success) {
-            toast.success("Order Placed Successfully")
-            router.push("/products")
-        }
-        // try {
-        //     const response = await axios.post("http://localhost:8000/api/v1/order/create", orderData,
-        //         {
-        //             headers: {
-        //                 Authorization: Cookies.get('HSPToken'),
-        //             }
-        //         });
-        //     if (response.data.success) {
-        //         toast.success("Order Placed Successfully")
-        //         router.push("/products")
-        //     }
 
-        // } catch (error) {
-        //     toast.error("something went wrong")
-        // }
-    }
+
+
 
     return (
         <div className="bg-white h-auto w-full mt-[5rem] shadow-md rounded-md px-4 py-4 ">
+            {
+                isShowPopUp &&
+                <PlaceCartOrder
+                    setIsOpen={setIsShowPopUp}
+                    cartProducts={cartProducts} />
+            }
             <h1 className="text-2xl">Order Summary</h1>
             <h1 className="text-black/75 flex ">
                 Total Amount : {isLoadingInStore ?
@@ -89,14 +54,14 @@ const OrderSummary: React.FC = () => {
                         }
                         <button
                             disabled={cartProducts && cartProducts?.products?.length >= 1 ? false : true}
-                            onClick={checkOutHandler}
+                            onClick={() => setIsShowPopUp(true)}
                             className=" min-w-1/2 max-w-1/2 w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white text-sm hover:bg-violet-500 py-1 mt-4 ">
-                            Place Order
+                            Checkout
                         </button>
                     </div>
                     :
                     <div className="w-full flex justify-center">
-                        <PuffLoader size={40}  color="#a78bfa" />
+                        <PuffLoader size={40} color="#a78bfa" />
                     </div>
             }
 
@@ -108,7 +73,7 @@ const OrderSummary: React.FC = () => {
                     </span>
                     shipping address
                 </p>
-               
+
             }
 
 

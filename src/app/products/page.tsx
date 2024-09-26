@@ -114,7 +114,6 @@ const Products: FC = () => {
                   <option className='text-black' value="bike">Bike</option>
                   <option className='text-black' value="car">Car</option>
                   <option className='text-black' value="light">Light</option>
-                  <option className='text-black' value="showcases">Showcases</option>
                 </select>
               </div>
             </div>

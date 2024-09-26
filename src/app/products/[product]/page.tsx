@@ -1,5 +1,4 @@
 "use client"
-import Loader from "@/app/_Components/Shared/Loader/Loader";
 import { SingleProductPageSkelton } from "@/app/_Components/Shared/SingleProdSkelton";
 import ProductInfo from "@/app/_Components/SingleProduct/Productinfo";
 import { useSingleProduct } from "@/hooks/products/useSingleProduct";
@@ -25,7 +24,7 @@ const  Product:FC<ProductProps>= ({params}) => {
 
     return ( 
         <>
-        <div className="w-full min-h-[101vh] h-max max-h-auto backgroundColor">
+        <div className="w-full min-h-[101vh]  h-auto backgroundColor">
           <ProductInfo product={product}/>            
         </div>
         </>

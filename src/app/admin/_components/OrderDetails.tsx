@@ -38,12 +38,14 @@ const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail }) => {
         link.click();
     }
     React.useEffect(() => {
-        window.scrollTo(0, 0)
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 100);
     },[])
 
     return (
-        <div className="absolute z-40 top-0 h-screen w-full bg-white/50 backdrop-blur-md flex justify-center items-center">
-            <Card className="w-[550px]">
+        <div className="absolute z-40 top-0 bottom-0 left-0 right-0 w-full bg-white/50 backdrop-blur-md flex py-[5rem] justify-center ">
+            <Card className="w-[550px] h-fit">
                 <CardHeader>
                     <CardTitle>Shipping Address</CardTitle>
                     <CardDescription>Address of user where we have to ship the order.</CardDescription>

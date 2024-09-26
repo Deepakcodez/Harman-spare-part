@@ -37,44 +37,44 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
       setIsShowPopUp(true)
   }
 
-  const placeOrderHandler = async () => {
-    const orderData: OrderDataType = {
-      shippingInfo: shippingDetails?._id ? shippingDetails._id.toString() : "",
-      orderItems: [{
-        name: data?.product.name ?? "",
-        price: data?.product.price ?? 0,
-        quantity: 1,
-        image: data?.product.images[0].url ?? "",
-        product: data?.product._id ? data.product._id.toString() : "",
-      }],
-      paymentInfo: {
-        id: "Cash On Delivery",
-        status: "pending",
-      },
-      itemsPrice: data?.product.price,
-      taxPrice: 0,
-      shippingPrice: 0,
-      totalPrice: data?.product.price,
-    }
-    const response = await placeOder(orderData)
-    if (response?.data.success) {
-      toast.success("Order Placed Successfully")
-      router.push("/products")
-    }
+  // const placeOrderHandler = async () => {
+  //   const orderData: OrderDataType = {
+  //     shippingInfo: shippingDetails?._id ? shippingDetails._id.toString() : "",
+  //     orderItems: [{
+  //       name: data?.product.name ?? "",
+  //       price: data?.product.price ?? 0,
+  //       quantity: 1,
+  //       image: data?.product.images[0].url ?? "",
+  //       product: data?.product._id ? data.product._id.toString() : "",
+  //     }],
+  //     paymentInfo: {
+  //       id: "Cash On Delivery",
+  //       status: "pending",
+  //     },
+  //     itemsPrice: data?.product.price,
+  //     taxPrice: 0,
+  //     shippingPrice: 0,
+  //     totalPrice: data?.product.price,
+  //   }
+  //   const response = await placeOder(orderData)
+  //   if (response?.data.success) {
+  //     toast.success("Order Placed Successfully")
+  //     router.push("/products")
+  //   }
 
-  }
+  // }
 
   return (
     <>
-      <div className="relative grid grid-cols-12 min-h-[100vh] max-h-auto pb-12">
+      <div className="relative grid grid-cols-12 min-h-screen h-auto pb-12 ">
 
-        {
+       {
           isShowPopUp && <PlaceOrder setIsOpen={setIsShowPopUp} productId={params.productid} />
         }
 
         {/* product detail */}
-        <div className="md:col-span-8 col-span-12  lg:px-12  px-3 ">
-          <div className="bg-white     h-auto w-full mt-[5rem] shadow-md rounded-md p-2 py-4">
+        <div className="md:col-span-8 col-span-12  lg:px-12  px-3  ">
+          <div className="bg-white     h-auto w-full mt-[5rem] shadow-md r ounded-md p-2 py-4">
             <h1 className="text-black text-2xl ">Product Details</h1>
 
             <div className="relative w-full flex flex-col items-center  justify-center">
@@ -130,7 +130,7 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
               <button
                 onClick={checkOutHandler}
                 className=" min-w-1/2 max-w-1/2 w-full bg-violet-600 ring-2 ring-violet-500 rounded-md text-white text-sm hover:bg-violet-500 py-1 mt-4 ">
-                Place Order
+                Checkout
               </button>
             </div>
             {

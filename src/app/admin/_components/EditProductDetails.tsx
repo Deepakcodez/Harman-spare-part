@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/select"
 import getProduct from "@/services/product/singleProduct"
 import { X } from "lucide-react"
-import addProduct from "@/services/product/addproduct"
 import updateProduct from "@/services/product/updateProduct.ts"
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -99,7 +98,7 @@ const EditProductDetails: React.FC<Props> = ({ setIsOpen, productId }) => {
         },
     })
 
-    const updateHandler = async(values:any) => {
+    const updateHandler = async (values: any) => {
         const response = await updateProduct(productId, values)
         if (response?.status === 200) {
             queryClient.invalidateQueries({ queryKey: ['allProductsAdmin'] })
@@ -114,8 +113,8 @@ const EditProductDetails: React.FC<Props> = ({ setIsOpen, productId }) => {
     }
     return (
         <>
-            <div className="absolute top-0 z-40 h-screen  w-full bg-white flex flex-col items-center justify-center">
-                <div className=" w-full flex justify-end px-12" onClick={() => setIsOpen(false)}><X/></div>
+            <div className="absolute top-0 bottom-0 left-0 right-0 z-40 h-auto py-12  w-full bg-white/75 backdrop-blur-md flex flex-col items-center justify-center">
+                <div className=" w-full flex justify-end px-12" onClick={() => setIsOpen(false)}><X /></div>
                 <div className=" ">
                     <h1 className="text-2xl font-bold">Edit Product Details</h1>
                     <Form {...form}>
@@ -144,6 +143,7 @@ const EditProductDetails: React.FC<Props> = ({ setIsOpen, productId }) => {
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
                                             <Textarea
+                                                rows={15}
                                                 placeholder="Enter product description"
                                                 {...field}
                                             />
@@ -226,7 +226,7 @@ const EditProductDetails: React.FC<Props> = ({ setIsOpen, productId }) => {
                                                     onCheckedChange={(value) => {
                                                         field.onChange(value);
                                                         setIsFreeDelivery(!!value);
-                                                      }}
+                                                    }}
                                                 />
                                             </FormControl>
                                             <div className="space-y-1 leading-none">

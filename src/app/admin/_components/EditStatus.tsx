@@ -27,7 +27,7 @@ interface Props {
 const EditStatus: React.FC<Props> = ({ setIsOpen, orderId }) => {
   const [orderStatus, setOrderStatus] = React.useState<string>("Processing");
   const [paymentStatus, setPaymentStatus] = React.useState<string>("Pending");
-  const queryClient = useQueryClient  ()
+  const queryClient = useQueryClient()
   const updateHandler = async () => {
     try {
       const response = await updateOrderStatus(orderId, orderStatus, paymentStatus);
@@ -37,13 +37,15 @@ const EditStatus: React.FC<Props> = ({ setIsOpen, orderId }) => {
       console.error('Failed to update order status:', error);
     }
   };
-  
+
   React.useEffect(() => {
-    window.scrollTo(0, 0)
-},[])
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 100);
+  }, [])
 
   return (
-    <div className="absolute top-0 z-40 h-screen w-full bg-violet-200/50 flex flex-col items-center justify-center">
+    <div className="absolute top-0 left-0 right-0 bottom-0 z-40  bg-white/75 backdrop-blur-md flex flex-col items-center justify-start py-[5rem]">
       <Card x-chunk="dashboard-07-chunk-3">
         <div
           onClick={() => setIsOpen(false)}

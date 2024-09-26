@@ -59,7 +59,8 @@ const Products = () => {
     await deleteProduct(id)
   }
   return (
-    <>
+    <div className="relative">
+
       {
         isEditDetails &&
         <EditProductDetails
@@ -195,7 +196,7 @@ const Products = () => {
           </TabsContent>
         </Tabs>
       </main>
-    </>
+    </div>
   )
 }
 export default Products

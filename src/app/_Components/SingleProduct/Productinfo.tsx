@@ -28,7 +28,7 @@ const ProductInfo: FC<ProdProps> = ({ product }) => {
                 </div>
 
                 {/* Product details */}
-                <div className="px-4 h-[100vh] md:overflow-y-auto backgroundColor custom-scrollbar ">
+                <div className="px-4 min-h-[100vh] h-auto md:overflow-y-auto backgroundColor custom-scrollbar ">
                     <ProdDetails product={product} />
                 </div>
             </div>

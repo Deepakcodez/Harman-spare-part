@@ -76,7 +76,7 @@ export default function Orders() {
     setShippingDetail(order)
   }
   return (
-    <>
+    <div  className="relative">
     {
       isShowAddress &&
       <OrderDetails
@@ -96,10 +96,10 @@ export default function Orders() {
           <div className="flex items-center">
             <TabsList>
               <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="draft">Draft</TabsTrigger>
+              <TabsTrigger value="active">Shipped</TabsTrigger>
+              <TabsTrigger value="draft">Returned</TabsTrigger>
               <TabsTrigger value="archived" className="hidden sm:flex">
-                Archived
+                Out-For-Delivery
               </TabsTrigger>
             </TabsList>
             <div className="ml-auto flex items-center gap-2">
@@ -239,6 +239,6 @@ export default function Orders() {
           </TabsContent>
         </Tabs>
       </main>
-    </>
+    </div>
   )
 }
