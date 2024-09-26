@@ -32,7 +32,12 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts }) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
     const router = useRouter();
     const queryClient = useQueryClient()
+
     
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     if (!cartProducts) {
         toast.error("No products in the cart to place the order");
         return;
@@ -72,9 +77,6 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts }) => {
     }
 
 
-    React.useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
 
 
 
