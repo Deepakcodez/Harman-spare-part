@@ -32,24 +32,27 @@ import useShippingdetail from "@/hooks/shippingDetail/useShippingDetails";
 
 const formSchema = z.object({
     city: z.string().min(2, {
-        message: "Enter valid city",
+        message: "Enter a valid city",
     }),
     state: z.string().min(2, {
-        message: "Enter valid state",
+        message: "Enter a valid state",
     }),
     country: z.string().min(2, {
-        message: "Enter valid country",
+        message: "Enter a valid country",
     }),
     address: z.string().min(2, {
-        message: "Enter valid address",
+        message: "Enter a valid address",
     }),
-    pincode: z.string().regex(/^\d{6}$/, {
-        message: "Enter valid 6-digit pincode",
-    }),
-    phone: z.string().regex(/^\d{10,12}$/, {
-        message: "Enter valid phone number (10-12 digits)",
-    }),
+    pincode: z.number()
+        .refine((val) => val.toString().length === 6, {
+            message: "Enter a valid 6-digit pincode",
+        }),
+    phone: z.number()
+        .refine((val) => val.toString().length >= 10 && val.toString().length <= 12, {
+            message: "Enter a valid phone number (10-12 digits)",
+        }), // Validate that phone has 10-12 digits
 });
+
 
 export const CheckOutForm: FC = () => {
     const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
@@ -80,13 +83,13 @@ export const CheckOutForm: FC = () => {
                 address: shippingDetails?.address || "",
                 state: shippingDetails?.state || "",
                 city: shippingDetails?.city || "",
-                pincode: shippingDetails?.pinCode || "",
-                phone: shippingDetails?.phoneNo || "",
+                pincode: shippingDetails?.pinCode || 0,
+                phone: shippingDetails?.phoneNo || 0,
 
 
             });
         }
-    }, [, form.reset,]);
+    }, [, form.reset, shippingDetails]);
 
 
 
@@ -97,8 +100,8 @@ export const CheckOutForm: FC = () => {
             city: data.city,
             state: data.state,
             country: data.country,
-            pinCode: parseInt(data.pincode),
-            phoneNo: parseInt(data.phone),
+            pinCode: data.pincode,
+            phoneNo: data.phone,
         };
 
 
@@ -111,18 +114,11 @@ export const CheckOutForm: FC = () => {
                         Authorization: Cookies.get('HSPToken'),
                     }
                 });
-            console.log(response.data)
-
-
-
 
             if (response.data.success) {
-
-
-
                 toast.success("shipping address submitted")
                 setIsLoaderShow(false)
-                router.push('/cart')
+                router.back()
             }
         } catch (error) {
             console.error("Error in saving shipping Info:", error);

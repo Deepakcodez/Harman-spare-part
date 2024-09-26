@@ -117,6 +117,7 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
                 <div> Loading.....</div>
               }
             </h1>
+            <h1 className="text-violet-600 text-xs">Cash On Delivery *</h1>
             <div className="w-full flex flex-col  px-4">
 
               {
