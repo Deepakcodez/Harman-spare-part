@@ -27,16 +27,17 @@ interface Props {
 
 const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts }) => {
 
-
-    if (!cartProducts) {
-        toast.error("No products in the cart to place the order");
-        return;
-    }
     const { data: shippingDetails } = useShippingdetail()
     const [message, setMessage] = React.useState<string>("No message")
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
     const router = useRouter();
     const queryClient = useQueryClient()
+    
+    if (!cartProducts) {
+        toast.error("No products in the cart to place the order");
+        return;
+    }
+   
 
 
 
