@@ -8,8 +8,8 @@ const fetchAllProductsAdmin = async (): Promise<ProductResponse> => {
     if (!token) {
       throw new Error("No token found");
     }
-  // const query = `https://harman-spare-parts-backend.vercel.app/api/v1/product/admin/all`;
-  const query = `http://localhost:8000/api/v1/product/admin/all`;
+  const query = `https://harman-spare-parts-backend.vercel.app/api/v1/product/admin/all`;
+  // const query = `http://localhost:8000/api/v1/product/admin/all`;
   const { data } = await axios.get<ProductResponse>(query,{
     headers: {
       Authorization: token,

@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 // Define the function to fetch the current user data
 const fetchCartDetail = async () => {
   const token = Cookies.get("HSPToken");
-  console.log(">>>>>>>>>>>api url", process.env.NEXT_PUBLIC_API_URL, token);
   if (!token) {
     throw new Error("No token found");
   }
