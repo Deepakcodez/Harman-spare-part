@@ -18,7 +18,6 @@ const  Product:FC<ProductProps>= ({params}) => {
     if (error) return <div>Failed to load</div>;
     if (!data) return <div className="h-auto "><SingleProductPageSkelton /></div>;
     
-    console.log(data)
 
     const product : ProdDocument | undefined = data?.product;
 

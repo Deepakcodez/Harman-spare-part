@@ -22,7 +22,6 @@ const CartDetail = () => {
       setIsLoadingInStore(isLoading)
       setIsErrorInStore(error)
     }
-    console.log('>>>>>>>>>>>', process.env.NEXT_PUBLIC_API_URL)
   }, [isLoading, error, cartProducts, cart, setCart, setIsLoadingInStore, isErrorInStore, setIsErrorInStore,])
 
   // const CheckOutClickHandler = async () => {
@@ -120,7 +119,7 @@ const CartDetail = () => {
           {/* order summary card */}
           <OrderSummary/>
           {/* your orders card*/}
-          <YourOrder/>
+          {/* <YourOrder/> */}
         </div>
       </div>
     </>

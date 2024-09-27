@@ -26,7 +26,6 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
     if (error) {
       console.log(error);
     }
-    console.log('>>>>>>>>>>>profuct', data?.product)
   }, [data])
 
   const addShippingInfo = () => {

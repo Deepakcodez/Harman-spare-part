@@ -16,11 +16,6 @@ const OrderSummary: React.FC = () => {
         router.push('/cart/shippingDetail')
     }
 
-    React.useEffect(() => {
-        console.log('>>>>>>>>>>>cartProducts?.products', cartProducts?.products)
-    })
-
-
 
 
 

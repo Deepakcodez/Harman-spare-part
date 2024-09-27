@@ -5,7 +5,6 @@ import axios from 'axios';
 const fetchSingleProduct = async (productid : string): Promise<singleProductResponse> => {
     const query = `https://harman-spare-parts-backend.vercel.app/api/v1/product/product/${productid}`;
     const { data } = await axios.get<singleProductResponse>(query);
-    console.log('>>>>>>>>>>>', data)
     return data;
   };
 

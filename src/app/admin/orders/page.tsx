@@ -55,9 +55,7 @@ export default function Orders() {
   const [isShowAddress, setIsShowAddress] = React.useState<boolean>(false)
   const [OrderId, setOrderId] = React.useState<string>("")
   const [shippingDetail, setShippingDetail] = React.useState({})
-  React.useEffect(() => {
-    console.log('>>>>>>>>>>>', data)
-  },[data])
+  const[message, setMessage] = React.useState<string>("")
 
   const handleExport = () => {
     if (data?.orders) {
@@ -71,9 +69,10 @@ export default function Orders() {
     window.scrollTo(0, 0);
   }
 
-  const showAddresstHandler= (order:any)=>{
+  const showAddresstHandler= (order:any, message:string)=>{
     setIsShowAddress(true)
     setShippingDetail(order)
+    setMessage(message)
   }
   return (
     <div  className="relative">
@@ -83,6 +82,7 @@ export default function Orders() {
         setIsOpen={setIsShowAddress}
         // shippingId={shippingId} 
         shippingDetail={shippingDetail}
+        message={message}
         />
     }
       {
@@ -184,7 +184,7 @@ export default function Orders() {
                                   {order.orderItems.map((item: any, idx: number) => (
                                     <div key={`ORDER_ITEM_${idx}`}>
                                       <span className="border-b border-b-slate-400">
-                                        {item.price}
+                                        {item.price}({item.quantity})
                                       </span>
                                     </div>
                                   ))}
@@ -216,7 +216,7 @@ export default function Orders() {
                                     <DropdownMenuContent align="end">
                                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                       <DropdownMenuItem onClick={() => editHandler(order?._id)}>Edit</DropdownMenuItem>
-                                      <DropdownMenuItem onClick={() => showAddresstHandler(order)}>Detail</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => showAddresstHandler(order, order?.userMessage)}>Detail</DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </TableCell>

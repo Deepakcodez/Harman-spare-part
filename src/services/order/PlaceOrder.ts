@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 async function placeOder(orderData: any) {
-    console.log('>>>>>>>>>>>orderdata', orderData)
     let response
     try {
         // https://harman-spare-parts-backend.vercel.app/api/v1/order/create

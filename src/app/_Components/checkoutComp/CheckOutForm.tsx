@@ -43,15 +43,16 @@ const formSchema = z.object({
     address: z.string().min(2, {
         message: "Enter a valid address",
     }),
-    pincode: z.number()
+    pincode: z.coerce.number()
         .refine((val) => val.toString().length === 6, {
             message: "Enter a valid 6-digit pincode",
         }),
-    phone: z.number()
+    phone: z.coerce.number()
         .refine((val) => val.toString().length >= 10 && val.toString().length <= 12, {
             message: "Enter a valid phone number (10-12 digits)",
-        }), // Validate that phone has 10-12 digits
+        }), 
 });
+
 
 
 export const CheckOutForm: FC = () => {
@@ -117,8 +118,8 @@ export const CheckOutForm: FC = () => {
 
             if (response.data.success) {
                 toast.success("shipping address submitted")
-                setIsLoaderShow(false)
                 router.back()
+                setIsLoaderShow(false)
             }
         } catch (error) {
             console.error("Error in saving shipping Info:", error);

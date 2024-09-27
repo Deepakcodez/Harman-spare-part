@@ -30,7 +30,6 @@ const Navbar = () => {
 
   React.useEffect(() => {
     setCurrentUser(data)
-    console.log('>>>>>>>>>>>', currentUser)
     if(isAdminRoute){
       document.title = "Admin"
     }

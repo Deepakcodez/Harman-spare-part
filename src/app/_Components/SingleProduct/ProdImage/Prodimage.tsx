@@ -56,7 +56,6 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
             },
           }
         );
-        console.log("cart detail", resp.data);
         const cart = resp.data.cart;
         const productExists = cart.products.some(
           (p: any) => p.product.productId._id.toString() === productId.toString()

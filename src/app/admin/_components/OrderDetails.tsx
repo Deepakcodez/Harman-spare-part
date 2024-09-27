@@ -13,11 +13,12 @@ import html2canvas from 'html2canvas';
 
 interface Props {
     setIsOpen: (status: boolean) => void;
-    shippingDetail : any
+    shippingDetail : any;
+    message : string;
 }
 
 
-const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail }) => {
+const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail , message}) => {
 
 
     const printHandler = () => {
@@ -90,6 +91,11 @@ const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail }) => {
                         <div className="flex gap-6">
                             <p className="font-semibold">Email:</p>
                             <p>{shippingDetail?.user?.email || "Loading...."}</p>
+                        </div>
+
+                        <div className="flex gap-6">
+                            <p className="font-semibold">Message:</p>
+                            <p>{message || "Loading...."}</p>
                         </div>
 
                     </div>
