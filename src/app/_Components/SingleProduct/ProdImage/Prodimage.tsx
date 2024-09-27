@@ -81,6 +81,10 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   }, [images]);
 
   const handleBuyButton = () => {
+    if(!currentUser) {
+      setShowAlert(true)
+      return;
+    }
     router.replace(`/products/buy/${productId}  `)
   }
 
