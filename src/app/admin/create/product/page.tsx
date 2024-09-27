@@ -51,7 +51,7 @@ const formSchema = z.object({
   deliveryCharges: z.string().refine((val) => !isNaN(Number(val)), { message: "Delivery charges must be a valid number." }),
 });
 
-const CreateProduct = () => {
+const CreateProduct:React.FC = () => {
   const [images, setImages] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -110,7 +110,7 @@ const CreateProduct = () => {
       setIsUploading(false);
     }
   };
-};
+
 
 return (
   <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 overflow-x-auto">
@@ -269,6 +269,6 @@ return (
     </Card>
   </main>
 );
-};
+}
 
 export default CreateProduct;
