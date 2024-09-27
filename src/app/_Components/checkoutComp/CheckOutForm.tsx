@@ -100,8 +100,8 @@ export const CheckOutForm: FC = () => {
             city: data.city,
             state: data.state,
             country: data.country,
-            pinCode: data.pincode,
-            phoneNo: data.phone,
+            pinCode: Number(data.pincode), // Convert pincode to a number
+            phoneNo: Number(data.phone),   // Convert phone number to a number
         };
 
 
@@ -175,7 +175,7 @@ export const CheckOutForm: FC = () => {
                             )}
                         />
                     </div>
-                   
+
                     {/* address */}
                     <FormField
                         control={form.control}
@@ -196,47 +196,47 @@ export const CheckOutForm: FC = () => {
                         )}
                     />
                     <div className="w-full flex gap-2">
-                         {/* country */}
-                    <FormField
-                        control={form.control}
-                        name="country"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Country</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={"INDIA"}>
+                        {/* country */}
+                        <FormField
+                            control={form.control}
+                            name="country"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Country</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={"INDIA"}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="India">India</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        {/* pincode */}
+                        <FormField
+                            control={form.control}
+                            name="pincode"
+                            render={({ field }) => (
+                                <FormItem className="w-full">
+                                    <FormLabel>Pincode</FormLabel>
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue />
-                                        </SelectTrigger>
+                                        <Input
+                                            autoComplete="off"
+                                            placeholder="Enter your pincode"
+                                            {...field}
+                                        />
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="India">India</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                     {/* pincode */}
-                     <FormField
-                        control={form.control}
-                        name="pincode"
-                        render={({ field }) => (
-                            <FormItem className="w-full">
-                                <FormLabel>Pincode</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        autoComplete="off"
-                                        placeholder="Enter your pincode"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </div>
-                   
+
                     {/* phone */}
                     <FormField
                         control={form.control}
