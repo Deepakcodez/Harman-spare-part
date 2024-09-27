@@ -45,7 +45,7 @@ const EditStatus: React.FC<Props> = ({ setIsOpen, orderId }) => {
   }, [])
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 z-40  bg-white/75 backdrop-blur-md flex flex-col items-center justify-start py-[5rem]">
+    <div className="absolute top-0  left-0 right-0 z-40 min-h-screen h-auto py-[5rem]  w-full bg-white/75 backdrop-blur-md flex flex-col items-center justify-center ">
       <Card x-chunk="dashboard-07-chunk-3">
         <div
           onClick={() => setIsOpen(false)}

@@ -113,7 +113,7 @@ const EditProductDetails: React.FC<Props> = ({ setIsOpen, productId }) => {
     }
     return (
         <>
-            <div className="absolute top-0 bottom-0 left-0 right-0 z-40 h-auto py-12  w-full bg-white/75 backdrop-blur-md flex flex-col items-center justify-center">
+            <div className="absolute top-0  left-0 right-0 z-40 min-h-screen h-auto py-12  w-full bg-white/75 backdrop-blur-md flex flex-col items-center justify-center  ">
                 <div className=" w-full flex justify-end px-12" onClick={() => setIsOpen(false)}><X /></div>
                 <div className=" ">
                     <h1 className="text-2xl font-bold">Edit Product Details</h1>
