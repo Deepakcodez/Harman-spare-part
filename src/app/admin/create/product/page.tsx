@@ -51,7 +51,7 @@ const formSchema = z.object({
   deliveryCharges: z.string().refine((val) => !isNaN(Number(val)), { message: "Delivery charges must be a valid number." }),
 });
 
-const CreateProduct: React.FC = () => {
+const CreateProduct = () => {
   const [images, setImages] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
