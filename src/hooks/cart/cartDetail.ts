@@ -10,7 +10,7 @@ const fetchCartDetail = async () => {
   }
   // "https://harman-spare-parts-backend.vercel.app/api/v1/cart/details",
   const response = await axios.get(
-   `${process.env.NEXT_PUBLIC_API_URL}api/v1/cart/details`,
+   `https://harman-spare-parts-backend.vercel.app/api/v1/cart/details`,
 
     {
       headers: {

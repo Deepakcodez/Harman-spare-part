@@ -17,8 +17,6 @@ import useCartProductStore from "@/Store/CartCount/usecartProducts";
 
 export const ProductDetailCard = () => {
     const { cart : cartProduct,isLoadingInStore, isErrorInStore}  = useCartProductStore()
-
-
     const [localCart, setLocalCart] = useState(cartProduct?.products || []);
     const [previousCart, setPreviousCart] = useState(localCart);
     const {  decreaseCartCount, increaseCartCount } = useCartCountStore(); 
