@@ -8,7 +8,7 @@ import useCartdetail from "@/hooks/cart/cartDetail";
 
 const Cart = () => {
   const token = Cookies.get("HSPToken"); 
-  const { isLoading, error, data: cart } = useCartdetail();
+  const {data: cart, isLoading, error  } = useCartdetail();
   const { cartCount, setCartCount } = useCartCountStore(); 
   
   useEffect(() => {

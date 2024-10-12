@@ -9,6 +9,15 @@ import toast from "react-hot-toast";
 import placeOder from "@/services/order/PlaceOrder";
 import { OrderDataType } from "@/types/shipping.types";
 import PlaceOrder from "../_components/placeOrder";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ChevronDown } from "lucide-react";
 interface ProductProps {
   params: {
     productid: string;
@@ -20,20 +29,22 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
   const { data, error } = useSingleProduct(params.productid);
   const { data: shippingDetails } = useShippingdetail()
   const [isShowPopUp, setIsShowPopUp] = React.useState<boolean>(false)
+  const [paymentMethod, setPaymentMethod] = React.useState<"cod" | "online">("online")
 
   const router = useRouter();
   React.useEffect(() => {
     if (error) {
       console.log(error);
     }
-  }, [data])
+    console.log('>>>>>>>>>>>', paymentMethod)
+  }, [data, paymentMethod])
 
   const addShippingInfo = () => {
     router.push('/cart/shippingDetail')
   }
 
   const checkOutHandler = () => {
-      setIsShowPopUp(true)
+    setIsShowPopUp(true)
   }
 
   // const placeOrderHandler = async () => {
@@ -67,8 +78,8 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
     <>
       <div className="relative grid grid-cols-12 min-h-screen h-auto pb-12 ">
 
-       {
-          isShowPopUp && <PlaceOrder setIsOpen={setIsShowPopUp} productId={params.productid} />
+        {
+          isShowPopUp && <PlaceOrder setIsOpen={setIsShowPopUp} productId={params.productid} paymentMethod={paymentMethod} />
         }
 
         {/* product detail */}
@@ -116,7 +127,25 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
                 <div> Loading.....</div>
               }
             </h1>
-            <h1 className="text-violet-600 text-xs">Cash On Delivery *</h1>
+
+            {/* dropdown */}
+            <div data-theme="light" className="dropdown">
+              <summary tabIndex={0} role="button" className=" py-2 flex gap-3 bg-violet-100 px-4 rounded-lg m-1 text-black/75">
+                <h1>{paymentMethod === "online" ? "Online Payment" : "Cash On Delivery"}</h1>
+                <ChevronDown />
+              </summary>
+              <ul tabIndex={0} className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li
+                  onClick={() => setPaymentMethod("online")}
+                  className="hover:bg-violet-100 cursor-pointer mb-2 px-2 rounded-lg">Online Payment</li>
+                <li onClick={() => setPaymentMethod("cod")}
+                  className="hover:bg-violet-100 cursor-pointer px-2 rounded-lg">
+                  Cash On Delivery
+                </li>
+              </ul>
+            </div>
+
+
             <div className="w-full flex flex-col  px-4">
 
               {

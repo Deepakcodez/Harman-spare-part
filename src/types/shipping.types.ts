@@ -15,7 +15,7 @@ interface OrderItemType {
     product: string;
   }
   interface PaymentInfoType {
-    id: string;
+    method: string;
     status: string;
   }
 
