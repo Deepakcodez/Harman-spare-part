@@ -54,6 +54,7 @@ export default function Orders() {
   const [isEditStatus, setIsEditStatus] = React.useState<boolean>(false)
   const [isShowAddress, setIsShowAddress] = React.useState<boolean>(false)
   const [OrderId, setOrderId] = React.useState<string>("")
+  const[isCOD, setIsCOD] = React.useState<boolean>(false)
   const [shippingDetail, setShippingDetail] = React.useState({})
   const[message, setMessage] = React.useState<string>("")
 
@@ -62,15 +63,20 @@ export default function Orders() {
       exportTableToExcel(data.orders);
     }
   };
+  
+  React.useEffect(() => {
+    console.log('>>>>>>>>>>>', data)
+  },[data])
 
-  const editHandler = (id: string) => {
+  const editHandler = (id: string,) => {
     setOrderId(id)
     setIsEditStatus(true)
     window.scrollTo(0, 0);
   }
 
-  const showAddresstHandler= (order:any, message:string)=>{
+  const showAddresstHandler= (order:any, message:string,  isCOD:boolean)=>{
     setIsShowAddress(true)
+    setIsCOD(isCOD)
     setShippingDetail(order)
     setMessage(message)
   }
@@ -83,13 +89,14 @@ export default function Orders() {
         // shippingId={shippingId} 
         shippingDetail={shippingDetail}
         message={message}
-        />
+        isCOD={isCOD}  />
     }
       {
         isEditStatus &&
         <EditStatus
           setIsOpen={setIsEditStatus}
-          orderId={OrderId} />
+          orderId={OrderId}
+          />
       }
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 overflow-x-auto">
         <Tabs defaultValue="all">
@@ -215,8 +222,8 @@ export default function Orders() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
                                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                      <DropdownMenuItem onClick={() => editHandler(order?._id)}>Edit</DropdownMenuItem>
-                                      <DropdownMenuItem onClick={() => showAddresstHandler(order, order?.userMessage)}>Detail</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => editHandler(order?._id, )}>Edit</DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => showAddresstHandler(order, order?.userMessage, order?.isCOD)}>Detail</DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </TableCell>

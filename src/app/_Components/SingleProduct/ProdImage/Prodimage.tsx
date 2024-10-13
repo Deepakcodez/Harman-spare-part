@@ -81,7 +81,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
   }, [images]);
 
   const handleBuyButton = () => {
-    if(!currentUser) {
+    if (!currentUser) {
       setShowAlert(true)
       return;
     }
@@ -194,17 +194,16 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
         <div className="mt-[7rem]">
 
           {/* main image */}
-          <div className="h-fit w-full flex justify-center">
-            <div className="h-auto px-3">
-              <Image
-                className="h-auto md:w-[20vw] w-[50vw] rounded-sm hover:scale-105  transition ease-linear duration-300"
-                src={currentImage}
-                width={500}
-                height={500}
-                alt="Prod image"
-                loading="lazy"
-              />
-            </div>
+          <div className="md:w-7/12 w-11/12  aspect-square mx-auto bg-red-400 flex justify-center ">
+
+            <Image
+              className=" rounded-sm hover:scale-105 object-cover h-full w-full  transition ease-linear duration-300"
+              src={currentImage}
+              width={700}
+              height={700}
+              alt="Prod image"
+              loading="lazy"
+            />
           </div>
 
           {/* option images */}
@@ -213,14 +212,17 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
             <div className="flex justify-center py-3 gap-2 flex-wrap px-2">
               {images.map((image, index) => (
                 <Fragment key={index}>
-                  <Image
-                    className={`border cursor-pointer rounded-md transition ease-linear duration-300  ${currentImage == image.url ? "border-b-violet-500 border-2 shadow-md scale-110 hover:scale-110" : " hover:shadow-md  hover:scale-105 "}`}
-                    src={image.url}
-                    width={50}
-                    height={50}
-                    alt={`Prod image ${index + 1}`}
-                    onClick={() => handleImageClick(image.url)}
-                  />
+                  <div className="w-12 aspect-square">
+                    <Image
+                      className={`border cursor-pointer rounded-md transition ease-linear duration-300 object-cover h-full w-full ${currentImage == image.url ? "border-b-violet-500 border-2 shadow-md scale-110 hover:scale-110" : " hover:shadow-md  hover:scale-105 "}`}
+                      src={image.url}
+                      width={50}
+                      height={50}
+                      alt={`Prod image ${index + 1}`}
+                      onClick={() => handleImageClick(image.url)}
+                    />
+                  </div>
+
                 </Fragment>
               ))}
             </div>

@@ -12,6 +12,7 @@ interface CartProduct {
 }
 
 export interface CartDocument  {
+  _id : mongoose.Types.ObjectId;
   userId: string;
   products: CartProduct[];
   totalPrice: number;

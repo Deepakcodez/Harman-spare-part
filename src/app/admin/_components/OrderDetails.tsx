@@ -15,11 +15,11 @@ interface Props {
     setIsOpen: (status: boolean) => void;
     shippingDetail : any;
     message : string;
+    isCOD : boolean;
 }
 
 
-const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail , message}) => {
-
+const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail , message, isCOD}) => {
 
     const printHandler = () => {
         window.print()
@@ -89,13 +89,18 @@ const OrderDetails: React.FC<Props> = ({ setIsOpen, shippingDetail , message}) =
                         </div>
 
                         <div className="flex gap-6">
+                            <p className="font-semibold">Payment Method:</p>
+                            <p>{isCOD ? "Cash-On-Delivery" : "Online Payment"}</p>
+                        </div>
+
+                        <div className="flex gap-6">
                             <p className="font-semibold">Email:</p>
                             <p>{shippingDetail?.user?.email || "Loading...."}</p>
                         </div>
 
                         <div className="flex gap-6">
                             <p className="font-semibold">Message:</p>
-                            <p>{message || "Loading...."}</p>
+                            <p>{message || "No Message"}</p>
                         </div>
 
                     </div>

@@ -114,12 +114,12 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
           }
         },
         prefill: {
-          name: "John Doe",
-          email: "email@example.com",
-          contact: "9999999999",
+          name: currentUser?.name,
+          email: currentUser?.email,
+          contact: currentUser?.phone,
         },
         theme: {
-          color: "#3399cc",
+          color: "#7f2eff",
         },
       };
 
