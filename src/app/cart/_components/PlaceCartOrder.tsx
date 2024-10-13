@@ -58,7 +58,7 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts }) => {
                 product: product.product.productId._id,
             })),
             paymentInfo: {
-                id: "Cash On Delivery",
+                method: "Cash-On-Delivery",
                 status: "pending",
             },
             itemsPrice: cartProducts?.totalPrice,
