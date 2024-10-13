@@ -89,25 +89,25 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
 
     // --
 
-    const createOrderData = (): OrderDataType => ({
-        shippingInfo: shippingDetails?._id?.toString() ?? "",
-        orderItems: cartProducts?.products.map((product: any) => ({
-            name: product.product.productId.name,
-            price: product.product.productId.price,
-            quantity: product.product.prodQuantity,
-            image: product.product.productId.images[0].url,
-            product: product.product.productId._id,
-        })),
-        paymentInfo: {
-            method: paymentMethod,
-            status: paymentMethod === "cod" ? "Pending" : "Success",
-        },
-        itemsPrice: cartProducts?.totalPrice,
-        taxPrice: 0,
-        shippingPrice: 0,
-        totalPrice: cartProducts?.totalPrice,
-        userMessage: message,
-    });
+    // const createOrderData = (): OrderDataType => ({
+    //     shippingInfo: shippingDetails?._id?.toString() ?? "",
+    //     orderItems: cartProducts?.products.map((product: any) => ({
+    //         name: product.product.productId.name,
+    //         price: product.product.productId.price,
+    //         quantity: product.product.prodQuantity,
+    //         image: product.product.productId.images[0].url,
+    //         product: product.product.productId._id,
+    //     })),
+    //     paymentInfo: {
+    //         method: paymentMethod,
+    //         status: paymentMethod === "cod" ? "Pending" : "Success",
+    //     },
+    //     itemsPrice: cartProducts?.totalPrice,
+    //     taxPrice: 0,
+    //     shippingPrice: 0,
+    //     totalPrice: cartProducts?.totalPrice,
+    //     userMessage: message,
+    // });
 
     // const placeOrderHandler = async () => {
     //     try {
@@ -195,8 +195,6 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
             await initiateRazorpayPayment();
         }
     };
-
-
 
 
 
