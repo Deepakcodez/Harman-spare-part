@@ -54,35 +54,36 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
 
 
 
-    // const placeOrderHandler = async () => {
-    //     setIsLoading(true)
-    //     const orderData: OrderDataType = {
-    //         shippingInfo: shippingDetails?._id,
-    //         orderItems: cartProducts?.products.map((product: any) => ({
-    //             name: product.product.productId.name,
-    //             price: product.product.productId.price,
-    //             quantity: product.product.prodQuantity,
-    //             image: product.product.productId.images[0].url,
-    //             product: product.product.productId._id,
-    //         })),
-    //         paymentInfo: {
-    //             method: "Cash-On-Delivery",
-    //             status: "pending",
-    //         },
-    //         itemsPrice: cartProducts?.totalPrice,
-    //         taxPrice: 0,
-    //         shippingPrice: 0,
-    //         totalPrice: cartProducts?.totalPrice,
-    //         userMessage: message,
-    //     }
-    //     const response = await placeOder(orderData)
-    //     queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
-    //     setIsLoading(false)
-    //     if (response?.data.success) {
-    //         toast.success("Order Placed Successfully")
-    //         router.push("/products")
-    //     }
-    // }
+    const   placeCODorder = async () => {
+        setIsLoading(true)
+        const orderData: OrderDataType = {
+            shippingInfo: shippingDetails?._id,
+            orderItems: cartProducts?.products.map((product: any) => ({
+                name: product.product.productId.name,
+                price: product.product.productId.price,
+                quantity: product.product.prodQuantity,
+                image: product.product.productId.images[0].url,
+                product: product.product.productId._id,
+            })),
+            paymentInfo: {
+                method: "Cash-On-Delivery",
+                status: "pending",
+            },
+            itemsPrice: cartProducts?.totalPrice,
+            taxPrice: 0,
+            shippingPrice: 0,
+            totalPrice: cartProducts?.totalPrice,
+            userMessage: message,
+            isCartOrder : true,
+        }
+        const response = await placeOder(orderData)
+        queryClient.invalidateQueries({ queryKey: ['cartDetails'] })
+        setIsLoading(false)
+        if (response?.data.success) {
+            toast.success("Order Placed Successfully")
+            router.push("/products")
+        }
+    }
 
 
 
@@ -189,7 +190,7 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
 
     const handlePlaceOrder = async () => {
         if (paymentMethod === "cod") {
-            // await placeOrderHandler();
+            await placeCODorder();
         } else {
             await initiateRazorpayPayment();
         }

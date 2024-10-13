@@ -50,6 +50,7 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
     shippingPrice: 0,
     totalPrice: data?.product.price ?? 0,
     userMessage: message,
+    isCartOrder : false,
   });
 
   const placeOrderHandler = async () => {

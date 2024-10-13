@@ -31,4 +31,5 @@ export interface OrderDataType {
   totalPrice: number | undefined;
   userMessage?: string;
   orderStatus?: "Processing" | "Out-For-Delivery" | "Delivered" | "Returned";
+  isCartOrder?: boolean;
 }
