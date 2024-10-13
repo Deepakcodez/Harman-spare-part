@@ -194,7 +194,7 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
         <div className="mt-[7rem]">
 
           {/* main image */}
-          <div className="md:w-7/12 w-11/12  aspect-square mx-auto bg-red-400 flex justify-center ">
+          <div className="md:w-7/12 w-11/12  aspect-square mx-auto  flex justify-center ">
 
             <Image
               className=" rounded-sm hover:scale-105 object-cover h-full w-full  transition ease-linear duration-300"
@@ -259,3 +259,4 @@ const ProdImage: FC<ProdImageProps> = ({ images, productId }) => {
 };
 
 export default ProdImage;
+

@@ -71,7 +71,7 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
 
   const initiateRazorpayPayment = async () => {
     try {
-      const createOrderResponse = await axios.post('http://localhost:8000/api/v1/order/razorpayorder', {
+      const createOrderResponse = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/order/razorpayorder', {
         productId: productId,
         shippingInfo : shippingDetails?._id?.toString() ?? "",
         userId :  currentUser._id,
@@ -96,7 +96,7 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
 
           try {
             const verificationResponse = await axios.post(
-              "http://localhost:8000/api/v1/order/paymentVerify",
+              "https://harman-spare-parts-backend.vercel.app/api/v1/order/paymentVerify",
               {
                 razorpay_order_id,
                 razorpay_payment_id,

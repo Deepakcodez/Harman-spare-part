@@ -127,7 +127,7 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
 
     const initiateRazorpayPayment = async () => {
         try {
-            const createOrderResponse = await axios.post('http://localhost:8000/api/v1/order/cart/razorpayorder', {
+            const createOrderResponse = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/order/cart/razorpayorder', {
                 cartId: cartProducts?._id ,
                 shippingInfo: shippingDetails?._id ?? "",
                 userId: currentUser._id,
@@ -152,7 +152,7 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
 
                     try {
                         const verificationResponse = await axios.post(
-                            "http://localhost:8000/api/v1/order/paymentVerify",
+                            "https://harman-spare-parts-backend.vercel.app/api/v1/order/paymentVerify",
                             {
                                 razorpay_order_id,
                                 razorpay_payment_id,
