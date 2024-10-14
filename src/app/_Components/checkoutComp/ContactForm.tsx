@@ -47,7 +47,7 @@ const formSchema = z.object({
 
 export const ContactForm: FC = () => {
     const [isLoaderShow, setIsLoaderShow] = useState<boolean>(false)
-    const {data:currentUserdetail} = useCurrentUser()
+    // const {data:currentUserdetail} = useCurrentUser()
     const {currentUser, setCurrentUser} = useCurrentUserStore()
     
     const router = useRouter();
@@ -64,16 +64,16 @@ export const ContactForm: FC = () => {
     });
 
     useEffect(() => {
-        setCurrentUser(currentUserdetail)
-        if (currentUserdetail) {
-            setCurrentUser(currentUserdetail);
+        
+        if (currentUser) {
+            
             form.reset({
-                name:  currentUser?.name || currentUserdetail?.name || "",
-                email: currentUser?.name || currentUserdetail?.email || "",
+                name:  currentUser?.name ||  "",
+                email: currentUser?.email ||  "",
                 message: "",
             });
         }
-    }, [currentUserdetail, form.reset, setCurrentUser]);
+    }, [currentUser, form.reset, setCurrentUser]);
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
 

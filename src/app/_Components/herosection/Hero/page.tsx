@@ -32,7 +32,12 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    if(currentUser) setCurrentUserName(currentUser?.name)
+    if (currentUser) {
+      const capitalizedUserName = currentUser?.name
+          ? currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1)
+          : "";
+      setCurrentUserName(capitalizedUserName);
+  }
   }, [currentUser])
 
 
