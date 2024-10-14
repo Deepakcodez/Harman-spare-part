@@ -35,6 +35,10 @@ const Navbar = () => {
     }
   }, [currentUser, data])
 
+  React.useEffect(() => {
+    setCurrentUser(data)
+  }, [currentUser, data])
+
   const navbarElems: navbarElemsProps[] = [
     {
       tag: "Home",

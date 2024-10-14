@@ -102,7 +102,10 @@ const SingleProdBuy: React.FC<ProductProps> = ({ params }) => {
                   </div>
                   <div className="flex items-center justify-start gap-2 ">
                     <h1 className="text-2xl w-full text-left ">₹{data?.product.price}</h1>
-                    {data?.product?.refPrice && <h1 className="text-md text-red-600/50  line-through"> ₹{data.product.refPrice}/-</h1>}
+                    {
+                      (data?.product?.refPrice ?? 0) > 0 && (
+                        <h1 className="text-md text-red-600/50  line-through"> ₹{data.product.refPrice}/-</h1>)
+                    }
                   </div>
                 </div>
                 :

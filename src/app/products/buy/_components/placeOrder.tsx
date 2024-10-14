@@ -31,7 +31,7 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
 
 
   const createOrderData = (): OrderDataType => ({
-    shippingInfo: shippingDetails?._id?.toString() ?? "",
+    shippingInfo: shippingDetails?._id ?? "",
     orderItems: [
       {
         name: data?.product.name ?? "",
@@ -73,7 +73,7 @@ export default function PlaceOrder({ setIsOpen, productId, paymentMethod }: Prop
     try {
       const createOrderResponse = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/order/razorpayorder', {
         productId: productId,
-        shippingInfo : shippingDetails?._id?.toString() ?? "",
+        shippingInfo : shippingDetails?._id ?? "",
         userId :  currentUser._id,
         userMessage: message 
       }, {

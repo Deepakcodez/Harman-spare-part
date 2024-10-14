@@ -21,7 +21,7 @@ const Hero = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [currentUserName, setCurrentUserName] = useState<string>("");
   const { currentUser, setCurrentUser } = useCurrentUserStore()
-  const { data } = useCurrentUser()
+  // const { data } = useCurrentUser()
 
   const bikeRef = useRef(null)
 
@@ -32,9 +32,8 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    setCurrentUser(data)
-    setCurrentUserName(currentUser?.name)
-  }, [currentUser, data])
+    if(currentUser) setCurrentUserName(currentUser?.name)
+  }, [currentUser])
 
 
   return (

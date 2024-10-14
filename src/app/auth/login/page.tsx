@@ -61,8 +61,6 @@ const Login: FC = () => {
                     })
                     setIsLoading(false)
                     queryClient.invalidateQueries({ queryKey: ['currentUser'] })
-
-
                 } else {
                     toast.error("Something Went Wrong")
                     console.error('Login failed:', response.data.message);

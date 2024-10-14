@@ -28,7 +28,9 @@ const ProdDetails: FC<ProdProps> = ({ product }) => {
                     <h1 className="text-xl text-black/75 ">{product.name}</h1>
                     <div className="flex gap-2 items-center">
                         <h1 className="text-2xl text-black "> ₹{product.price}/-</h1>
-                       {product?.refPrice && <h1 className="text-md text-red-600/50  line-through"> ₹{product.refPrice}/-</h1>}
+                        {(product?.refPrice ?? 0) > 0 && (
+                            <h1 className="text-md text-red-600/50 line-through">₹{product.refPrice}/-</h1>
+                        )}
                     </div>
                     {
                         product.isFreeDelivery ?

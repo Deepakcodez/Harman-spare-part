@@ -86,45 +86,6 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
     }
 
 
-
-    // --
-
-    // const createOrderData = (): OrderDataType => ({
-    //     shippingInfo: shippingDetails?._id?.toString() ?? "",
-    //     orderItems: cartProducts?.products.map((product: any) => ({
-    //         name: product.product.productId.name,
-    //         price: product.product.productId.price,
-    //         quantity: product.product.prodQuantity,
-    //         image: product.product.productId.images[0].url,
-    //         product: product.product.productId._id,
-    //     })),
-    //     paymentInfo: {
-    //         method: paymentMethod,
-    //         status: paymentMethod === "cod" ? "Pending" : "Success",
-    //     },
-    //     itemsPrice: cartProducts?.totalPrice,
-    //     taxPrice: 0,
-    //     shippingPrice: 0,
-    //     totalPrice: cartProducts?.totalPrice,
-    //     userMessage: message,
-    // });
-
-    // const placeOrderHandler = async () => {
-    //     try {
-    //         let paymentData = createOrderData();
-    //         const response = await placeOrder(paymentData);
-    //         if (response?.data.success) {
-    //             toast.success("Order Placed Successfully");
-    //             router.push("/products");
-    //         } else {
-    //             toast.error("Failed to place the order. Please try again.");
-    //         }
-    //     } catch (error) {
-    //         console.error("Error in placing order:", error);
-    //         toast.error("Error in placing order.");
-    //     }
-    // };
-
     const initiateRazorpayPayment = async () => {
         try {
             const createOrderResponse = await axios.post('https://harman-spare-parts-backend.vercel.app/api/v1/order/cart/razorpayorder', {
@@ -144,7 +105,7 @@ const PlaceCartOrder: React.FC<Props> = ({ setIsOpen, cartProducts, paymentMetho
                 order_id: id,
                 amount: amount,
                 currency: "INR",
-                name: cartProducts.products.map((product: any) => product.name).join(", ") || "No product name", // Convert product names to comma-separated string
+                name: cartProducts.products.map((product: any) => product.name).join(", ") || "Cart Products", 
                 description: "Order Payment",
                 handler: async (response: any) => {
                     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
